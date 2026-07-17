@@ -1,6 +1,6 @@
 /* ============================================================
    Albin Sigi | portfolio v2 (black & white)
-   Clash Display + Satoshi + Instrument Serif
+   Onest + Satoshi + Instrument Serif
    ============================================================ */
 
 :root {
@@ -11,7 +11,7 @@
   --line: #e4e4e4;
   --line-dark: #262626;
 
-  --font-display: "Clash Display", "Satoshi", system-ui, sans-serif;
+  --font-display: "Onest", "Satoshi", system-ui, sans-serif;
   --font-body: "Satoshi", system-ui, -apple-system, sans-serif;
   --font-accent: "Instrument Serif", Georgia, serif;
 
