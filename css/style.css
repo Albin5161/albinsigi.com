@@ -205,7 +205,8 @@ button:focus-visible {
   object-fit: cover;
   transition: opacity 0.45s var(--ease-out);
 }
-.flip-photo__img--then { opacity: 0; object-position: 50% 32%; }
+/* y-position tuned so both heads start at the same line, no jump on hover */
+.flip-photo__img--then { opacity: 0; object-position: 50% 23%; }
 .flip-photo:hover .flip-photo__img--then,
 .flip-photo.is-flipped .flip-photo__img--then { opacity: 1; }
 
