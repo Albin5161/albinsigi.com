@@ -757,7 +757,8 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .hero__photo { max-width: 280px; align-items: flex-start; }
   .about { grid-template-columns: 1fr; }
   .about__portrait { max-width: 300px; }
-  .portrait-card { position: static; }
+  /* relative (not static) so the absolutely positioned photo stays inside the card */
+  .portrait-card { position: relative; top: auto; }
   .work-row { grid-template-columns: auto 1fr; }
   .work-row__arrow { display: none; }
 }
