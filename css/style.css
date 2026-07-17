@@ -305,6 +305,7 @@ button:focus-visible {
   border-bottom: 1px solid var(--ink);
   padding: 16px 0;
   background: var(--paper);
+  margin-top: clamp(32px, 6vh, 72px);
 }
 .marquee__track {
   display: flex; gap: 28px; align-items: center;
