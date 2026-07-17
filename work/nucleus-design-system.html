@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nucleus Design System | Albin Sigi</title>
+  <meta name="description" content="Case study: Nucleus, a token-based design system with 10 components and 150+ variants, built on a three-tier token structure." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Nucleus Design System | Albin Sigi" />
+  <meta property="og:description" content="Case study: Nucleus, a token-based design system with 10 components and 150+ variants, built on a three-tier token structure." />
+  <meta property="og:url" content="https://PLACEHOLDER-URL/work/nucleus-design-system.html" />
+  <meta property="og:image" content="https://PLACEHOLDER-URL/assets/photo-now.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__brand" href="../index.html"><span class="nav__mark" aria-hidden="true">✳</span> <span class="nav__brand-text">Albin Sigi</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="nav__cta" href="https://drive.google.com/file/d/1_pjqeDO0RBVGOVzTcRX2xzrHd2riNp9h/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header>
+
+  <main class="case" id="main-content">
+    <a class="case__back" href="../index.html#work">← Back to all work</a>
+
+    <p class="case__category">Case study 03 · Design system</p>
+    <h1 class="case__title">Nucleus. A token-based design system for consistent UI and clean developer handoff.</h1>
+
+    <dl class="case__meta">
+      <div><dt>Role</dt><dd>Designer &amp; author</dd></div>
+      <div><dt>Context</dt><dd>Interface Anatomy, Molecule Academy</dd></div>
+      <div><dt>Tool</dt><dd>Figma</dd></div>
+      <div><dt>Components</dt><dd>10</dd></div>
+      <div><dt>Variants</dt><dd>150+</dd></div>
+      <div><dt>Token tiers</dt><dd>3</dd></div>
+    </dl>
+
+    <div class="case__summary">
+      <h2>In 30 seconds</h2>
+      <ul>
+        <li><strong>The problem:</strong> Products built without a system fall apart quietly. Four shades of the same red, buttons that drift, handoff that turns into negotiation.</li>
+        <li><strong>What I did:</strong> Built a complete design system from first principles. 10 components, 150+ variants, a three-tier token structure, and documentation for every decision.</li>
+        <li><strong>Why it matters:</strong> Every visual decision is traceable from raw value to finished component. Change the brand colour once and it updates everywhere.</li>
+      </ul>
+    </div>
+
+    <h2>Why a design system</h2>
+    <p>
+      Most projects start without one. A designer picks a few colours, makes some components and
+      starts building screens. It works at first. Then buttons start looking slightly different
+      across pages. There are four shades of red that were all meant to be the same. Changing
+      the brand colour becomes a week of work instead of a five-minute update.
+    </p>
+    <p>
+      A design system is a single source of truth for every visual decision. And there is a new
+      reason it matters now: AI agents are generating screens and shipping code. An agent is only
+      as good as the system it works inside. Without tokens it hardcodes colours. Without rules
+      it makes things up. With a system, AI output starts consistent instead of needing a manual
+      cleanup pass.
+    </p>
+    <blockquote>Nucleus was built to make these problems structurally impossible.</blockquote>
+
+    <h2>The problems it prevents</h2>
+    <ul>
+      <li><strong>Hardcoded colours everywhere.</strong> Raw hex values in components mean every brand change is manual, and something always gets missed.</li>
+      <li><strong>No spacing logic.</strong> One button has 12px padding, another 14px, a third 16px. None looks wrong alone. Together they feel off.</li>
+      <li><strong>Component drift.</strong> The login button and the dashboard button were built weeks apart. They were supposed to be the same. They are not anymore.</li>
+      <li><strong>No shared language.</strong> The designer says "primary blue." The developer says "#0AC2FF." Handoff becomes a negotiation.</li>
+    </ul>
+
+    <h2>The token structure</h2>
+    <p>
+      Nucleus uses three tiers. Tier 1 holds raw values: the full colour palette, the spacing
+      scale, the font tokens. Tier 2 holds semantic names like surface, text, border and radius
+      that point at tier 1 values. Tier 3 holds component-specific tokens for things like inputs,
+      checkboxes and toggles.
+    </p>
+    <p>
+      One rule guided every decision: if changing a token should update many components at once,
+      it belongs in the semantic tier. If it should affect only one component, it belongs in the
+      component tier. That keeps the structure intentional instead of arbitrary.
+    </p>
+
+    <figure class="img-slot">Visual: the three token tiers and how a colour flows through them</figure>
+
+    <h2>Foundations</h2>
+    <ul>
+      <li><strong>Colour.</strong> Two brand ramps (yellow primary, blue secondary), a neutral backbone, and four feedback ramps. Each feedback colour has three stops that map directly to component roles: light for backgrounds, base for borders and icons, dark for text.</li>
+      <li><strong>Type.</strong> Inter for all UI text, Playfair Display reserved for editorial moments, JetBrains Mono for code.</li>
+      <li><strong>Spacing.</strong> A 4-point scale from 0 to 56. Components reference semantic spacing tokens, never raw numbers.</li>
+      <li><strong>Touch targets.</strong> Every interactive component meets a 40x40 minimum. Small controls like the 16x16 radio sit inside invisible wrappers that grow the tappable area without changing the look.</li>
+    </ul>
+
+    <h2>The components</h2>
+    <p>
+      Ten components, each defined on paper before any frames were drawn: anatomy, properties
+      and usage notes first, Figma second. All built with auto layout, boolean properties for
+      optional parts, and variant sets for types and states.
+    </p>
+    <ul>
+      <li><strong>Button:</strong> 75 variants. 5 types, 5 states, 3 sizes. Disabled uses 40% opacity, not a colour change, so it works on any surface.</li>
+      <li><strong>Input field:</strong> always fills its container. Helper text becomes the error message in the error state.</li>
+      <li><strong>Checkbox, radio, toggle:</strong> small visual controls inside full-size touch targets.</li>
+      <li><strong>Alert, badge, tag, avatar, tooltip, empty state:</strong> each with its own documented rules, like tags truncating at 160px and error empty states using the danger button, not the primary one.</li>
+    </ul>
+
+    <figure class="img-slot">Visual: the full component library on one canvas</figure>
+
+    <h2>Documentation</h2>
+    <p>
+      Every component page has four sections: a header with version and property counts, all
+      variants shown live on the canvas, an anatomy diagram with numbered labels and a property
+      table, and usage guidelines written as actions. "Use danger for destructive states"
+      rather than "danger is for destructive states." The goal: a developer opening the file for
+      the first time understands not just what each component looks like, but why it was built
+      that way.
+    </p>
+
+    <h2>Governance, if a team adopted it</h2>
+    <p>
+      A system only stays useful if it has rules for how it grows. Nucleus defines a named owner,
+      a four-step contribution process (propose, review, build, publish), semantic versioning,
+      and a deprecation cycle. Components are never deleted immediately. Token renames are
+      treated as breaking changes and keep the old name live until everyone has migrated.
+    </p>
+
+    <h2>What I learned</h2>
+    <p>
+      Starting with tokens before touching components was the right call. Every component built
+      after the token system existed went faster, because colour, spacing and naming were already
+      settled. The system was doing its job before a single component existed.
+    </p>
+    <p>
+      What I would do differently: plan the full three-tier structure from day one. Moving from
+      two tiers to three mid-build meant rebinding tokens on every component. And I would add
+      dark mode support from the start, because the semantic layer is exactly the right place
+      for it and it only works if you plan it before naming the first token.
+    </p>
+    <p>
+      Next on the roadmap: modal, dropdown, navigation bar, toast, data table, dark mode and a
+      full accessibility audit.
+    </p>
+
+    <a class="case__next" href="cinema-ticketing.html">
+      <span class="case__next-label">Next case study</span>
+      <span class="case__next-title">CinePass, a Cinema Ticketing App →</span>
+    </a>
+  </main>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

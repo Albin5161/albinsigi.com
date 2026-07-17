@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law Enforcement Intelligence Dashboard | Albin Sigi</title>
+  <meta name="description" content="Case study: redesigning the intelligence dashboard used daily by Delhi Police officers. Launched by the Police Commissioner in December 2025." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Law Enforcement Intelligence Dashboard | Albin Sigi" />
+  <meta property="og:description" content="Case study: redesigning the intelligence dashboard used daily by Delhi Police officers. Launched by the Police Commissioner in December 2025." />
+  <meta property="og:url" content="https://PLACEHOLDER-URL/work/intelligence-dashboard.html" />
+  <meta property="og:image" content="https://PLACEHOLDER-URL/assets/photo-now.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__brand" href="../index.html"><span class="nav__mark" aria-hidden="true">✳</span> <span class="nav__brand-text">Albin Sigi</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="nav__cta" href="https://drive.google.com/file/d/1_pjqeDO0RBVGOVzTcRX2xzrHd2riNp9h/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header>
+
+  <main class="case" id="main-content">
+    <a class="case__back" href="../index.html#work">← Back to all work</a>
+
+    <p class="case__category">Case study 01 · Redesign · Dashboard</p>
+    <h1 class="case__title">Faster decisions, fewer errors. Redesigning a law enforcement intelligence dashboard.</h1>
+
+    <dl class="case__meta">
+      <div><dt>Role</dt><dd>Sole UX Designer</dd></div>
+      <div><dt>Company</dt><dd>Tejis.ai</dd></div>
+      <div><dt>Client</dt><dd>Delhi Police</dd></div>
+      <div><dt>Timeline</dt><dd>2 months</dd></div>
+      <div><dt>Tools</dt><dd>Figma</dd></div>
+      <div><dt>Status</dt><dd>Phase 1 shipped</dd></div>
+    </dl>
+
+    <div class="case__summary">
+      <h2>In 30 seconds</h2>
+      <ul>
+        <li><strong>The problem:</strong> Delhi Police officers were abandoning forms midway because the intelligence tool was slow, confusing and tiring to use.</li>
+        <li><strong>What I did:</strong> Redesigned the full product as the only designer. 100+ screens across dashboard, forms, reports and AI tools.</li>
+        <li><strong>The result:</strong> Launched by the Commissioner of Delhi Police in December 2025. Two more divisions asked for the same system, with no sales effort.</li>
+      </ul>
+    </div>
+
+    <div class="case__nda">
+      <strong>A note on confidentiality:</strong> This project was under an NDA because the client was an Indian law enforcement agency. The screens shown here were shared with permission before the company closed in early 2026. Everything was prepared from saved exports and recordings made during active development.
+    </div>
+
+    <h2>The starting point</h2>
+    <p>
+      Police officers in Delhi were using a tool that made their job harder. Every day, officers
+      logged intelligence, registered programs and generated reports on a dashboard so poorly
+      designed that many gave up filling forms midway. It had been built by developers thinking
+      about data storage. Nobody had thought about the officer sitting in front of it under pressure.
+    </p>
+    <p>
+      I joined Tejis.ai as the only UX designer and was handed one task: fix it. The tool was the
+      Intelligence Data Management Tool, used daily by officers at every level, from constables
+      logging field inputs to senior officers reviewing reports.
+    </p>
+
+    <figure class="img-slot">Visual: the old dashboard homepage and its 11-tab form</figure>
+
+    <h2>What was broken</h2>
+    <ul>
+      <li><strong>No hierarchy.</strong> Labels, fields and headings all had equal weight. There was no natural reading path.</li>
+      <li><strong>An 11-tab form.</strong> A single program entry form had 11 horizontal tabs. Officers had to hunt across all of them to finish basic tasks.</li>
+      <li><strong>Dangerous button placement.</strong> The delete button sat right next to save, with identical styling. In this context that is a real operational risk, not just bad design.</li>
+      <li><strong>Noise everywhere.</strong> Every text field had a full rich text toolbar. Officers logging intelligence do not need font colours and strikethrough.</li>
+      <li><strong>Inconsistent patterns.</strong> Some tasks used popups, others used full pages. Same work, two different models.</li>
+    </ul>
+    <blockquote>The tool was built for data entry, not for decisions made under pressure.</blockquote>
+
+    <h2>How I learned the workflow</h2>
+    <p>
+      This was a fast-moving startup, so research had to be lean. The product manager walked me
+      through every core task step by step. I combined that with direct feedback from our
+      point-of-contact officer and observations from onboarding sessions.
+    </p>
+    <p>I found three types of users with different needs:</p>
+    <ul>
+      <li><strong>Field officers</strong> who log intelligence quickly, often under time pressure.</li>
+      <li><strong>Supervisors</strong> who track program status across many events.</li>
+      <li><strong>Senior officers</strong> who read reports and make approval decisions.</li>
+    </ul>
+    <p>
+      The clearest insight: officers needed to see their workload at a glance. They could not
+      afford to read every row in a list. And trust in the tool was low because of past data
+      entry mistakes, so preventing accidental actions mattered as much as speed.
+    </p>
+
+    <h2>Decision 1: a visual language that belongs to its users</h2>
+    <p>
+      The goal was a tool that felt purpose-built for law enforcement, not a generic dashboard
+      with a police logo on it. I chose dark navy as the base because it reads as calm and serious.
+      Gold became the accent colour because it matches the uniform colours worn by Indian
+      law enforcement officers. That was deliberate. The tool should feel like it belongs to them.
+    </p>
+    <p>
+      I tried three background directions first: a subtle texture, a bright blue gradient, and a
+      near-black flat tone. All three failed the same test. They could belong to any product.
+      The final direction was a night aerial satellite view of India. Officers work with real
+      events in real places, and showing the country from above grounded the tool in its purpose.
+    </p>
+
+    <figure class="img-slot">Visual: the three rejected directions and the final night-view background</figure>
+
+    <h2>Decision 2: a homepage sorted by urgency</h2>
+    <p>
+      In the old tool, live events, upcoming events and past events sat in one flat list. An
+      officer managing an active situation had to read everything to find what needed attention.
+      The redesign puts today's and live events first, always. Upcoming events follow. That is
+      how officers think about their day, so that is how the screen is ordered.
+    </p>
+    <p>
+      Each program became a card showing its category, venue, date, time and live status in one
+      scannable unit. A small line at the bottom of each card shows which officer last updated
+      the record and when. In a tool where many officers touch the same record, that one line
+      builds accountability without adding a single extra step. Officers noticed it and said so.
+    </p>
+    <p>
+      The homepage went through seven documented versions. Ideas that got cut along the way:
+      priority tags that crowded the cards, different card colours per section that made the
+      screen feel like two products, and compact rows that hid too much information. Each cut
+      taught us what officers actually needed: one card style, clear order, no decoration.
+    </p>
+
+    <figure class="img-slot">Visual: homepage versions 1 to 7, side by side</figure>
+
+    <h2>Decision 3: killing the 11-tab form</h2>
+    <p>
+      This was the most critical fix in the whole product. Officers had no way to see what was
+      filled and what was pending without clicking through every tab. Our point-of-contact
+      officer confirmed that officers were regularly abandoning the form midway. In an
+      intelligence system, incomplete records are an operational risk.
+    </p>
+    <p>
+      The key insight: filling a program form is not a linear task. An officer might add basic
+      details first, come back hours later for venue information, then again to log incident
+      details. The form had to support that, not fight it. A step-by-step wizard was considered
+      and rejected, because it forces an order that does not match how the work happens.
+    </p>
+    <p>The solution was one screen with all 11 sections as collapsible cards:</p>
+    <ul>
+      <li><strong>Everything visible at once.</strong> Officers see all sections and jump straight to the one they need.</li>
+      <li><strong>Progress on every card.</strong> A fraction like 3/4 shows fields filled, with red for empty, gold for partial, green for complete. An officer returning midway can scan the whole form in seconds.</li>
+      <li><strong>Focused editing.</strong> Clicking a card opens a clean modal form, so the overview stays calm and the editing space stays focused.</li>
+    </ul>
+    <p>
+      The card design went through 12 documented iterations to get the completion indicator,
+      labels and editing pattern right. A pinning system that let officers keep their
+      most-used sections on top was fully designed but cut for development time.
+    </p>
+
+    <figure class="img-slot">Visual: the card grid with completion indicators, and the modal form</figure>
+
+    <h2>Decision 4: a report wizard that prevents wrong prints</h2>
+    <p>
+      After every program, officers generate a PDF report and submit it to senior officers for
+      approval. In the old tool there was no structure, and officers frequently printed the
+      wrong report while believing it was correct. Reports go up the chain of command, so that
+      is a real failure with real consequences.
+    </p>
+    <p>
+      Unlike the program form, report generation is a linear task. You pick the report type,
+      select the data, then review and export. So here a three-step wizard was the right
+      pattern. It guides each decision in order and confirms each step. Choosing the right
+      pattern for each workflow, instead of one pattern everywhere, was a conscious decision.
+    </p>
+
+    <h2>Decision 5: AI features that stay out of the way</h2>
+    <p>
+      AI features are easy to add and easy to get wrong. In a law enforcement tool, officers
+      must never feel the system is doing something unpredictable with sensitive data.
+      I surfaced four AI tools directly in the top navigation of the program view: AI Form
+      Filler, History, Visualize and AI Program Match. If a feature saves officers time on
+      frequent tasks, it should be one click away, not three.
+    </p>
+    <p>
+      My favourite of these is AI Notes. Officers could type or speak their observations in
+      English or Hindi, in their own words. The AI formatted the raw input into a clean,
+      structured note. The officer changed nothing about how they work. In a multilingual
+      force, that matters.
+    </p>
+    <p>
+      All AI features were scoped for phase 2, on purpose. Phase 1 fixed the core usability
+      failures first. Shipping AI on top of a broken foundation would have created more
+      problems than it solved.
+    </p>
+
+    <figure class="img-slot">Visual: AI tools in the program view navigation</figure>
+
+    <h2>The result</h2>
+    <ul>
+      <li>The redesigned tool was <strong>launched by the Commissioner of Delhi Police in December 2025</strong> and described internally as a significant success.</li>
+      <li>Two more high-profile divisions, <strong>Delhi Special Cell and Delhi Crime Branch</strong>, approached the company to get the same system. No sales effort was involved.</li>
+      <li>Officers reported the new interface was much easier to navigate, especially program management and report generation.</li>
+    </ul>
+    <p>
+      The company closed in early 2026, so the expanded rollout did not happen. That was outside
+      anyone's control on the design side.
+    </p>
+
+    <h2>What I learned</h2>
+    <p>
+      Designing for high-stakes work taught me that clarity is a safety requirement, not a style
+      choice. Every unnecessary element is a possible source of error. When an officer prints
+      the wrong report because the screen was unclear, that has real consequences.
+    </p>
+    <p>
+      If I did it again, I would push harder for direct usability sessions with officers instead
+      of relying on intermediaries. The best design decision I made was not a screen. It was
+      asking, over and over: what does this officer need to do right now, and what is in the way?
+    </p>
+
+    <a class="case__next" href="citizen-safety-app.html">
+      <span class="case__next-label">Next case study</span>
+      <span class="case__next-title">Citizen Safety App →</span>
+    </a>
+  </main>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
