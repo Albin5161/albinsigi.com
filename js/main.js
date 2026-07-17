@@ -98,6 +98,11 @@ if (canvas && !reducedMotion) {
   window.addEventListener("resize", build);
   build();
   frame();
+
+  // fonts can change the hero's height after first paint; rebuild so the
+  // grid always reaches the bottom of the hero
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+  if ("ResizeObserver" in window) new ResizeObserver(build).observe(hero);
 }
 
 /* ---- AI section: type the terminal command when it scrolls in ---- */

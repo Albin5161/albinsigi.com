@@ -176,7 +176,8 @@ button:focus-visible {
   position: relative;
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: clamp(20px, 3vh, 40px) var(--pad-x) clamp(20px, 3vh, 40px);
+  /* extra bottom padding keeps the dot grid running all the way to the ticker */
+  padding: clamp(20px, 3vh, 40px) var(--pad-x) clamp(52px, 9vh, 112px);
   pointer-events: none;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
@@ -271,7 +272,7 @@ button:focus-visible {
 }
 .hero__intro { max-width: 52ch; font-size: 1.08rem; color: var(--gray); }
 
-.hero__side { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.hero__side { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
 .hero__status {
   display: inline-flex; align-items: center; gap: 10px;
   font-weight: 700; font-size: 0.92rem;
@@ -305,7 +306,6 @@ button:focus-visible {
   border-bottom: 1px solid var(--ink);
   padding: 16px 0;
   background: var(--paper);
-  margin-top: clamp(32px, 6vh, 72px);
 }
 .marquee__track {
   display: flex; gap: 28px; align-items: center;
