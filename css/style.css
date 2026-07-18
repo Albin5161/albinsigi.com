@@ -721,12 +721,14 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 /* Real case-study screenshots */
 .shot { margin: 28px 0 8px; }
 .shot > img,
+.shot > picture img,
 .shot--grid img {
   width: 100%; height: auto; display: block;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--paper-soft);
 }
+.shot > picture { display: block; }
 .shot figcaption {
   font-size: 0.82rem; color: var(--gray);
   text-align: center; margin-top: 12px;
