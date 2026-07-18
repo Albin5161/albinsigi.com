@@ -718,6 +718,27 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   margin: 24px 0;
 }
 
+/* Real case-study screenshots */
+.shot { margin: 28px 0 8px; }
+.shot > img,
+.shot--grid img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-soft);
+}
+.shot figcaption {
+  font-size: 0.82rem; color: var(--gray);
+  text-align: center; margin-top: 12px;
+}
+.shot--grid { display: grid; gap: 12px; }
+.shot--grid figcaption { grid-column: 1 / -1; }
+.shot--2 { grid-template-columns: repeat(2, 1fr); }
+.shot--3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 680px) {
+  .shot--2, .shot--3 { grid-template-columns: 1fr; }
+}
+
 .case__nda {
   border: 1px solid var(--line);
   border-radius: 14px;
