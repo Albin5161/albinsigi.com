@@ -741,6 +741,45 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .shot--4 { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Portrait phone rows: uniform height, centred, so nothing towers */
+.shot--phones {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; align-items: flex-start;
+  gap: 16px;
+}
+.shot--phones img {
+  width: auto; height: auto;
+  max-height: 560px; max-width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-soft);
+}
+.shot--phones figcaption { flex-basis: 100%; }
+
+/* Stacked: a full-width landscape shot with a centred phone beneath it */
+.shot--stack { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.shot--stack > img,
+.shot--stack .shot-row { width: 100%; }
+.shot-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.shot-row img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-soft);
+}
+.shot__phone {
+  width: auto; height: auto;
+  max-width: 300px; max-height: 560px;
+  display: block; margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-soft);
+}
+@media (max-width: 680px) {
+  .shot-row { grid-template-columns: 1fr; }
+}
+
 .case__nda {
   border: 1px solid var(--line);
   border-radius: 14px;
