@@ -309,13 +309,14 @@ button:focus-visible {
   background: var(--paper);
 }
 .marquee__track {
-  display: flex; gap: 28px; align-items: center;
+  display: flex; align-items: center;
   width: max-content;
   animation: marquee 28s linear infinite;
   font-family: var(--font-display);
   font-weight: 500; font-size: 1.05rem;
   white-space: nowrap;
 }
+.marquee__seq { display: flex; gap: 28px; align-items: center; padding-right: 28px; }
 .marquee__track i { font-style: normal; font-size: 0.8em; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
