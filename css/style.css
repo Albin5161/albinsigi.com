@@ -735,8 +735,10 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .shot--grid figcaption { grid-column: 1 / -1; }
 .shot--2 { grid-template-columns: repeat(2, 1fr); }
 .shot--3 { grid-template-columns: repeat(3, 1fr); }
+.shot--4 { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 680px) {
   .shot--2, .shot--3 { grid-template-columns: 1fr; }
+  .shot--4 { grid-template-columns: repeat(2, 1fr); }
 }
 
 .case__nda {
