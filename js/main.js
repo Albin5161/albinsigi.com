@@ -217,3 +217,25 @@ if (timeEl) {
   tick();
   setInterval(tick, 30_000);
 }
+
+/* ---- Visit counter (homepage only) ----
+   Counts once per browser session, reads the total on repeat views.
+   Stays hidden if the store isn't attached or the request fails, so it
+   never shows a broken number to a visitor. */
+(function () {
+  const el = document.getElementById("visit-count");
+  if (!el) return;
+  const sep = document.querySelector(".footer__visits-sep");
+  const COUNTED = "pv-counted";
+  const alreadyCounted = sessionStorage.getItem(COUNTED);
+  fetch("/api/views" + (alreadyCounted ? "?peek=1" : ""))
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (!d || d.views == null) return;
+      sessionStorage.setItem(COUNTED, "1");
+      el.textContent = d.views.toLocaleString("en-IN") + (d.views === 1 ? " visit" : " visits");
+      el.hidden = false;
+      if (sep) sep.hidden = false;
+    })
+    .catch(() => {});
+})();
