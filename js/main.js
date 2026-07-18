@@ -239,3 +239,71 @@ if (timeEl) {
     })
     .catch(() => {});
 })();
+
+/* ---- Work-row hover preview (pointer devices only) ----
+   Shows a small thumbnail near the cursor when a project row is hovered,
+   easing toward the pointer. Disabled on touch and reduced-motion. */
+(function () {
+  const rows = document.querySelectorAll(".work-row[data-preview]");
+  if (!rows.length) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const box = document.createElement("div");
+  box.className = "work-preview";
+  box.setAttribute("aria-hidden", "true");
+  const img = document.createElement("img");
+  img.alt = "";
+  box.appendChild(img);
+  document.body.appendChild(box);
+
+  rows.forEach((r) => {
+    const pre = new Image();
+    pre.src = r.dataset.preview;
+  });
+
+  const W = 260, H = (260 * 2) / 3, OFF = 24;
+  let tx = 0, ty = 0, cx = 0, cy = 0, raf = null, active = false;
+
+  function target(e) {
+    let x = e.clientX + OFF, y = e.clientY + OFF;
+    if (x + W > window.innerWidth) x = e.clientX - W - OFF;
+    if (y + H > window.innerHeight) y = e.clientY - H - OFF;
+    return { x, y };
+  }
+  function loop() {
+    const ease = reduce ? 1 : 0.18;
+    cx += (tx - cx) * ease;
+    cy += (ty - cy) * ease;
+    box.style.left = Math.round(cx) + "px";
+    box.style.top = Math.round(cy) + "px";
+    if (active || Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) {
+      raf = requestAnimationFrame(loop);
+    } else {
+      raf = null;
+    }
+  }
+  rows.forEach((row) => {
+    row.addEventListener("mouseenter", (e) => {
+      if (img.getAttribute("src") !== row.dataset.preview) img.src = row.dataset.preview;
+      const p = target(e);
+      cx = tx = p.x;
+      cy = ty = p.y;
+      box.style.left = Math.round(p.x) + "px";
+      box.style.top = Math.round(p.y) + "px";
+      active = true;
+      box.classList.add("is-visible");
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    row.addEventListener("mousemove", (e) => {
+      const p = target(e);
+      tx = p.x;
+      ty = p.y;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    row.addEventListener("mouseleave", () => {
+      active = false;
+      box.classList.remove("is-visible");
+    });
+  });
+})();
