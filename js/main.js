@@ -339,23 +339,38 @@ if (timeEl) {
     return buf;
   }
 
+  /* Karplus-Strong plucked string: a noise burst fed through a short
+     averaging delay line decays into a convincingly string-like tone. */
+  const pluckCache = {};
+  function pluckBuffer(c, freq) {
+    const key = Math.round(freq);
+    if (pluckCache[key]) return pluckCache[key];
+    const seconds = 1.1;
+    const buf = c.createBuffer(1, Math.floor(c.sampleRate * seconds), c.sampleRate);
+    const data = buf.getChannelData(0);
+    const N = Math.round(c.sampleRate / freq);
+    for (let i = 0; i < N; i++) data[i] = Math.random() * 2 - 1;
+    for (let i = N; i < data.length; i++) {
+      data[i] = 0.997 * 0.5 * (data[i - N] + data[i - N + 1]);
+    }
+    pluckCache[key] = buf;
+    return buf;
+  }
+
   const play = {
     guitar(c) {
-      [196, 247].forEach((freq, i) => {
-        const t = c.currentTime + i * 0.09;
-        const osc = c.createOscillator();
-        osc.type = "triangle";
-        osc.frequency.value = freq;
+      // G major strum, low to high: G3 B3 D4 G4
+      [196.0, 246.94, 293.66, 392.0].forEach((freq, i) => {
+        const t = c.currentTime + i * 0.045;
+        const src = c.createBufferSource();
+        src.buffer = pluckBuffer(c, freq);
         const lp = c.createBiquadFilter();
         lp.type = "lowpass";
-        lp.frequency.value = 1400;
+        lp.frequency.value = 3200;
         const g = c.createGain();
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(0.12, t + 0.008);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
-        osc.connect(lp).connect(g).connect(c.destination);
-        osc.start(t);
-        osc.stop(t + 0.6);
+        g.gain.value = 0.085;
+        src.connect(lp).connect(g).connect(c.destination);
+        src.start(t);
       });
     },
     camera(c) {

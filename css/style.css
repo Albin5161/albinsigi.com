@@ -639,6 +639,9 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   letter-spacing: 0.02em;
 }
 .contact__phone:hover { color: #a3a3a3; }
+.contact__socials { margin-top: 6px; font-size: 0.95rem; color: #a3a3a3; display: flex; gap: 10px; justify-content: center; }
+.contact__socials a { border-bottom: 1.5px solid var(--line-dark); padding-bottom: 2px; transition: color 0.25s, border-color 0.25s; }
+.contact__socials a:hover { color: var(--paper); border-color: var(--paper); }
 
 /* ============================================================
    FOOTER (inside inverted contact block)
