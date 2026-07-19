@@ -418,3 +418,26 @@ if (timeEl) {
     });
   });
 })();
+
+/* Back-to-top button on case study pages. Injected here so every case
+   page gets it without editing each file. Appears after scrolling down. */
+(function () {
+  const caseMain = document.querySelector("main.case");
+  if (!caseMain) return;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "to-top";
+  btn.setAttribute("aria-label", "Back to top");
+  btn.innerHTML = '<span aria-hidden="true">↑</span>';
+  document.body.appendChild(btn);
+
+  const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+  });
+
+  const onScroll = () => btn.classList.toggle("is-visible", window.scrollY > 600);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
