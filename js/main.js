@@ -166,7 +166,7 @@ if (cursor && window.matchMedia("(hover: hover)").matches && !reducedMotion) {
     cursor.classList.add("cursor-dot--photo");
     cursor.style.backgroundImage = `url("${childPhoto.src}")`;
   };
-  childPhoto.src = assetPrefix + "assets/photo-child.png";
+  childPhoto.src = assetPrefix + "assets/photo-child.webp";
 
   let cx = -100, cy = -100, tx = -100, ty = -100;
 
