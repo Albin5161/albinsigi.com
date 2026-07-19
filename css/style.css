@@ -674,6 +674,9 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .case__summary li::before { content: "✳"; position: absolute; left: 0; font-size: 0.75em; top: 0.35em; color: var(--ink); }
 .case__summary strong { color: var(--ink); }
 
+.case__ext { border-bottom: 1.5px solid var(--line); padding-bottom: 1px; transition: border-color 0.25s; }
+.case__ext:hover { border-color: var(--ink); }
+
 .case__measure { margin-top: clamp(40px, 7vh, 64px); }
 .case__measure p { font-size: 0.92rem; margin-bottom: 14px; }
 
