@@ -683,12 +683,42 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   margin: 0 auto;
   padding: clamp(56px, 9vh, 100px) var(--pad-x) clamp(40px, 6vh, 80px);
 }
+/* The strip lives on a Figma-style canvas: dot grid, selection handles, a named cursor */
+.viz-canvas {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 44px) clamp(16px, 3vw, 36px) clamp(16px, 2vw, 24px);
+  background-image: radial-gradient(var(--line) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+.viz-cursor {
+  position: absolute;
+  top: clamp(14px, 2vw, 22px);
+  right: clamp(20px, 6vw, 72px);
+  z-index: 2;
+  display: flex; align-items: flex-start; gap: 2px;
+  pointer-events: none;
+  animation: viz-cursor-drift 7s ease-in-out infinite alternate;
+}
+.viz-cursor__arrow { font-size: 0.85rem; transform: rotate(-100deg); line-height: 1; }
+.viz-cursor__tag {
+  background: var(--ink); color: var(--paper);
+  font-size: 0.72rem; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+@keyframes viz-cursor-drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-26px, 14px); }
+}
 .viz-strip {
   display: flex;
-  gap: clamp(12px, 2vw, 20px);
+  gap: clamp(18px, 2.5vw, 28px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 12px;
+  padding: 10px 4px 12px;
   -webkit-overflow-scrolling: touch;
 }
 .viz-strip figure {
@@ -697,19 +727,54 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   scroll-snap-align: start;
   margin: 0;
 }
-.viz-strip img {
+.viz-frame { position: relative; }
+.viz-frame img {
   width: 100%; height: auto; display: block;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--paper-soft);
 }
-.viz-strip figcaption {
-  font-size: 0.82rem;
-  color: var(--gray);
-  margin-top: 10px;
-  text-align: center;
+/* Selection outline + corner handles, shown on hover like a selected Figma layer */
+.viz-frame::before {
+  content: "";
+  position: absolute; inset: -8px;
+  border: 1.5px solid var(--ink);
+  background-image:
+    linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--ink), var(--ink)),
+    linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--ink), var(--ink));
+  background-size: 7px 7px;
+  background-position: 0 0, 100% 0, 0 100%, 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-out);
+  pointer-events: none;
 }
+.viz-frame::after {
+  content: "402 × 874";
+  position: absolute; left: 50%; bottom: -26px;
+  transform: translateX(-50%);
+  background: var(--ink); color: var(--paper);
+  font-size: 0.68rem; font-weight: 600;
+  padding: 2px 8px; border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-out);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.viz-strip figure:hover .viz-frame::before,
+.viz-strip figure:hover .viz-frame::after { opacity: 1; }
+.viz-strip figcaption {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-top: 16px;
+  text-align: center;
+  font-family: var(--font-accent); font-style: italic;
+}
+.viz-strip figure:hover figcaption { color: var(--ink); }
 .viz-strip:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .viz-cursor { animation: none; }
+}
 
 .case__stats {
   display: grid;
@@ -918,7 +983,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 /* Work-row hover preview (pointer devices only) */
 .work-preview {
   position: fixed; top: 0; left: 0;
-  width: 260px; aspect-ratio: 3 / 2;
+  width: 300px; aspect-ratio: 16 / 9;
   border-radius: 12px; overflow: hidden;
   border: 1px solid var(--line);
   background: var(--paper-soft);

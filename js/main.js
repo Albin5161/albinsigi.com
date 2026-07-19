@@ -262,7 +262,7 @@ if (timeEl) {
     pre.src = r.dataset.preview;
   });
 
-  const W = 260, H = (260 * 2) / 3, OFF = 24;
+  const W = 300, H = (300 * 9) / 16, OFF = 24;
   let tx = 0, ty = 0, cx = 0, cy = 0, raf = null, active = false;
 
   function target(e) {
