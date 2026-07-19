@@ -307,3 +307,99 @@ if (timeEl) {
     });
   });
 })();
+
+/* Doodle hover sounds: tiny synthesized effects, no audio files.
+   Browsers only allow audio after a real user gesture (click/tap/key),
+   so the context unlocks on the first interaction and hovers stay
+   silent until then. Skipped on touch and reduced-motion. */
+(function () {
+  const cards = document.querySelectorAll(".doodle[data-sound]");
+  if (!cards.length) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let ctx = null;
+  function ensureCtx() {
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx.state === "running" ? ctx : null;
+  }
+  ["pointerdown", "keydown"].forEach((ev) =>
+    window.addEventListener(ev, () => ensureCtx(), { once: true, passive: true })
+  );
+
+  function noiseBuffer(c, seconds) {
+    const buf = c.createBuffer(1, c.sampleRate * seconds, c.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    return buf;
+  }
+
+  const play = {
+    guitar(c) {
+      [196, 247].forEach((freq, i) => {
+        const t = c.currentTime + i * 0.09;
+        const osc = c.createOscillator();
+        osc.type = "triangle";
+        osc.frequency.value = freq;
+        const lp = c.createBiquadFilter();
+        lp.type = "lowpass";
+        lp.frequency.value = 1400;
+        const g = c.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.12, t + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
+        osc.connect(lp).connect(g).connect(c.destination);
+        osc.start(t);
+        osc.stop(t + 0.6);
+      });
+    },
+    camera(c) {
+      [0, 0.07].forEach((off) => {
+        const t = c.currentTime + off;
+        const src = c.createBufferSource();
+        src.buffer = noiseBuffer(c, 0.04);
+        const hp = c.createBiquadFilter();
+        hp.type = "highpass";
+        hp.frequency.value = 1800;
+        const g = c.createGain();
+        g.gain.setValueAtTime(0.09, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+        src.connect(hp).connect(g).connect(c.destination);
+        src.start(t);
+      });
+    },
+    plane(c) {
+      const t = c.currentTime;
+      const src = c.createBufferSource();
+      src.buffer = noiseBuffer(c, 0.5);
+      const bp = c.createBiquadFilter();
+      bp.type = "bandpass";
+      bp.Q.value = 1.2;
+      bp.frequency.setValueAtTime(350, t);
+      bp.frequency.exponentialRampToValueAtTime(1800, t + 0.45);
+      const g = c.createGain();
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.08, t + 0.12);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+      src.connect(bp).connect(g).connect(c.destination);
+      src.start(t);
+    },
+  };
+
+  cards.forEach((card) => {
+    let last = 0;
+    card.addEventListener("mouseenter", () => {
+      const now = performance.now();
+      if (now - last < 400) return;
+      last = now;
+      const c = ensureCtx();
+      const fn = play[card.dataset.sound];
+      if (c && fn) fn(c);
+    });
+  });
+})();
