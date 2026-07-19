@@ -35,7 +35,7 @@
   <main class="case" id="main-content">
     <a class="case__back" href="../index.html#work">← Back to all work</a>
 
-    <p class="case__category">Case study 01 · Redesign · Dashboard</p>
+    <p class="case__category">Case study 01 · Product redesign · Dashboard</p>
     <h1 class="case__title">Faster decisions, fewer errors. Redesigning a law enforcement intelligence dashboard.</h1>
 
     <dl class="case__meta">
@@ -52,7 +52,7 @@
       <ul>
         <li><strong>The problem:</strong> Delhi Police officers were abandoning forms midway because the intelligence tool was slow, confusing and tiring to use.</li>
         <li><strong>What I did:</strong> Redesigned the full product as the only designer. 100+ screens across dashboard, forms, reports and AI tools.</li>
-        <li><strong>The result:</strong> Launched by the Commissioner of Delhi Police in December 2025. Two more divisions asked for the same system, with no sales effort.</li>
+        <li><strong>The result:</strong> Launched by the Commissioner of Delhi Police in December 2025. Two more divisions asked for the same system, which became two new government contracts.</li>
       </ul>
     </div>
 
@@ -60,32 +60,52 @@
       <strong>A note on confidentiality:</strong> This project was under an NDA because the client was an Indian law enforcement agency. The screens shown here were shared with permission before the company closed in early 2026. Everything was prepared from saved exports and recordings made during active development.
     </div>
 
-    <h2>The starting point</h2>
+    <h2>The product and the people using it</h2>
     <p>
-      Police officers in Delhi were using a tool that made their job harder. Every day, officers
-      logged intelligence, registered programs and generated reports on a dashboard so poorly
-      designed that many gave up filling forms midway. It had been built by developers thinking
-      about data storage. Nobody had thought about the officer sitting in front of it under pressure.
+      The Intelligence Data Management Tool (IDMT) is the dashboard Delhi Police officers use
+      every day to register programs, log intelligence inputs and generate official reports.
+      A program is any event the force monitors: a political rally, a religious gathering,
+      a community event. The tool was built by Tejis.ai for the Delhi Police Special Branch,
+      with more forces in the pipeline, including Chennai, Salem and Tiruppur police.
+    </p>
+    <p>Three very different people use the same screens:</p>
+    <ul>
+      <li><strong>Field officers</strong> log intelligence inputs quickly, often under time pressure.</li>
+      <li><strong>Supervisors</strong> track program status across many events at once.</li>
+      <li><strong>Senior officers</strong> review reports and make approval decisions.</li>
+    </ul>
+    <div class="case__stats">
+      <div><span class="case__stat-num">100+</span><span class="case__stat-label">screens designed</span></div>
+      <div><span class="case__stat-num">5</span><span class="case__stat-label">core modules</span></div>
+      <div><span class="case__stat-num">1</span><span class="case__stat-label">designer, me</span></div>
+      <div><span class="case__stat-num">2</span><span class="case__stat-label">delivery phases</span></div>
+    </div>
+
+    <h2>The problem: a real business need meeting a broken tool</h2>
+    <p>
+      <strong>The business need was legitimate.</strong> Law enforcement agencies wanted to
+      replace fragmented, manual processes with one digital system for managing intelligence
+      programs and producing reports for the chain of command.
     </p>
     <p>
-      I joined Tejis.ai as the only UX designer and was handed one task: fix it. The tool was the
-      Intelligence Data Management Tool, used daily by officers at every level, from constables
-      logging field inputs to senior officers reviewing reports.
+      <strong>The user need was not being met.</strong> The tool officers actually got had
+      been built by developers thinking about data storage. Nobody had thought about the
+      officer sitting in front of it under pressure. Many gave up filling forms midway,
+      and in an intelligence system an incomplete record is an operational risk.
     </p>
 
-    <figure class="shot shot--grid shot--2">
-      <img src="../assets/work/dashboard/old-homepage.webp" width="1200" height="854" loading="lazy" alt="The old Intelligence Data Management Tool homepage: a flat blue interface with many category tabs and no clear hierarchy" />
-      <img src="../assets/work/dashboard/old-form.webp" width="1200" height="667" loading="lazy" alt="The old program entry form, split across 11 horizontal tabs" />
-      <figcaption>The old tool: a flat homepage and the 11-tab entry form.</figcaption>
+    <figure class="shot">
+      <img src="../assets/work/dashboard/old-form.webp" width="1200" height="667" loading="lazy" alt="The old Intelligence Data Management Tool: a flat blue interface with a long program form and a full rich text toolbar on every field" />
+      <figcaption>The old tool: a flat interface where the program form sprawled across 11 tabs, with a rich text toolbar on every field.</figcaption>
     </figure>
 
-    <h2>What was broken</h2>
+    <p>What was failing, specifically:</p>
     <ul>
-      <li><strong>No hierarchy.</strong> Labels, fields and headings all had equal weight. There was no natural reading path.</li>
-      <li><strong>An 11-tab form.</strong> A single program entry form had 11 horizontal tabs. Officers had to hunt across all of them to finish basic tasks.</li>
-      <li><strong>Dangerous button placement.</strong> The delete button sat right next to save, with identical styling. In this context that is a real operational risk, not just bad design.</li>
-      <li><strong>Noise everywhere.</strong> Every text field had a full rich text toolbar. Officers logging intelligence do not need font colours and strikethrough.</li>
-      <li><strong>Inconsistent patterns.</strong> Some tasks used popups, others used full pages. Same work, two different models.</li>
+      <li><strong>No priority structure.</strong> Live, upcoming and past events sat in the same flat list. Nothing surfaced what needed attention right now.</li>
+      <li><strong>Cognitive overload.</strong> A single form had 11 horizontal tabs. Officers had to hunt across all of them to finish basic tasks, and many abandoned the form midway.</li>
+      <li><strong>Dangerous interactions.</strong> Delete sat right next to Save with identical styling. In this context that is an operational risk, not just bad design.</li>
+      <li><strong>Wrong reports sent.</strong> Report generation had no guidance, so officers printed the wrong report type and submitted it up the chain of command.</li>
+      <li><strong>Noise and inconsistency.</strong> Every text field had a full rich text toolbar, and the same kind of task was a popup in one place and a full page in another.</li>
     </ul>
     <blockquote>The tool was built for data entry, not for decisions made under pressure.</blockquote>
 
@@ -101,24 +121,66 @@
       fit the timeline, which is how the pinning system got cut, and the point-of-contact officer
       reviewed designs before anything went to build.
     </p>
-    <p>I found three types of users with different needs:</p>
-    <ul>
-      <li><strong>Field officers</strong> who log intelligence quickly, often under time pressure.</li>
-      <li><strong>Supervisors</strong> who track program status across many events.</li>
-      <li><strong>Senior officers</strong> who read reports and make approval decisions.</li>
-    </ul>
     <p>
       The clearest insight: officers needed to see their workload at a glance. They could not
       afford to read every row in a list. And trust in the tool was low because of past data
       entry mistakes, so preventing accidental actions mattered as much as speed.
     </p>
 
-    <h2>Decision 1: a visual language that belongs to its users</h2>
+    <h2>The strategy: fix the foundation, then add AI</h2>
+    <p>The product vision was simple to state and hard to hold on to: purpose-built for law enforcement, not a generic dashboard with a police logo on it. The delivery strategy had two phases:</p>
+    <ul>
+      <li><strong>Phase 1: fix the foundation.</strong> Solve the core usability failures first. Clear hierarchy, structured forms, guided report generation. Ship something officers can actually use.</li>
+      <li><strong>Phase 2: layer AI on stability.</strong> AI Form Filler, Program Match, AI Notes and Visualize were designed and ready, but only on top of a stable foundation. Shipping AI on top of a broken product would have created more problems than it solved.</li>
+    </ul>
     <p>
-      The goal was a tool that felt purpose-built for law enforcement, not a generic dashboard
-      with a police logo on it. I chose dark navy as the base because it reads as calm and serious.
-      Gold became the accent colour because it matches the uniform colours worn by Indian
-      law enforcement officers. That was deliberate. The tool should feel like it belongs to them.
+      One principle filtered every decision: design for the person, not the data. What does this
+      officer need to do right now, and what is in the way?
+    </p>
+
+    <h2>How the product is organised</h2>
+    <p>Everything in the system lives under two top-level categories, because the work itself splits that way:</p>
+    <ul>
+      <li><strong>Law and Order.</strong> Political gatherings, rallies, religious programs, community events. The primary category for the Special Branch.</li>
+      <li><strong>Crime.</strong> Theft, gang incidents, serious crimes, arrests. A separate workflow with its own form structure.</li>
+    </ul>
+    <p>Five modules carry the navigation:</p>
+    <ul>
+      <li><strong>Dashboard.</strong> Live, upcoming and completed programs at a glance.</li>
+      <li><strong>Programs.</strong> Create and manage programs, and fill their intelligence forms.</li>
+      <li><strong>Reports.</strong> Generate and submit PDF reports to senior officers.</li>
+      <li><strong>Updates.</strong> Alerts and status changes across programs.</li>
+      <li><strong>Calendar.</strong> A time-based view of everything scheduled.</li>
+    </ul>
+    <p>
+      One navigation decision worth naming: the sidebar collapses. Program cards are the
+      officer's primary focus, so the chrome gives way to the content.
+    </p>
+    <figure class="shot">
+      <img src="../assets/work/dashboard/final-homepage.webp" width="1200" height="854" loading="lazy" alt="The shipped homepage: sidebar with Dashboard, Calendar, Updates and Reports, category chips along the top, the Law and Order vs Crime toggle, and live programs shown first on a night satellite view of India" />
+      <figcaption>The shipped homepage carries the whole model: modules in the sidebar, the two-category toggle, filter chips, and live programs first.</figcaption>
+    </figure>
+
+    <h2>Three flows carry most of the work</h2>
+    <ul>
+      <li><strong>Creating and filling a program. Non-linear.</strong> An officer opens or creates a program, sees all 11 sections as a card grid, fills what is relevant in any order, saves, and returns later as intelligence develops. Progress indicators show what is done.</li>
+      <li><strong>Generating and submitting a report. Linear.</strong> Pick one of four report types (Active, Input, Alert or Event), let a three-step wizard guide data selection, review the populated report, export as PDF, submit.</li>
+      <li><strong>Triage on the dashboard. Urgency-first.</strong> Live events appear first with a blinking red indicator, today's programs sit right below, category filters narrow the list. Everything is scannable without opening a single record.</li>
+    </ul>
+    <p>
+      Matching the pattern to the flow, a card grid for non-linear work and a wizard for linear
+      work, is the single thread that runs through the whole redesign.
+    </p>
+
+    <h2>Key decisions and their trade-offs</h2>
+    <p>Every design decision buys something and costs something. These are the four that shaped the product, with what each one cost.</p>
+
+    <h3>1. A visual language that belongs to its users</h3>
+    <p>
+      I chose dark navy as the base because it reads as calm and serious, and gold as the accent
+      because it matches the uniform colours worn by Indian law enforcement officers. Two more
+      colours carry meaning everywhere: a blinking red for live events and green for completed
+      form sections.
     </p>
     <p>
       I tried three background directions first: a subtle texture, a bright blue gradient, and a
@@ -126,7 +188,6 @@
       The final direction was a night aerial satellite view of India. Officers work with real
       events in real places, and showing the country from above grounded the tool in its purpose.
     </p>
-
     <figure class="shot shot--grid shot--2">
       <img src="../assets/work/dashboard/bg-texture.webp" width="1200" height="852" loading="lazy" alt="Rejected background direction: a subtle texture" />
       <img src="../assets/work/dashboard/bg-blue.webp" width="1200" height="848" loading="lazy" alt="Rejected background direction: a bright blue gradient" />
@@ -134,13 +195,17 @@
       <img src="../assets/work/dashboard/bg-night.webp" width="1200" height="860" loading="lazy" alt="The final direction: a night aerial satellite view of India" />
       <figcaption>Three background directions I rejected, and the final night aerial view.</figcaption>
     </figure>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> a dark theme on older government monitors can reduce
+      readability. We knew this and planned a light mode for a later phase.
+    </p>
 
-    <h2>Decision 2: a homepage sorted by urgency</h2>
+    <h3>2. A homepage sorted by urgency</h3>
     <p>
-      In the old tool, live events, upcoming events and past events sat in one flat list. An
-      officer managing an active situation had to read everything to find what needed attention.
-      The redesign puts today's and live events first, always. Upcoming events follow. That is
-      how officers think about their day, so that is how the screen is ordered.
+      In the old tool an officer managing an active situation had to read everything to find
+      what needed attention. The redesign puts today's and live events first, always. Upcoming
+      events follow. That is how officers think about their day, so that is how the screen is
+      ordered.
     </p>
     <p>
       Each program became a card showing its category, venue, date, time and live status in one
@@ -148,55 +213,60 @@
       the record and when. In a tool where many officers touch the same record, that one line
       builds accountability without adding a single extra step. Officers noticed it and said so.
     </p>
+    <figure class="shot shot--stack">
+      <img src="../assets/work/dashboard/v1.webp" width="820" height="584" loading="lazy" alt="Homepage version 1, the first attempt at the redesign" />
+      <img src="../assets/work/dashboard/v7.webp" width="820" height="588" loading="lazy" alt="Homepage version 7, the final layout that shipped" />
+      <figcaption>Where it started and what shipped: version 1 above, version 7 below.</figcaption>
+    </figure>
     <p>
-      The homepage went through seven documented versions. Ideas that got cut along the way:
-      priority tags that crowded the cards, different card colours per section that made the
-      screen feel like two products, and compact rows that hid too much information. Each cut
-      taught us what officers actually needed: one card style, clear order, no decoration.
+      Between those two sat seven documented versions. Ideas cut along the way: priority tags
+      that crowded the cards, different card colours per section that made the screen feel like
+      two products, and compact rows that hid too much information. Each cut taught us what
+      officers actually needed: one card style, clear order, no decoration.
     </p>
-
-    <figure class="shot shot--grid shot--3">
-      <img src="../assets/work/dashboard/v1.webp" width="820" height="584" loading="lazy" alt="Homepage version 1" />
+    <figure class="shot shot--grid shot--2">
       <img src="../assets/work/dashboard/v2.webp" width="820" height="580" loading="lazy" alt="Homepage version 2" />
       <img src="../assets/work/dashboard/v3.webp" width="820" height="514" loading="lazy" alt="Homepage version 3" />
       <img src="../assets/work/dashboard/v4.webp" width="820" height="581" loading="lazy" alt="Homepage version 4" />
       <img src="../assets/work/dashboard/v5.webp" width="820" height="577" loading="lazy" alt="Homepage version 5" />
       <img src="../assets/work/dashboard/v6.webp" width="820" height="574" loading="lazy" alt="Homepage version 6" />
-      <img src="../assets/work/dashboard/v7.webp" width="820" height="588" loading="lazy" alt="Homepage version 7, the final layout" />
-      <figcaption>The homepage across seven documented versions.</figcaption>
+      <figcaption>The versions in between, where the wrong ideas got cut.</figcaption>
     </figure>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> some officers preferred the old flat list purely because
+      it was familiar. The new structure asks for a short learning curve, especially from older
+      officers.
+    </p>
 
-    <h2>Decision 3: killing the 11-tab form</h2>
+    <h3>3. A card grid instead of tabs, because the work is not linear</h3>
     <p>
       This was the most critical fix in the whole product. Officers had no way to see what was
-      filled and what was pending without clicking through every tab. Our point-of-contact
-      officer confirmed that officers were regularly abandoning the form midway. In an
-      intelligence system, incomplete records are an operational risk.
+      filled and what was pending without clicking through all 11 tabs, and our point-of-contact
+      officer confirmed they were regularly abandoning the form midway.
     </p>
     <p>
       The key insight: filling a program form is not a linear task. An officer might add basic
       details first, come back hours later for venue information, then again to log incident
-      details. The form had to support that, not fight it. A step-by-step wizard was considered
-      and rejected, because it forces an order that does not match how the work happens.
+      details. A step-by-step wizard was considered and rejected, because it forces an order
+      that does not match how the work happens. The solution was one screen with all 11 sections
+      as collapsible cards:
     </p>
-    <p>The solution was one screen with all 11 sections as collapsible cards:</p>
     <ul>
-      <li><strong>Everything visible at once.</strong> Officers see all sections and jump straight to the one they need.</li>
+      <li><strong>Everything visible at once.</strong> Officers see all sections and jump straight to the one they need. Not every section is mandatory, so they fill only what applies.</li>
       <li><strong>Progress on every card.</strong> A fraction like 3/4 shows fields filled, with red for empty, gold for partial, green for complete. An officer returning midway can scan the whole form in seconds.</li>
       <li><strong>Focused editing.</strong> Clicking a card opens a clean modal form, so the overview stays calm and the editing space stays focused.</li>
     </ul>
-    <p>
-      The card design went through 12 documented iterations to get the completion indicator,
-      labels and editing pattern right. A pinning system that let officers keep their
-      most-used sections on top was fully designed but cut for development time.
-    </p>
-
     <figure class="shot">
       <img src="../assets/work/dashboard/cards.webp" width="1200" height="857" loading="lazy" alt="The redesigned program view: one screen of collapsible section cards, each with a completion indicator" />
-      <figcaption>The program form as one screen of section cards, each showing completion at a glance.</figcaption>
+      <figcaption>The program form as one screen of section cards, each showing completion at a glance. The card design went through 12 documented iterations.</figcaption>
     </figure>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> a pinning system that let officers keep their most-used
+      sections on top was fully designed but cut for development time. Officers cannot yet
+      personalise their card layout.
+    </p>
 
-    <h2>Decision 4: a report wizard that prevents wrong prints</h2>
+    <h3>4. A report wizard that prevents wrong prints</h3>
     <p>
       After every program, officers generate a PDF report and submit it to senior officers for
       approval. In the old tool there was no structure, and officers frequently printed the
@@ -206,34 +276,46 @@
     <p>
       Unlike the program form, report generation is a linear task. You pick the report type,
       select the data, then review and export. So here a three-step wizard was the right
-      pattern. It guides each decision in order and confirms each step. Choosing the right
-      pattern for each workflow, instead of one pattern everywhere, was a conscious decision.
+      pattern. It guides each decision in order and confirms each step with a visible checkmark.
+      Choosing the right pattern for each workflow, instead of one pattern everywhere, was a
+      conscious decision.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> experienced officers who know the flow may find the wizard
+      slower. A power-user shortcut was discussed but not built in phase 1.
     </p>
 
-    <h2>Decision 5: AI features that stay out of the way</h2>
-    <p>
-      AI features are easy to add and easy to get wrong. In a law enforcement tool, officers
-      must never feel the system is doing something unpredictable with sensitive data.
-      I surfaced four AI tools directly in the top navigation of the program view: AI Form
-      Filler, History, Visualize and AI Program Match. If a feature saves officers time on
-      frequent tasks, it should be one click away, not three.
-    </p>
-    <p>
-      My favourite of these is AI Notes. Officers could type or speak their observations in
-      English or Hindi, in their own words. The AI formatted the raw input into a clean,
-      structured note. The officer changed nothing about how they work. In a multilingual
-      force, that matters.
-    </p>
-    <p>
-      All AI features were scoped for phase 2, on purpose. Phase 1 fixed the core usability
-      failures first. Shipping AI on top of a broken foundation would have created more
-      problems than it solved.
-    </p>
-
+    <h2>What was built</h2>
+    <p><strong>Phase 1, shipped:</strong></p>
+    <ul>
+      <li><strong>Dashboard.</strong> Live-first layout, card-based event view, the Law and Order vs Crime toggle, category filter chips, collapsible sidebar.</li>
+      <li><strong>Program management.</strong> The 11-section card grid, expand and collapse, completion indicators, modal form filling, and the last-updated accountability line.</li>
+      <li><strong>Report generation.</strong> Four report types, the three-step wizard, PDF export and submission, filtered report listing.</li>
+    </ul>
+    <p><strong>Phase 2, designed and ready to ship:</strong></p>
+    <ul>
+      <li><strong>AI Form Filler.</strong> Auto-fills fields from historical data.</li>
+      <li><strong>AI Program Match.</strong> Matches new programs to historical patterns.</li>
+      <li><strong>AI Notes.</strong> Turns typed or spoken observations, in English or Hindi, into clean structured notes. The officer changes nothing about how they work. In a multilingual force, that matters.</li>
+      <li><strong>Visualize.</strong> Generates visual summaries for briefings.</li>
+    </ul>
     <figure class="shot">
       <img src="../assets/work/dashboard/ai-nav.webp" width="1400" height="208" loading="lazy" alt="The four AI tools surfaced in the top navigation: AI Form Filler, History, Visualize and AI Program Match" />
-      <figcaption>The four AI tools kept one click away, in the top navigation.</figcaption>
+      <figcaption>The four AI tools kept one click away, in the top navigation. In a law enforcement tool, officers must never feel the system is doing something unpredictable with sensitive data.</figcaption>
     </figure>
+
+    <h2>The design system underneath</h2>
+    <p>
+      One designer keeping 100+ screens consistent only works with a system. These are the rules
+      that held it together:
+    </p>
+    <ul>
+      <li><strong>Four colours with fixed meanings.</strong> Navy for the base, gold for emphasis, blinking red only for live events, green only for complete. Nothing else competes.</li>
+      <li><strong>The card is the base unit.</strong> Every program, form section and report is a card. Consistent, scannable, collapsible.</li>
+      <li><strong>One completion indicator.</strong> A fraction plus a colour on every form card, so progress is readable without opening anything.</li>
+      <li><strong>Two-level interaction.</strong> Card grids for scanning, modals for filling. Clean separation between overview and detail.</li>
+      <li><strong>A dotted scroll affordance.</strong> A small cue that more fields exist below without expanding the card. A tiny detail that removes a moment of doubt.</li>
+    </ul>
 
     <h2>The result</h2>
     <ul>
@@ -261,17 +343,28 @@
       </ul>
     </div>
 
-    <h2>What I learned</h2>
+    <h2>Reflections, and what would come next</h2>
     <p>
-      Designing for high-stakes work taught me that clarity is a safety requirement, not a style
-      choice. Every unnecessary element is a possible source of error. When an officer prints
-      the wrong report because the screen was unclear, that has real consequences.
+      <strong>What worked:</strong> settling a strong visual language early paid off across
+      100+ screens. The card layout and completion indicators got the most positive officer
+      feedback, and the report wizard solved a real operational failure.
     </p>
     <p>
-      If I did it again, I would push harder for direct usability sessions with officers instead
-      of relying on intermediaries. The best design decision I made was not a screen. It was
-      asking, over and over: what does this officer need to do right now, and what is in the way?
+      <strong>What I would do differently:</strong> push harder for direct usability sessions
+      with officers instead of relying on intermediaries, advocate more strongly for the pinning
+      system, and document constraints like low-resolution government monitors earlier.
     </p>
+    <p>
+      <strong>The lesson I keep:</strong> in high-stakes tools, clarity is a safety requirement,
+      not a style choice. When an officer prints the wrong report because the screen was
+      unclear, that has real consequences.
+    </p>
+    <p>If the rollout had continued, the roadmap was already clear:</p>
+    <ul>
+      <li><strong>The pinning system.</strong> Fully designed, cut from phase 1 for timeline.</li>
+      <li><strong>Light mode.</strong> The night satellite view shifts to a daytime view, so the visual metaphor survives the theme change.</li>
+      <li><strong>The full AI layer.</strong> All four phase 2 features, shipping on a foundation that could finally support them.</li>
+    </ul>
 
     <a class="case__next" href="citizen-safety-app.html">
       <span class="case__next-label">Next case study</span>
