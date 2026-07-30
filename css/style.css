@@ -741,7 +741,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   right: clamp(16px, calc((100vw - 860px) / 2 - 40px), 72px);
   transform: translateY(-50%);
   z-index: 70;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 15px;
   padding: 6px 0;
 }
 .case-toc__link {
