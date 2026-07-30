@@ -738,40 +738,40 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .case-toc {
   position: fixed;
   top: 50%;
-  left: clamp(16px, calc((100vw - 860px) / 2 - 190px), 80px);
+  right: clamp(16px, calc((100vw - 860px) / 2 - 40px), 72px);
   transform: translateY(-50%);
   z-index: 70;
-  display: flex; flex-direction: column; gap: 2px;
-  max-width: 200px;
-  padding: 6px 8px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  padding: 6px 0;
 }
 .case-toc__link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 5px 0;
+  position: relative;
+  display: block;
+  padding: 3px 0;
   color: var(--gray);
 }
 .case-toc__tick {
-  flex: 0 0 auto;
-  width: 16px; height: 1.5px;
+  display: block;
+  width: 18px; height: 1.5px;
   background: var(--line-dark, #d4d4d4);
   transition: width 0.25s var(--ease-out), background 0.25s var(--ease-out);
 }
 .case-toc__label {
-  font-size: 0.82rem;
-  line-height: 1.25;
+  position: absolute;
+  right: 28px; top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  font-size: 0.8rem; line-height: 1.2;
   white-space: nowrap;
-  overflow: hidden; text-overflow: ellipsis;
-  max-width: 170px;
-  opacity: 0; transform: translateX(-6px);
-  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), color 0.25s;
+  color: var(--ink);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
 }
-.case-toc:hover .case-toc__label,
-.case-toc:focus-within .case-toc__label { opacity: 1; transform: none; }
-.case-toc__link:hover .case-toc__tick { width: 26px; background: var(--ink); }
-.case-toc__link:hover .case-toc__label { color: var(--ink); }
-/* active section */
-.case-toc__link.is-current .case-toc__tick { width: 26px; background: var(--ink); }
-.case-toc__link.is-current .case-toc__label { opacity: 1; transform: none; color: var(--ink); font-weight: 600; }
+/* minimal: only the tick you hover reveals its label */
+.case-toc__link:hover .case-toc__tick { width: 28px; background: var(--ink); }
+.case-toc__link:hover .case-toc__label { opacity: 1; transform: translateY(-50%); }
+/* active section: highlighted tick, no persistent label */
+.case-toc__link.is-current .case-toc__tick { width: 28px; background: var(--ink); }
 /* hide where there is no room for a side rail */
 @media (max-width: 1240px) { .case-toc { display: none; } }
 @media (prefers-reduced-motion: reduce) {
