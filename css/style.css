@@ -758,20 +758,25 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 .case-toc__label {
   position: absolute;
-  right: 28px; top: 50%;
+  right: 44px; top: 50%;
   transform: translateY(-50%) translateX(6px);
   font-size: 0.8rem; line-height: 1.2;
   white-space: nowrap;
-  color: var(--ink);
+  color: var(--gray);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), color 0.25s;
 }
-/* minimal: only the tick you hover reveals its label */
+/* hovering the rail reveals every label; the gap keeps them clear of the cursor */
+.case-toc:hover .case-toc__label { opacity: 1; transform: translateY(-50%); }
 .case-toc__link:hover .case-toc__tick { width: 28px; background: var(--ink); }
-.case-toc__link:hover .case-toc__label { opacity: 1; transform: translateY(-50%); }
-/* active section: highlighted tick, no persistent label */
+.case-toc__link:hover .case-toc__label { color: var(--ink); }
+/* active section: highlighted tick and a persistent, bold label */
 .case-toc__link.is-current .case-toc__tick { width: 28px; background: var(--ink); }
+.case-toc__link.is-current .case-toc__label {
+  opacity: 1; transform: translateY(-50%);
+  color: var(--ink); font-weight: 600;
+}
 /* hide where there is no room for a side rail */
 @media (max-width: 1240px) { .case-toc { display: none; } }
 @media (prefers-reduced-motion: reduce) {
