@@ -441,3 +441,56 @@ if (timeEl) {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 })();
+
+/* On-this-page table of contents for case studies. Built from the page's
+   h2 headings, so every case page gets it without editing each file.
+   Highlights the section you're reading (scrollspy) and jumps on click. */
+(function () {
+  const caseMain = document.querySelector("main.case");
+  if (!caseMain) return;
+  const headings = Array.from(caseMain.querySelectorAll("h2"));
+  if (headings.length < 3) return;
+
+  const slug = (s) =>
+    s.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-").slice(0, 40);
+
+  const nav = document.createElement("nav");
+  nav.className = "case-toc";
+  nav.setAttribute("aria-label", "On this page");
+
+  const links = headings.map((h, i) => {
+    if (!h.id) h.id = slug(h.textContent) || "section-" + i;
+    const a = document.createElement("a");
+    a.className = "case-toc__link";
+    a.href = "#" + h.id;
+    a.innerHTML =
+      '<span class="case-toc__tick" aria-hidden="true"></span>' +
+      '<span class="case-toc__label"></span>';
+    a.querySelector(".case-toc__label").textContent = h.textContent;
+    nav.appendChild(a);
+    return a;
+  });
+  document.body.appendChild(nav);
+
+  // scrollspy: active = last heading whose top has passed a line near the top
+  let ticking = false;
+  function updateActive() {
+    ticking = false;
+    let current = 0;
+    for (let i = 0; i < headings.length; i++) {
+      if (headings[i].getBoundingClientRect().top <= 130) current = i;
+    }
+    links.forEach((a, i) => a.classList.toggle("is-current", i === current));
+  }
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateActive);
+      }
+    },
+    { passive: true }
+  );
+  updateActive();
+})();
