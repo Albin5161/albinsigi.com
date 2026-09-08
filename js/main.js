@@ -494,3 +494,60 @@ if (timeEl) {
   );
   updateActive();
 })();
+
+/* Corner mascot (homepage only): an autonomous little "kid-me" that
+   wanders the bottom-left and does activities (walk, sit, sleep, stretch,
+   code, guitar, photo, design). Silent. Desktop only. Fades out over the
+   dark contact section so a dark-bodied mascot doesn't vanish on black. */
+(function () {
+  const mascot = document.getElementById("mascot");
+  if (!mascot) return;                                   // homepage only
+  if (!window.matchMedia("(min-width: 769px)").matches) return;  // desktop only
+  const stage = document.getElementById("mascot-stage");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let x = 40, dir = 1, state = "walk", until = 0;
+  const pxPerSec = 30, W = 56;
+  const maxX = () => window.innerWidth - W - 8;
+
+  function setState(next, hold) { state = next; mascot.className = next; until = performance.now() + hold; }
+  function startWalk() { setState("walk", 2800 + Math.random() * 3400); }
+  function rollAfterWalk() {
+    const r = Math.random(), rnd = Math.random();
+    if (r < 0.14) return setState("sit", 1800 + rnd * 1500);
+    if (r < 0.28) return setState("sleep", 4000 + rnd * 3000);
+    if (r < 0.38) return setState("stretch", 1100);
+    if (r < 0.54) return setState("code", 3000 + rnd * 2500);
+    if (r < 0.69) return setState("guitar", 3000 + rnd * 2500);
+    if (r < 0.82) return setState("photo", 2400 + rnd * 1500);
+    if (r < 0.94) return setState("design", 3000 + rnd * 2500);
+    return startWalk();
+  }
+  function face(d) { dir = d; apply(); }
+  function apply() { mascot.style.transform = `translateX(${x}px) scaleX(${dir})`; }
+
+  let last = performance.now();
+  function loop(now) {
+    let dt = (now - last) / 1000; last = now;
+    if (dt > 0.05) dt = 0.05;
+    if (state === "walk") {
+      x += dir * pxPerSec * dt;
+      if (x >= maxX()) { x = maxX(); face(-1); }
+      else if (x <= 8) { x = 8; face(1); }
+      else apply();
+    }
+    if (now >= until) { state === "walk" ? rollAfterWalk() : startWalk(); }
+    requestAnimationFrame(loop);
+  }
+
+  if (reduce) { setState("sit", Infinity); apply(); }
+  else { startWalk(); apply(); requestAnimationFrame(loop); }
+
+  // fade out when the dark contact section reaches the bottom where the mascot stands
+  const contact = document.querySelector(".contact");
+  if (contact && "IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => entries.forEach((e) => stage.classList.toggle("faded", e.isIntersecting))
+    ).observe(contact);
+  }
+})();

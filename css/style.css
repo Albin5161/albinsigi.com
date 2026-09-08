@@ -785,6 +785,100 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 /* anchored headings clear the fixed nav */
 .case h2 { scroll-margin-top: 90px; }
 
+/* ============================================================
+   CORNER MASCOT (homepage) — autonomous kid-me. Silent, desktop only.
+   Everything scoped under #mascot so generic class names never clash.
+   ============================================================ */
+#mascot-stage {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 150px;
+  pointer-events: none; z-index: 60;
+  opacity: 1; transition: opacity 0.4s var(--ease-out);
+}
+#mascot-stage.faded { opacity: 0; }   /* fade out over the dark contact section */
+
+#mascot {
+  position: absolute; bottom: 40px; left: 0;
+  width: 56px; height: 84px;
+  transform: translateX(40px) scaleX(1);
+  transform-origin: bottom center; will-change: transform;
+}
+#mascot .m-char { position: absolute; inset: 0; transform-origin: bottom center; }
+#mascot .m-shadow {
+  position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+  width: 46px; height: 10px; border-radius: 50%;
+  background: rgba(0,0,0,0.18); filter: blur(2px);
+}
+#mascot .m-head {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  background-image: url("../assets/photo-child.webp");
+  background-size: cover; background-position: 50% 30%;
+  border: 2px solid var(--ink); background-color: var(--line); z-index: 2;
+}
+#mascot .m-torso {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 26px; border-radius: 12px 12px 10px 10px;
+  background: var(--ink); z-index: 1;
+}
+#mascot .m-leg {
+  position: absolute; bottom: 6px; width: 6px; height: 20px; border-radius: 3px;
+  background: var(--ink); transform-origin: top center;
+}
+#mascot .m-leg.m-l { left: 21px; }
+#mascot .m-leg.m-r { left: 29px; }
+
+/* WALK */
+#mascot.walk .m-leg.m-l { animation: m-swing 0.5s linear infinite; }
+#mascot.walk .m-leg.m-r { animation: m-swing 0.5s linear infinite -0.25s; }
+#mascot.walk .m-char    { animation: m-bob 0.5s linear infinite; }
+@keyframes m-swing { 0%,100% { transform: rotate(22deg); } 50% { transform: rotate(-22deg); } }
+@keyframes m-bob   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+
+/* SIT */
+#mascot.sit .m-char { transform: translateY(10px); }
+#mascot.sit .m-leg  { animation: none; transform: rotate(78deg); bottom: 2px; }
+
+/* SLEEP — curl in place on the floor + z's, no downward drift */
+#mascot.sleep .m-char { transform: scaleY(0.88); }
+#mascot.sleep .m-head { transform: translateX(-50%) rotate(-14deg); }
+#mascot.sleep .m-leg  { animation: none; transform: rotate(78deg); bottom: 2px; }
+#mascot .m-zzz { position: absolute; top: -6px; left: 40px; font-weight: 700; color: var(--ink); opacity: 0; font-size: 14px; }
+#mascot.sleep .m-zzz { animation: m-zfloat 2.4s ease-in-out infinite; }
+@keyframes m-zfloat { 0% { opacity: 0; transform: translate(0,0) scale(0.7); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(10px,-24px) scale(1.1); } }
+
+/* STRETCH */
+#mascot.stretch .m-char { animation: m-stretch 1.1s ease-in-out; }
+@keyframes m-stretch { 0%,100% { transform: scaleY(1); } 45% { transform: scaleY(1.18) translateY(-4px); } }
+
+/* ACTIVITY PROPS (rough placeholders) */
+#mascot .m-prop { position: absolute; display: none; z-index: 3; }
+#mascot .m-prop span { position: absolute; display: block; }
+#mascot.code .m-laptop { display: block; left: 11px; bottom: 8px; }
+#mascot .m-laptop .m-base { width: 34px; height: 6px; background: var(--ink); border-radius: 2px; bottom: 0; left: 0; }
+#mascot .m-laptop .m-lid  { width: 30px; height: 20px; background: var(--ink); border-radius: 3px 3px 0 0; left: 2px; bottom: 6px; }
+#mascot.code .m-head { transform: translateX(-50%) rotate(9deg); }
+#mascot.code .m-char { animation: m-typebob 0.5s steps(2) infinite; }
+@keyframes m-typebob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
+#mascot.photo .m-camera { display: block; left: 13px; top: 12px; width: 30px; height: 18px; }
+#mascot .m-camera::before { content: ""; position: absolute; inset: 0; background: var(--ink); border-radius: 4px; }
+#mascot .m-camera .m-lens  { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--paper); right: 4px; top: 3px; z-index: 1; }
+#mascot .m-camera .m-flash { width: 100%; height: 100%; background: var(--paper); opacity: 0; border-radius: 4px; }
+#mascot.photo .m-camera .m-flash { animation: m-flash 2.2s ease-in-out infinite; }
+@keyframes m-flash { 0%,82%,100% { opacity: 0; } 88% { opacity: 0.9; } }
+#mascot.guitar .m-guitar { display: block; left: 0; bottom: 8px; }
+#mascot .m-guitar .m-body { width: 22px; height: 26px; background: var(--ink); border-radius: 11px; left: 22px; bottom: 0; }
+#mascot .m-guitar .m-neck { width: 4px; height: 32px; background: var(--ink); left: 8px; bottom: 14px; transform: rotate(38deg); transform-origin: bottom center; }
+#mascot.guitar .m-char { animation: m-bob 0.6s linear infinite; }
+#mascot.design .m-tablet { display: block; left: 12px; bottom: 10px; width: 32px; height: 22px; }
+#mascot .m-tablet::before { content: ""; position: absolute; inset: 0; background: var(--ink); border-radius: 3px; }
+#mascot .m-tablet .m-pen { width: 2px; height: 14px; background: var(--ink); right: -2px; bottom: 8px; transform: rotate(32deg); z-index: 1; }
+#mascot.design .m-head { transform: translateX(-50%) rotate(9deg); }
+
+@media (max-width: 768px) { #mascot-stage { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  #mascot .m-leg, #mascot .m-char, #mascot .m-zzz, #mascot .m-camera .m-flash { animation: none !important; }
+}
+
 /* Back-to-top button (case study pages) */
 .to-top {
   position: fixed;
