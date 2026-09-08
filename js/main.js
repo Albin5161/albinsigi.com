@@ -501,14 +501,14 @@ if (timeEl) {
    dark contact section so a dark-bodied mascot doesn't vanish on black. */
 (function () {
   const mascot = document.getElementById("mascot");
-  if (!mascot) return;                                   // homepage only
-  if (!window.matchMedia("(min-width: 769px)").matches) return;  // desktop only
+  if (!mascot) return;                                   // homepage only (runs on mobile too)
   const stage = document.getElementById("mascot-stage");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let x = 40, dir = 1, state = "walk", until = 0;
-  const pxPerSec = 30, W = 56;
-  const maxX = () => window.innerWidth - W - 8;
+  const pxPerSec = 30;
+  const W = () => mascot.offsetWidth || 96;              // real (responsive) width for edge math
+  const maxX = () => window.innerWidth - W() - 8;
 
   function setState(next, hold) { state = next; mascot.className = next; until = performance.now() + hold; }
   function startWalk() { setState("walk", 2800 + Math.random() * 3400); }

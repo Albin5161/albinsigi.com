@@ -336,18 +336,78 @@
   <!-- Corner mascot: autonomous "kid-me" that wanders the bottom-left. Homepage only, silent, desktop only. -->
   <div id="mascot-stage" aria-hidden="true">
     <div id="mascot" class="walk">
-      <div class="m-char">
-        <span class="m-zzz">z</span>
-        <div class="m-head"></div>
-        <div class="m-torso"></div>
-        <div class="m-leg m-l"></div>
-        <div class="m-leg m-r"></div>
-        <div class="m-prop m-laptop"><span class="m-lid"></span><span class="m-base"></span></div>
-        <div class="m-prop m-camera"><span class="m-lens"></span><span class="m-flash"></span></div>
-        <div class="m-prop m-guitar"><span class="m-neck"></span><span class="m-body"></span></div>
-        <div class="m-prop m-tablet"><span class="m-pen"></span></div>
-      </div>
-      <div class="m-shadow"></div>
+      <svg class="mc-svg" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+        <g class="mc-bob">
+          <g transform="translate(50,68)"><g class="mc-arm mc-back-arm">
+            <rect x="-3.5" y="0" width="7" height="30" rx="3.5" fill="var(--accent-dk)"/>
+            <circle cx="0" cy="32" r="3.6" fill="var(--skin2)"/></g></g>
+          <g transform="translate(55,94)"><g class="mc-leg mc-back-leg">
+            <rect x="-4.5" y="0" width="9" height="46" rx="4.5" fill="var(--pants-dk)"/>
+            <ellipse cx="1" cy="48" rx="7" ry="4" fill="var(--ink)"/></g></g>
+          <g class="mc-torso">
+            <rect x="44" y="62" width="32" height="36" rx="13" fill="var(--accent)"/>
+            <path d="M60 62 v16" stroke="var(--accent-dk)" stroke-width="1.5"/>
+          </g>
+          <g transform="translate(65,94)"><g class="mc-leg mc-front-leg">
+            <rect x="-4.5" y="0" width="9" height="46" rx="4.5" fill="var(--pants)"/>
+            <ellipse cx="1" cy="48" rx="7" ry="4" fill="var(--ink)"/></g></g>
+          <g transform="translate(70,68)"><g class="mc-arm mc-front-arm">
+            <rect x="-3.5" y="0" width="7" height="30" rx="3.5" fill="var(--accent)"/>
+            <circle cx="0" cy="32" r="3.6" fill="var(--skin)"/></g></g>
+          <g class="mc-head">
+            <rect x="55.5" y="50" width="9" height="14" fill="var(--skin)"/>
+            <circle cx="60" cy="36" r="21" fill="var(--skin)"/>
+            <circle cx="50" cy="40" r="4.2" fill="var(--accent)" opacity="0.28"/>
+            <circle cx="70" cy="40" r="4.2" fill="var(--accent)" opacity="0.28"/>
+            <path d="M55 45 q5 4.5 10 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M39 35 q0 -24 21 -24 q21 0 21 24 q-6 -14 -21 -14 q-15 0 -21 14 z" fill="var(--hair)"/>
+            <circle cx="51" cy="35" r="7.5" fill="var(--paper)" fill-opacity="0.35" stroke="var(--ink)" stroke-width="1.7"/>
+            <circle cx="69" cy="35" r="7.5" fill="var(--paper)" fill-opacity="0.35" stroke="var(--ink)" stroke-width="1.7"/>
+            <path d="M58.5 35 h3" stroke="var(--ink)" stroke-width="1.7"/>
+            <path d="M76.5 34 l4 -1.5" stroke="var(--ink)" stroke-width="1.7" fill="none"/>
+            <g class="mc-eyes-open">
+              <ellipse cx="51" cy="35.5" rx="2.6" ry="3" fill="var(--ink)"/>
+              <ellipse cx="69" cy="35.5" rx="2.6" ry="3" fill="var(--ink)"/>
+              <circle cx="52" cy="34.4" r="0.9" fill="var(--paper)"/>
+              <circle cx="70" cy="34.4" r="0.9" fill="var(--paper)"/>
+            </g>
+            <g class="mc-eyes-shut">
+              <path d="M47.5 35.5 q3.5 3 7 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M65.5 35.5 q3.5 3 7 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+            <text class="mc-zzz" x="82" y="20" font-size="12" font-weight="700" fill="var(--ink)">z</text>
+          </g>
+          <g class="mc-prop mc-p-guitar" transform="rotate(-32 60 92)">
+            <rect x="56.5" y="34" width="7" height="10" rx="1.5" fill="var(--wood-dk)"/>
+            <circle cx="58" cy="36" r="1" fill="#eee"/><circle cx="62" cy="36" r="1" fill="#eee"/>
+            <rect x="57" y="43" width="6" height="52" fill="var(--wood-dk)"/>
+            <g stroke="#d8c4a0" stroke-width="0.7"><path d="M57 54 h6"/><path d="M57 63 h6"/><path d="M57 72 h6"/><path d="M57 81 h6"/></g>
+            <ellipse cx="60" cy="108" rx="17" ry="15" fill="var(--wood)"/>
+            <ellipse cx="60" cy="94" rx="12.5" ry="11" fill="var(--wood)"/>
+            <circle cx="60" cy="100" r="5" fill="var(--wood-dk)"/>
+            <rect x="55" y="108" width="10" height="2.4" rx="1" fill="var(--wood-dk)"/>
+            <g stroke="#efe6d2" stroke-width="0.5"><path d="M58 95 v18"/><path d="M60 95 v18"/><path d="M62 95 v18"/></g>
+          </g>
+          <g class="mc-prop mc-p-laptop">
+            <rect x="48" y="96" width="30" height="6" rx="2" fill="var(--ink)"/>
+            <rect x="50" y="78" width="26" height="20" rx="3" fill="var(--ink)"/>
+            <rect x="53" y="81" width="20" height="14" rx="2" fill="#5cc39a" opacity="0.55"/>
+          </g>
+          <g class="mc-prop mc-p-camera">
+            <rect x="45" y="26" width="30" height="19" rx="4" fill="var(--ink)"/>
+            <rect x="66" y="22" width="7" height="5" rx="1" fill="var(--ink)"/>
+            <circle cx="60" cy="36" r="6.5" fill="#2b2b2b" stroke="var(--paper)" stroke-width="2"/>
+            <circle cx="60" cy="36" r="2.4" fill="#6cf" opacity="0.5"/>
+            <rect class="mc-flash" x="45" y="26" width="30" height="19" rx="4" fill="var(--paper)"/>
+          </g>
+          <g class="mc-prop mc-p-tablet">
+            <rect x="46" y="92" width="32" height="22" rx="3" fill="var(--ink)"/>
+            <rect x="49" y="95" width="26" height="16" rx="2" fill="var(--paper)" opacity="0.9"/>
+            <rect x="74" y="88" width="2.5" height="16" rx="1" fill="var(--ink)" transform="rotate(30 75 96)"/>
+          </g>
+        </g>
+      </svg>
+      <div class="mc-shadow"></div>
     </div>
   </div>
 
