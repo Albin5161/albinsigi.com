@@ -7,7 +7,10 @@
   --paper: #ffffff;
   --paper-soft: #f5f5f4;
   --ink: #0b0b0b;
-  --gray: #6b6b6b;
+  --gray: #6b6b6b;        /* secondary text on light */
+  --gray-muted: #a3a3a3;  /* muted text, mostly on dark surfaces */
+  --gray-faint: #c9c9c9;  /* faint text on dark (e.g. row-hover body) */
+  --gray-dim: #8f8f8f;    /* dim mono / terminal text */
   --line: #e4e4e4;
   --line-dark: #262626;
 
@@ -70,33 +73,41 @@ button:focus-visible {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---- custom cursor: inverts whatever is under it ---- */
+/* ---- custom cursor: inverts whatever is under it ----
+   JS drives the element's transform (position). The visible disc is a ::before
+   that scales via transform, so the hover grow never animates width/height. */
 .cursor-dot {
   position: fixed; top: 0; left: 0;
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: #fff;
+  width: 52px; height: 52px;       /* box size; the visible disc is ::before */
   pointer-events: none;
   z-index: 1000;
   transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out), opacity 0.25s;
+  transition: opacity 0.25s;
   opacity: 0;
+}
+.cursor-dot::before {
+  content: "";
+  position: absolute; inset: 0; margin: auto;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #fff;
   mix-blend-mode: difference;
+  transition: transform 0.25s var(--ease-out);
 }
 .cursor-dot.is-active { opacity: 1; }
-.cursor-dot.is-hovering { width: 52px; height: 52px; }
+.cursor-dot.is-hovering::before { transform: scale(3.714); }  /* 14 → 52px */
 
-/* when assets/photo-child.png exists, the cursor becomes the childhood photo */
-.cursor-dot--photo {
+/* when assets/photo-child.* exists, the disc becomes the childhood photo */
+.cursor-dot--photo::before {
   width: 44px; height: 44px;
-  background-size: cover;
+  background: var(--cursor-photo) center / cover no-repeat;
   /* the childhood photo is very tall; this keeps the face in the circle */
   background-position: 50% 33%;
   mix-blend-mode: normal;
   border: 1.5px solid var(--ink);
   box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.35);
 }
-.cursor-dot--photo.is-hovering { width: 64px; height: 64px; }
+.cursor-dot--photo.is-hovering::before { transform: scale(1.4545); }  /* 44 → 64px */
 
 @media (hover: none), (prefers-reduced-motion: reduce) {
   .cursor-dot { display: none; }
@@ -121,6 +132,9 @@ button:focus-visible {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px var(--pad-x);
+  /* clear a side notch in landscape (viewport-fit=cover) */
+  padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--pad-x), env(safe-area-inset-right, 0px));
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -379,14 +393,14 @@ button:focus-visible {
   max-width: 62ch;
   transition: color 0.3s;
 }
-.work-row:hover .work-row__desc { color: #c9c9c9; }
+.work-row:hover .work-row__desc { color: var(--gray-faint); }
 .work-row__tags {
   font-size: 0.8rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.1em;
   color: var(--gray);
   transition: color 0.3s;
 }
-.work-row:hover .work-row__tags { color: #a3a3a3; }
+.work-row:hover .work-row__tags { color: var(--gray-muted); }
 
 .work-row__arrow {
   font-size: clamp(1.4rem, 3vw, 2rem);
@@ -422,14 +436,14 @@ button:focus-visible {
 .term__bar-title {
   margin-left: 10px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.75rem; color: #8f8f8f;
+  font-size: 0.75rem; color: var(--gray-dim);
 }
 
 .term__body {
   padding: clamp(22px, 4vw, 40px);
   font-family: "JetBrains Mono", monospace;
 }
-.term__prompt { color: #a3a3a3; font-size: 0.95rem; }
+.term__prompt { color: var(--gray-muted); font-size: 0.95rem; }
 .term__prompt strong { color: var(--paper); font-weight: 700; }
 #term-typed { color: var(--paper); }
 
@@ -444,7 +458,7 @@ button:focus-visible {
 @keyframes term-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .term__cursor { animation: none; } }
 
-.term__result { color: #8f8f8f; font-size: 0.88rem; margin: 10px 0 30px; }
+.term__result { color: var(--gray-dim); font-size: 0.88rem; margin: 10px 0 30px; }
 
 .ai-grid {
   display: grid;
@@ -471,16 +485,16 @@ button:focus-visible {
   font-size: 0.95rem;
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
 }
-.ai-card__status { font-weight: 400; font-size: 0.75rem; color: #8f8f8f; }
+.ai-card__status { font-weight: 400; font-size: 0.75rem; color: var(--gray-dim); }
 .ai-card__status--live { color: var(--paper); }
 
 .ai-card__desc {
-  color: #a3a3a3;
+  color: var(--gray-muted);
   font-size: 0.85rem;
   line-height: 1.7;
   margin: 10px 0 14px;
 }
-.ai-card__tools { color: #8a8a8a; font-size: 0.75rem; }
+.ai-card__tools { color: var(--gray-dim); font-size: 0.75rem; }
 .ai-card__link {
   color: var(--paper);
   font-size: 0.85rem;
@@ -489,7 +503,7 @@ button:focus-visible {
 }
 a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 
-.term__footnote { color: #8a8a8a; font-size: 0.85rem; margin-top: 30px; }
+.term__footnote { color: var(--gray-dim); font-size: 0.85rem; margin-top: 30px; }
 
 @media (max-width: 860px) {
   .ai-grid { grid-template-columns: 1fr; }
@@ -606,7 +620,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .contact__eyebrow {
   font-size: 0.82rem; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: #a3a3a3; margin-bottom: 20px;
+  color: var(--gray-muted); margin-bottom: 20px;
 }
 .contact__title { font-size: clamp(2.4rem, 7vw, 4.6rem); margin-bottom: 40px; }
 
@@ -628,7 +642,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   text-transform: uppercase; letter-spacing: 0.1em;
   opacity: 0.55;
 }
-.contact__alt { font-weight: 500; color: #a3a3a3; border-bottom: 1.5px solid var(--line-dark); padding-bottom: 2px; transition: color 0.25s, border-color 0.25s; }
+.contact__alt { font-weight: 500; color: var(--gray-muted); border-bottom: 1.5px solid var(--line-dark); padding-bottom: 2px; transition: color 0.25s, border-color 0.25s; }
 .contact__alt:hover { color: var(--paper); border-color: var(--paper); }
 .contact__phone {
   font-family: var(--font-display);
@@ -637,8 +651,8 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   color: var(--paper);
   letter-spacing: 0.02em;
 }
-.contact__phone:hover { color: #a3a3a3; }
-.contact__socials { margin-top: 6px; font-size: 0.95rem; color: #a3a3a3; display: flex; gap: 10px; justify-content: center; }
+.contact__phone:hover { color: var(--gray-muted); }
+.contact__socials { margin-top: 6px; font-size: 0.95rem; color: var(--gray-muted); display: flex; gap: 10px; justify-content: center; }
 .contact__socials a { border-bottom: 1.5px solid var(--line-dark); padding-bottom: 2px; transition: color 0.25s, border-color 0.25s; }
 .contact__socials a:hover { color: var(--paper); border-color: var(--paper); }
 
@@ -650,7 +664,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   justify-content: space-between; align-items: center;
   padding: 28px 0;
   border-top: 1px solid var(--line-dark);
-  font-size: 0.9rem; color: #a3a3a3;
+  font-size: 0.9rem; color: var(--gray-muted);
   text-align: left;
 }
 .footer a { font-weight: 700; color: var(--paper); }
@@ -752,9 +766,12 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 .case-toc__tick {
   display: block;
-  width: 18px; height: 1.5px;
+  width: 28px; height: 1.5px;
   background: var(--line-dark, #d4d4d4);
-  transition: width 0.25s var(--ease-out), background 0.25s var(--ease-out);
+  /* animate scaleX (compositor) instead of width (layout). Ticks are right-aligned. */
+  transform: scaleX(0.643);       /* renders at 18px until active */
+  transform-origin: right center;
+  transition: transform 0.25s var(--ease-out), background 0.25s var(--ease-out);
 }
 .case-toc__label {
   position: absolute;
@@ -769,10 +786,10 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 /* hovering the rail reveals every label; the gap keeps them clear of the cursor */
 .case-toc:hover .case-toc__label { opacity: 1; transform: translateY(-50%); }
-.case-toc__link:hover .case-toc__tick { width: 28px; background: var(--ink); }
+.case-toc__link:hover .case-toc__tick { transform: scaleX(1); background: var(--ink); }
 .case-toc__link:hover .case-toc__label { color: var(--ink); }
 /* active section: highlighted tick and a persistent, bold label */
-.case-toc__link.is-current .case-toc__tick { width: 28px; background: var(--ink); }
+.case-toc__link.is-current .case-toc__tick { transform: scaleX(1); background: var(--ink); }
 .case-toc__link.is-current .case-toc__label {
   opacity: 1; transform: translateY(-50%);
   color: var(--ink); font-weight: 600;
@@ -834,8 +851,9 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 /* Back-to-top button (case study pages) */
 .to-top {
   position: fixed;
-  right: clamp(16px, 3vw, 32px);
-  bottom: clamp(16px, 3vw, 32px);
+  /* clear the side notch / home indicator on notched phones (needs viewport-fit=cover) */
+  right: max(clamp(16px, 3vw, 32px), calc(env(safe-area-inset-right, 0px) + 12px));
+  bottom: max(clamp(16px, 3vw, 32px), calc(env(safe-area-inset-bottom, 0px) + 12px));
   z-index: 80;
   width: 48px; height: 48px;
   border-radius: 50%;
@@ -985,6 +1003,16 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 
 .case__measure { margin-top: clamp(40px, 7vh, 64px); }
 .case__measure p { font-size: 0.92rem; margin-bottom: 14px; }
+/* The measure block reuses .case__summary, so its h2 would render as the same
+   17px uppercase label as the "In 30 seconds" TL;DR. Give it its own voice: a
+   real sentence-case heading, so the two summary beats read as distinct. */
+.case__measure h2 {
+  font-size: 1.35rem;
+  text-transform: none;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
 
 .case h2:not(.case__summary h2) {
   font-family: var(--font-display);
@@ -1119,7 +1147,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   text-transform: uppercase; letter-spacing: 0.14em;
   color: var(--gray); display: block; margin-bottom: 8px;
 }
-.case__next:hover .case__next-label { color: #a3a3a3; }
+.case__next:hover .case__next-label { color: var(--gray-muted); }
 .case__next-title {
   font-family: var(--font-display);
   font-weight: 600;
@@ -1155,6 +1183,46 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
     max-width: 100%;
   }
   .contact__copy-hint { white-space: nowrap; }
+}
+
+/* ============================================================
+   TOUCH TARGETS — guarantee ≥44px hit areas on touch input (WCAG 2.5.8).
+   Hover underlines never render on touch, so growing the hit box is invisible.
+   ============================================================ */
+@media (pointer: coarse) {
+  /* boxed / pill controls: grow to a 44px min height, label stays centered */
+  .nav__links a:not(.nav__cta),
+  .nav__cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav__cta { padding-top: 0; padding-bottom: 0; }
+
+  /* standalone underlined text links: extend an invisible 44px-tall hit strip
+     centered on the text, so the visible rule on the text never moves */
+  .hero__social a,
+  .contact__alt,
+  .contact__phone,
+  .contact__socials a,
+  .footer a,
+  .case__back { position: relative; }
+  .hero__social a::before,
+  .contact__alt::before,
+  .contact__phone::before,
+  .contact__socials a::before,
+  .footer a::before,
+  .case__back::before {
+    content: "";
+    position: absolute; left: 0; right: 0;
+    top: 50%; height: 44px;
+    transform: translateY(-50%);
+  }
+
+  /* a touch more room between adjacent targets */
+  .hero__social { gap: 12px 22px; flex-wrap: wrap; }
+  .contact__socials { gap: 10px 16px; }
+  .footer { row-gap: 8px; }
 }
 
 /* Work-row hover preview (pointer devices only) */

@@ -34,6 +34,7 @@ if (canvas && !reducedMotion) {
   const dots = [];
   let mouseX = -9999, mouseY = -9999;
   let width = 0, height = 0, dpr = 1;
+  let rafId = null, heroVisible = true;   // run only while the hero is on-screen and the tab is active
 
   function build() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -81,8 +82,12 @@ if (canvas && !reducedMotion) {
       ctx.fillStyle = `rgb(${shade}, ${shade}, ${shade})`;
       ctx.fill();
     }
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
   }
+
+  function start() { if (rafId == null) rafId = requestAnimationFrame(frame); }
+  function stop() { if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; } }
+  function sync() { (heroVisible && !document.hidden) ? start() : stop(); }
 
   const hero = canvas.parentElement;
   hero.addEventListener("mousemove", (e) => {
@@ -97,7 +102,18 @@ if (canvas && !reducedMotion) {
 
   window.addEventListener("resize", build);
   build();
-  frame();
+
+  // Only animate while the hero is actually visible and the tab is active,
+  // so the rAF loop stops once the visitor scrolls past or switches away.
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      heroVisible = entries[0].isIntersecting;
+      sync();
+    }, { threshold: 0 }).observe(hero);
+  } else {
+    start();
+  }
+  document.addEventListener("visibilitychange", sync);
 
   // fonts can change the hero's height after first paint; rebuild so the
   // grid always reaches the bottom of the hero
@@ -163,8 +179,8 @@ if (cursor && window.matchMedia("(hover: hover)").matches && !reducedMotion) {
   // if the childhood photo exists, the cursor becomes it
   const childPhoto = new Image();
   childPhoto.onload = () => {
+    cursor.style.setProperty("--cursor-photo", `url("${childPhoto.src}")`);
     cursor.classList.add("cursor-dot--photo");
-    cursor.style.backgroundImage = `url("${childPhoto.src}")`;
   };
   childPhoto.src = assetPrefix + "assets/photo-child.webp";
 
