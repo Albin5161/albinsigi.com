@@ -506,31 +506,54 @@ if (timeEl) {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Frame-based mascot. Each action = a group of <img> frames + timing.
-  // Extensible: add a group in the HTML + an entry here to add sit/sleep/etc.
-  const groups = {
-    walk: document.getElementById("mc-walk"),
-    wave: document.getElementById("mc-wave"),
-  };
-  const imgs = {};
-  for (const k in groups) imgs[k] = groups[k] ? [...groups[k].querySelectorAll("img")] : [];
+  // Stationary actions lazy-load (data-src) and play in place; walk moves + mirrors.
+  const NAMES = ["walk", "wave", "sleep", "stretch", "guitar", "photo", "design"];
+  const groups = {}, imgs = {};
+  NAMES.forEach((n) => {
+    groups[n] = document.getElementById("mc-" + n);
+    imgs[n] = groups[n] ? [...groups[n].querySelectorAll("img")] : [];
+  });
   const A = {
-    walk: { fps: 8,  loop: true,  moves: true  },
-    wave: { fps: 6,  loop: false, moves: false, hold: 1200 },
+    walk:    { fps: 8, loop: true,  moves: true },   // walk stays lively
+    wave:    { fps: 5, loop: false, hold: 1300 },     // activities slower
+    sleep:   { fps: 4, loop: false, hold: 3200 },
+    stretch: { fps: 3, loop: true,  dur: 7000 },      // really slow, repeats ~3-4x
+    guitar:  { fps: 5, loop: true,  dur: 4200 },
+    photo:   { fps: 5, loop: false, hold: 1100 },
+    design:  { fps: 3, loop: true,  dur: 5200 },      // really slow
   };
+  const flashEl = mascot.querySelector(".mc-flash");
+  function fireFlash() {
+    if (!flashEl) return;
+    flashEl.classList.remove("fire"); void flashEl.offsetWidth; flashEl.classList.add("fire");
+  }
+  const ACTIVITIES = ["wave", "sleep", "stretch", "guitar", "photo", "design"];
 
   let action = "walk", f = 0, x = 40, dir = 1;
-  let animT = 0, moveT = 0, holdT = 0, nextWave = 0;
+  let animT = 0, moveT = 0, holdT = 0, stateEnd = 0;
   const pxPerSec = 48;
-  const W = () => mascot.offsetWidth || 84;
+  const W = () => mascot.offsetWidth || 86;
   const maxX = () => window.innerWidth - W() - 8;
+  const rand = (a, b) => a + Math.random() * (b - a);
 
+  function ensureLoaded(name) {
+    imgs[name].forEach((im) => { if (im.dataset.src) { im.src = im.dataset.src; im.removeAttribute("data-src"); } });
+  }
   function show(name) { for (const k in groups) if (groups[k]) groups[k].hidden = (k !== name); }
   function setFrame(name, i) { imgs[name].forEach((im, j) => im.classList.toggle("on", j === i)); }
   function apply() { mascot.style.transform = `translateX(${x}px) scaleX(${dir})`; }
-  function start(name, now) {
-    action = name; f = 0; holdT = 0; show(name); setFrame(name, 0);
-    if (name === "wave") dir = 1;                         // wave art faces the viewer, never mirrored
-    animT = moveT = now || performance.now(); apply();
+
+  function startWalk(now) {
+    action = "walk"; f = 0; show("walk"); setFrame("walk", 0);
+    stateEnd = now + rand(2800, 6200); animT = moveT = now; apply();
+  }
+  function startActivity(now) {
+    const name = ACTIVITIES[(Math.random() * ACTIVITIES.length) | 0];
+    ensureLoaded(name);
+    action = name; f = 0; holdT = 0; dir = 1;             // activities drawn front/side, never mirrored
+    show(name); setFrame(name, 0);
+    if (A[name].loop) stateEnd = now + A[name].dur;
+    animT = now; apply();
   }
 
   function loop(now) {
@@ -538,6 +561,7 @@ if (timeEl) {
     if (now - animT >= 1000 / a.fps) {
       if (a.loop) { f = (f + 1) % imgs[action].length; setFrame(action, f); }
       else if (f < imgs[action].length - 1) { f++; setFrame(action, f); if (f === imgs[action].length - 1) holdT = now; }
+      if (action === "photo" && f === 3) fireFlash();   // camera flash on the shutter frame
       animT = now;
     }
     if (a.moves) {
@@ -546,15 +570,23 @@ if (timeEl) {
       if (x >= maxX()) { x = maxX(); dir = -1; }
       else if (x <= 8) { x = 8; dir = 1; }
       apply();
-      if (now >= nextWave) start("wave", now);
+      if (now >= stateEnd) startActivity(now);
+    } else if (a.loop) {
+      if (now >= stateEnd) startWalk(now);
     } else if (holdT && now - holdT >= a.hold) {
-      nextWave = now + 9000 + Math.random() * 5000;
-      start("walk", now);
+      startWalk(now);
     }
     moveT = now;
     requestAnimationFrame(loop);
   }
 
   if (reduce) { show("walk"); setFrame("walk", 0); apply(); }   // static, no motion
-  else { nextWave = performance.now() + 9000; start("walk"); requestAnimationFrame(loop); }
+  else {
+    startWalk(performance.now());
+    requestAnimationFrame(loop);
+    // preload activity frames during idle so they play instantly, without blocking initial load
+    const preload = () => ACTIVITIES.forEach(ensureLoaded);
+    if ("requestIdleCallback" in window) requestIdleCallback(preload, { timeout: 4000 });
+    else setTimeout(preload, 2500);
+  }
 })();

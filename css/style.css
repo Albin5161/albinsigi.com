@@ -797,8 +797,8 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 #mascot-stage.faded { opacity: 0; }   /* fade out over the dark contact section */
 
 #mascot {
-  position: absolute; bottom: 30px; left: 0;
-  width: 80px; height: 133px;               /* frame aspect 192x320 = 0.6 */
+  position: absolute; bottom: 0; left: 0;
+  width: 80px; height: 121px;               /* shared frame 215x326 (0.66), feet at edge */
   transform: translateX(40px) scaleX(1);
   transform-origin: bottom center; will-change: transform;
 }
@@ -810,16 +810,25 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   opacity: 0; image-rendering: auto;
 }
 #mascot .mc-frames img.on { opacity: 1; }
-#mascot .mc-shadow {
-  position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
-  width: 50px; height: 10px; border-radius: 50%;
-  background: rgba(0,0,0,0.15); filter: blur(2px);
+
+/* camera flash — a quick white burst on the shutter frame */
+#mascot .mc-flash {
+  position: absolute; left: 50%; top: 46%; width: 78%; aspect-ratio: 1; z-index: 5;
+  transform: translate(-50%, -50%) scale(0.4);
+  border-radius: 50%; opacity: 0; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0) 72%);
 }
+#mascot .mc-flash.fire { animation: mcFlash 0.32s ease-out; }
+@keyframes mcFlash {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(0.3); }
+  25% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+@media (prefers-reduced-motion: reduce) { #mascot .mc-flash { display: none; } }
 
 /* mobile: smaller, still shown */
 @media (max-width: 768px) {
-  #mascot { width: 60px; height: 100px; bottom: 20px; }
-  #mascot .mc-shadow { width: 36px; }
+  #mascot { width: 60px; height: 91px; bottom: 0; }
 }
 
 /* Back-to-top button (case study pages) */
