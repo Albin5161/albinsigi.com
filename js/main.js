@@ -580,13 +580,19 @@ if (timeEl) {
     requestAnimationFrame(loop);
   }
 
-  if (reduce) { show("walk"); setFrame("walk", 0); apply(); }   // static, no motion
-  else {
+  if (reduce) { show("walk"); setFrame("walk", 0); apply(); return; }   // static, no motion
+
+  // Defer ALL mascot startup to idle so it never competes with first paint / LCP.
+  // walk_0 is the only eager frame; load the rest of walk + wave when we actually start.
+  function boot() {
+    ensureLoaded("walk"); ensureLoaded("wave");
     startWalk(performance.now());
     requestAnimationFrame(loop);
-    // preload activity frames during idle so they play instantly, without blocking initial load
+    // then preload the activity frames on a later idle tick
     const preload = () => ACTIVITIES.forEach(ensureLoaded);
-    if ("requestIdleCallback" in window) requestIdleCallback(preload, { timeout: 4000 });
-    else setTimeout(preload, 2500);
+    if ("requestIdleCallback" in window) requestIdleCallback(preload, { timeout: 6000 });
+    else setTimeout(preload, 3000);
   }
+  if ("requestIdleCallback" in window) requestIdleCallback(boot, { timeout: 3000 });
+  else setTimeout(boot, 1200);
 })();
