@@ -1,2 +1,5 @@
 .DS_Store
 .vercel
+
+# mascot source sheets (not shipped)
+assets/mascot/raw/

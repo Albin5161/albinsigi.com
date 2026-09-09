@@ -505,49 +505,56 @@ if (timeEl) {
   const stage = document.getElementById("mascot-stage");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  let x = 40, dir = 1, state = "walk", until = 0;
-  const pxPerSec = 30;
-  const W = () => mascot.offsetWidth || 96;              // real (responsive) width for edge math
+  // Frame-based mascot. Each action = a group of <img> frames + timing.
+  // Extensible: add a group in the HTML + an entry here to add sit/sleep/etc.
+  const groups = {
+    walk: document.getElementById("mc-walk"),
+    wave: document.getElementById("mc-wave"),
+  };
+  const imgs = {};
+  for (const k in groups) imgs[k] = groups[k] ? [...groups[k].querySelectorAll("img")] : [];
+  const A = {
+    walk: { fps: 8,  loop: true,  moves: true  },
+    wave: { fps: 6,  loop: false, moves: false, hold: 1200 },
+  };
+
+  let action = "walk", f = 0, x = 40, dir = 1;
+  let animT = 0, moveT = 0, holdT = 0, nextWave = 0;
+  const pxPerSec = 48;
+  const W = () => mascot.offsetWidth || 84;
   const maxX = () => window.innerWidth - W() - 8;
 
-  function setState(next, hold) { state = next; mascot.className = next; until = performance.now() + hold; }
-  function startWalk() { setState("walk", 2800 + Math.random() * 3400); }
-  function rollAfterWalk() {
-    const r = Math.random(), rnd = Math.random();
-    if (r < 0.14) return setState("sit", 1800 + rnd * 1500);
-    if (r < 0.28) return setState("sleep", 4000 + rnd * 3000);
-    if (r < 0.38) return setState("stretch", 1100);
-    if (r < 0.54) return setState("code", 3000 + rnd * 2500);
-    if (r < 0.69) return setState("guitar", 3000 + rnd * 2500);
-    if (r < 0.82) return setState("photo", 2400 + rnd * 1500);
-    if (r < 0.94) return setState("design", 3000 + rnd * 2500);
-    return startWalk();
-  }
-  function face(d) { dir = d; apply(); }
+  function show(name) { for (const k in groups) if (groups[k]) groups[k].hidden = (k !== name); }
+  function setFrame(name, i) { imgs[name].forEach((im, j) => im.classList.toggle("on", j === i)); }
   function apply() { mascot.style.transform = `translateX(${x}px) scaleX(${dir})`; }
+  function start(name, now) {
+    action = name; f = 0; holdT = 0; show(name); setFrame(name, 0);
+    if (name === "wave") dir = 1;                         // wave art faces the viewer, never mirrored
+    animT = moveT = now || performance.now(); apply();
+  }
 
-  let last = performance.now();
   function loop(now) {
-    let dt = (now - last) / 1000; last = now;
-    if (dt > 0.05) dt = 0.05;
-    if (state === "walk") {
-      x += dir * pxPerSec * dt;
-      if (x >= maxX()) { x = maxX(); face(-1); }
-      else if (x <= 8) { x = 8; face(1); }
-      else apply();
+    const a = A[action];
+    if (now - animT >= 1000 / a.fps) {
+      if (a.loop) { f = (f + 1) % imgs[action].length; setFrame(action, f); }
+      else if (f < imgs[action].length - 1) { f++; setFrame(action, f); if (f === imgs[action].length - 1) holdT = now; }
+      animT = now;
     }
-    if (now >= until) { state === "walk" ? rollAfterWalk() : startWalk(); }
+    if (a.moves) {
+      const dt = Math.min((now - moveT) / 1000, 0.05);
+      x += dir * pxPerSec * dt;
+      if (x >= maxX()) { x = maxX(); dir = -1; }
+      else if (x <= 8) { x = 8; dir = 1; }
+      apply();
+      if (now >= nextWave) start("wave", now);
+    } else if (holdT && now - holdT >= a.hold) {
+      nextWave = now + 9000 + Math.random() * 5000;
+      start("walk", now);
+    }
+    moveT = now;
     requestAnimationFrame(loop);
   }
 
-  if (reduce) { setState("sit", Infinity); apply(); }
-  else { startWalk(); apply(); requestAnimationFrame(loop); }
-
-  // fade out when the dark contact section reaches the bottom where the mascot stands
-  const contact = document.querySelector(".contact");
-  if (contact && "IntersectionObserver" in window) {
-    new IntersectionObserver(
-      (entries) => entries.forEach((e) => stage.classList.toggle("faded", e.isIntersecting))
-    ).observe(contact);
-  }
+  if (reduce) { show("walk"); setFrame("walk", 0); apply(); }   // static, no motion
+  else { nextWave = performance.now() + 9000; start("walk"); requestAnimationFrame(loop); }
 })();

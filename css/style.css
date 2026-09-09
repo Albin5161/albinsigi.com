@@ -797,92 +797,30 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 #mascot-stage.faded { opacity: 0; }   /* fade out over the dark contact section */
 
 #mascot {
-  --skin:#eec6a0; --skin2:#d8a97e; --hair:#241c16;
-  --accent:#e5533d; --accent-dk:#b23f2e; --pants:#33333d; --pants-dk:#25252e;
-  --wood:#c98a4e; --wood-dk:#7a5230;
   position: absolute; bottom: 30px; left: 0;
-  width: 96px; height: 128px;
+  width: 80px; height: 133px;               /* frame aspect 192x320 = 0.6 */
   transform: translateX(40px) scaleX(1);
   transform-origin: bottom center; will-change: transform;
 }
-#mascot .mc-svg { width: 100%; height: 100%; overflow: visible; display: block; }
+#mascot .mc-frames { position: absolute; inset: 0; }
+#mascot .mc-frames[hidden] { display: none; }
+#mascot .mc-frames img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; object-position: bottom center;
+  opacity: 0; image-rendering: auto;
+}
+#mascot .mc-frames img.on { opacity: 1; }
 #mascot .mc-shadow {
-  position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%);
-  width: 58px; height: 11px; border-radius: 50%;
+  position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+  width: 50px; height: 10px; border-radius: 50%;
   background: rgba(0,0,0,0.15); filter: blur(2px);
 }
-#mascot .mc-leg, #mascot .mc-arm { transform-box: fill-box; transform-origin: top center; }
-#mascot .mc-head { transform-box: fill-box; transform-origin: bottom center; }
-#mascot .mc-bob  { transform-box: fill-box; transform-origin: bottom center; }
-
-/* WALK */
-#mascot.walk .mc-front-leg { animation: mcswing .5s ease-in-out infinite; }
-#mascot.walk .mc-back-leg  { animation: mcswing .5s ease-in-out infinite -.25s; }
-#mascot.walk .mc-front-arm { animation: mcswing .5s ease-in-out infinite -.25s; }
-#mascot.walk .mc-back-arm  { animation: mcswing .5s ease-in-out infinite; }
-#mascot.walk .mc-bob       { animation: mcbob .5s ease-in-out infinite; }
-@keyframes mcswing { 0%,100% { transform: rotate(18deg); } 50% { transform: rotate(-18deg); } }
-@keyframes mcbob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
-
-/* SIT */
-#mascot.sit .mc-bob { transform: translateY(18px); }
-#mascot.sit .mc-front-leg, #mascot.sit .mc-back-leg { transform: rotate(84deg); }
-#mascot.sit .mc-front-arm, #mascot.sit .mc-back-arm { transform: rotate(10deg); }
-
-/* SLEEP — lie flat, eyes closed */
-#mascot.sleep .mc-bob { transform: rotate(90deg) scale(.92); transform-origin: bottom center; }
-#mascot.sleep .mc-front-arm, #mascot.sleep .mc-back-arm { transform: rotate(-8deg); }
-#mascot .mc-eyes-shut { display: none; }
-#mascot.sleep .mc-eyes-open { display: none; }
-#mascot.sleep .mc-eyes-shut { display: inline; }
-#mascot .mc-zzz { opacity: 0; }
-#mascot.sleep .mc-zzz { animation: mczfloat 2.4s ease-in-out infinite; }
-@keyframes mczfloat { 0% { opacity: 0; transform: translate(0,0) scale(.7); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(6px,-16px) scale(1.1); } }
-
-/* STRETCH */
-#mascot.stretch .mc-front-arm, #mascot.stretch .mc-back-arm { animation: mcstretcharm 1.1s ease-in-out; }
-#mascot.stretch .mc-bob { animation: mcstretchbody 1.1s ease-in-out; }
-@keyframes mcstretcharm { 0%,100% { transform: rotate(0); } 45% { transform: rotate(168deg); } }
-@keyframes mcstretchbody { 0%,100% { transform: translateY(0) scaleY(1); } 45% { transform: translateY(-3px) scaleY(1.07); } }
-
-/* CODE */
-#mascot.code .mc-front-arm, #mascot.code .mc-back-arm { transform: rotate(74deg); }
-#mascot.code .mc-head { transform: rotate(9deg); }
-#mascot.code .mc-bob { animation: mctype .45s steps(2) infinite; }
-@keyframes mctype { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
-
-/* GUITAR */
-#mascot.guitar .mc-back-arm { transform: rotate(38deg); }
-#mascot.guitar .mc-front-arm { animation: mcstrum .5s ease-in-out infinite; }
-#mascot.guitar .mc-bob { animation: mcbob .6s ease-in-out infinite; }
-@keyframes mcstrum { 0%,100% { transform: rotate(52deg); } 50% { transform: rotate(78deg); } }
-
-/* PHOTO */
-#mascot.photo .mc-front-arm { transform: rotate(148deg); }
-#mascot.photo .mc-back-arm { transform: rotate(-148deg); }
-#mascot.photo .mc-head { transform: rotate(-3deg); }
-#mascot .mc-flash { opacity: 0; }
-#mascot.photo .mc-flash { animation: mcflash 2.2s ease-in-out infinite; }
-@keyframes mcflash { 0%,82%,100% { opacity: 0; } 88% { opacity: .85; } }
-
-/* DESIGN */
-#mascot.design .mc-front-arm { transform: rotate(86deg); }
-#mascot.design .mc-back-arm { transform: rotate(72deg); }
-#mascot.design .mc-head { transform: rotate(10deg); }
-
-/* props hidden unless their state */
-#mascot .mc-prop { display: none; }
-#mascot.guitar .mc-p-guitar,
-#mascot.code   .mc-p-laptop,
-#mascot.photo  .mc-p-camera,
-#mascot.design .mc-p-tablet { display: inline; }
 
 /* mobile: smaller, still shown */
 @media (max-width: 768px) {
-  #mascot { width: 66px; height: 88px; bottom: 20px; }
-  #mascot .mc-shadow { width: 40px; }
+  #mascot { width: 60px; height: 100px; bottom: 20px; }
+  #mascot .mc-shadow { width: 36px; }
 }
-@media (prefers-reduced-motion: reduce) { #mascot * { animation: none !important; } }
 
 /* Back-to-top button (case study pages) */
 .to-top {
