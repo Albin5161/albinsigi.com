@@ -557,7 +557,11 @@ if (timeEl) {
   }
   function show(name) { for (const k in groups) if (groups[k]) groups[k].hidden = (k !== name); }
   function setFrame(name, i) { imgs[name].forEach((im, j) => im.classList.toggle("on", j === i)); }
-  function apply() { mascot.style.transform = `translateX(${x}px) scaleX(${dir})`; }
+  // only mirror while walking; activities are drawn front/side and render unmirrored
+  function apply() {
+    const facing = A[action].moves ? dir : 1;
+    mascot.style.transform = `translateX(${x}px) scaleX(${facing})`;
+  }
 
   function startWalk(now) {
     action = "walk"; f = 0; show("walk"); setFrame("walk", 0);
@@ -566,7 +570,7 @@ if (timeEl) {
   function startActivity(now) {
     const name = ACTIVITIES[(Math.random() * ACTIVITIES.length) | 0];
     ensureLoaded(name);
-    action = name; f = 0; holdT = 0; dir = 1;             // activities drawn front/side, never mirrored
+    action = name; f = 0; holdT = 0;                      // keep dir so walk resumes the same way; apply() unmirrors activities
     show(name); setFrame(name, 0);
     if (A[name].loop) stateEnd = now + A[name].dur;
     animT = now; apply();
