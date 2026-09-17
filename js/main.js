@@ -616,3 +616,22 @@ if (timeEl) {
   if ("requestIdleCallback" in window) requestIdleCallback(boot, { timeout: 3000 });
   else setTimeout(boot, 1200);
 })();
+
+/* ---- before/after compare slider (case studies) ---- */
+(function () {
+  const sliders = document.querySelectorAll(".compare-slider");
+  if (!sliders.length) return;
+  sliders.forEach((el) => {
+    const range = el.querySelector(".compare-slider__range");
+    const before = el.querySelector(".compare-slider__before");
+    const handle = el.querySelector(".compare-slider__handle");
+    if (!range || !before || !handle) return;
+    const update = () => {
+      const v = range.value;
+      before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+      handle.style.left = v + "%";
+    };
+    range.addEventListener("input", update);
+    update();
+  });
+})();

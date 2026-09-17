@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://albinsigi.com/assets/photo-now-og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../css/fonts.css" />
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/style.css?v=3" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/work/intelligence-dashboard.html" />
   <script defer src="/_vercel/insights/script.js"></script>
@@ -47,6 +47,11 @@
       <div><dt>Status</dt><dd>Phase 1 shipped</dd></div>
     </dl>
 
+    <figure class="shot shot--hero">
+      <img src="../assets/work/dashboard/old-dashboard.webp" width="1200" height="667" loading="lazy" alt="The old Intelligence Data Management Tool dashboard: a flat interface dense with raw charts, filters and tables, no priority or hierarchy" />
+      <figcaption>This is what officers opened every morning. No hierarchy, no priority, just data.</figcaption>
+    </figure>
+
     <div class="case__summary">
       <h2>In 30 seconds</h2>
       <ul>
@@ -65,7 +70,7 @@
       The Intelligence Data Management Tool (IDMT) is the dashboard Delhi Police officers use
       every day to register programs, log intelligence inputs and generate official reports.
       A program is any event the force monitors: a political rally, a religious gathering,
-      a community event. The tool was built by Tejis.ai for the Delhi Police Special Branch,
+      a community event. The tool was built by Tejis.ai for Delhi Police,
       with more forces in the pipeline, including Chennai, Salem and Tiruppur police.
     </p>
     <p>Three very different people use the same screens:</p>
@@ -141,7 +146,7 @@
     <h2>How the product is organised</h2>
     <p>Everything in the system lives under two top-level categories, because the work itself splits that way:</p>
     <ul>
-      <li><strong>Law and Order.</strong> Political gatherings, rallies, religious programs, community events. The primary category for the Special Branch.</li>
+      <li><strong>Law and Order.</strong> Political gatherings, rallies, religious programs, community events. The primary category for Delhi Police.</li>
       <li><strong>Crime.</strong> Theft, gang incidents, serious crimes, arrests. A separate workflow with its own form structure.</li>
     </ul>
     <p>Five modules carry the navigation:</p>
@@ -183,15 +188,16 @@
       form sections.
     </p>
     <p>
-      I tried three background directions first: a subtle texture, a bright blue gradient, and a
-      near-black flat tone. All three failed the same test. They could belong to any product.
-      The final direction was a night aerial satellite view of India. Officers work with real
-      events in real places, and showing the country from above grounded the tool in its purpose.
+      I tried three background directions first: a dark background with a subtle texture, a bright
+      blue gradient, and a very dark near-black tone. All three were rejected for the same
+      underlying reason: they could belong to any product. The final direction was a night aerial
+      satellite view of India. Officers work with real events in real places, and showing the
+      country from above grounded the tool in its purpose.
     </p>
     <figure class="shot shot--grid shot--2">
-      <img src="../assets/work/dashboard/bg-texture.webp" width="1200" height="852" loading="lazy" alt="Rejected background direction: a subtle texture" />
-      <img src="../assets/work/dashboard/bg-blue.webp" width="1200" height="848" loading="lazy" alt="Rejected background direction: a bright blue gradient" />
-      <img src="../assets/work/dashboard/bg-flat.webp" width="1200" height="854" loading="lazy" alt="Rejected background direction: a near-black flat tone" />
+      <img src="../assets/work/dashboard/bg-texture.webp" width="1200" height="849" loading="lazy" alt="Rejected background direction: a dark background with a subtle texture, too generic" />
+      <img src="../assets/work/dashboard/bg-blue.webp" width="1200" height="848" loading="lazy" alt="Rejected background direction: a bright electric blue gradient, felt too loud" />
+      <img src="../assets/work/dashboard/bg-flat.webp" width="1200" height="854" loading="lazy" alt="Rejected background direction: a very dark near-black background, clean but too flat" />
       <img src="../assets/work/dashboard/bg-night.webp" width="1200" height="860" loading="lazy" alt="The final direction: a night aerial satellite view of India" />
       <figcaption>Three background directions I rejected, and the final night aerial view.</figcaption>
     </figure>
@@ -256,9 +262,16 @@
       <li><strong>Progress on every card.</strong> A fraction like 3/4 shows fields filled, with red for empty, gold for partial, green for complete. An officer returning midway can scan the whole form in seconds.</li>
       <li><strong>Focused editing.</strong> Clicking a card opens a clean modal form, so the overview stays calm and the editing space stays focused.</li>
     </ul>
-    <figure class="shot">
-      <img src="../assets/work/dashboard/cards.webp" width="1200" height="857" loading="lazy" alt="The redesigned program view: one screen of collapsible section cards, each with a completion indicator" />
-      <figcaption>The program form as one screen of section cards, each showing completion at a glance. The card design went through 12 documented iterations.</figcaption>
+    <figure class="shot compare-slider">
+      <div class="compare-slider__frame">
+        <img class="compare-slider__img compare-slider__img--after" src="../assets/work/dashboard/cards.webp" alt="The redesigned program view: one screen of collapsible section cards, each with a completion indicator" />
+        <img class="compare-slider__img compare-slider__before" src="../assets/work/dashboard/tabs-old.webp" alt="The old input form: eleven horizontal tabs for one program record" />
+        <span class="compare-slider__tag compare-slider__tag--before">Before</span>
+        <span class="compare-slider__tag compare-slider__tag--after">After</span>
+        <div class="compare-slider__handle"><span class="compare-slider__grip">↔</span></div>
+        <input type="range" class="compare-slider__range" min="0" max="100" value="50" aria-label="Drag to compare the old 11-tab form with the new card grid" />
+      </div>
+      <p class="compare-slider__hint">Drag to compare: eleven tabs, then one screen of cards.</p>
     </figure>
     <p class="case__tradeoff">
       <strong>The trade-off:</strong> a pinning system that let officers keep their most-used
@@ -273,6 +286,10 @@
       wrong report while believing it was correct. Reports go up the chain of command, so that
       is a real failure with real consequences.
     </p>
+    <figure class="shot">
+      <img src="../assets/work/dashboard/report-old.webp" width="1200" height="667" loading="lazy" alt="The old report page: an unfiltered table of report entries with no guided flow, just a date range and a search box" />
+      <figcaption>The old report page: an unfiltered list, no guidance on what to pick or why.</figcaption>
+    </figure>
     <p>
       Unlike the program form, report generation is a linear task. You pick the report type,
       select the data, then review and export. So here a three-step wizard was the right
@@ -280,6 +297,10 @@
       Choosing the right pattern for each workflow, instead of one pattern everywhere, was a
       conscious decision.
     </p>
+    <figure class="shot">
+      <img src="../assets/work/dashboard/report-wizard.webp" width="1200" height="851" loading="lazy" alt="The new 3-step report wizard: Choose Report Type, Select Data, Edit or View Report, each step confirmed with a checkmark before moving on" />
+      <figcaption>The redesigned flow: three steps, each confirmed before the next, so the wrong report can't get printed by accident.</figcaption>
+    </figure>
     <p class="case__tradeoff">
       <strong>The trade-off:</strong> experienced officers who know the flow may find the wizard
       slower. A power-user shortcut was discussed but not built in phase 1.
@@ -365,6 +386,11 @@
       <li><strong>Light mode.</strong> The night satellite view shifts to a daytime view, so the visual metaphor survives the theme change.</li>
       <li><strong>The full AI layer.</strong> All four phase 2 features, shipping on a foundation that could finally support them.</li>
     </ul>
+    <figure class="shot shot--grid shot--2">
+      <img src="../assets/work/dashboard/bg-night.webp" width="1200" height="860" loading="lazy" alt="The shipped night mode: a night aerial satellite view of India" />
+      <img src="../assets/work/dashboard/bg-daylight.webp" width="1200" height="852" loading="lazy" alt="The planned light mode: the same satellite view of India by day" />
+      <figcaption>Night mode, shipped. Daytime mode, designed for the phase that never came.</figcaption>
+    </figure>
 
     <a class="case__next" href="citizen-safety-app.html">
       <span class="case__next-label">Next case study</span>
@@ -372,6 +398,6 @@
     </a>
   </main>
 
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=3"></script>
 </body>
 </html>
