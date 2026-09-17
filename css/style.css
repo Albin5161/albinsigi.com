@@ -1225,6 +1225,16 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   margin-top: 10px; letter-spacing: 0.02em;
 }
 
+/* Breaks a shot out of the 860px reading column for screenshots that are
+   dense with fine print (chat logs, press clippings) and need the extra
+   width to stay legible. */
+.shot--wide {
+  max-width: min(1040px, calc(100vw - 48px));
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 .case__nda {
   border: 1px solid var(--line);
   border-radius: 14px;
