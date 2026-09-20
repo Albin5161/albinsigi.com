@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Referral Status, a LinkedIn Concept | Albin Sigi</title>
+  <meta name="description" content="Case study: a concept feature that turns a LinkedIn referral request into something you can follow, so nobody has to send the awkward second follow-up." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Referral Status, a LinkedIn Concept | Albin Sigi" />
+  <meta property="og:description" content="Case study: a concept feature that turns a LinkedIn referral request into something you can follow, so nobody has to send the awkward second follow-up." />
+  <meta property="og:url" content="https://albinsigi.com/work/referral-status.html" />
+  <meta property="og:image" content="https://albinsigi.com/assets/work/thumb-referral.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="../css/fonts.css" />
+  <link rel="stylesheet" href="../css/style.css?v=5" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="canonical" href="https://albinsigi.com/work/referral-status.html" />
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__brand" href="../index.html" aria-label="Albin Sigi"><span class="nav__mark" aria-hidden="true">✳</span> <span class="nav__brand-text">Albin Sigi</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="nav__cta" href="https://drive.google.com/file/d/1_pjqeDO0RBVGOVzTcRX2xzrHd2riNp9h/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header>
+
+  <main class="case" id="main-content">
+    <a class="case__back" href="../index.html#work">← Back to all work</a>
+
+    <p class="case__category">Case study 04 · Concept feature · Built and tested</p>
+    <h1 class="case__title">You asked for a referral. Now you can see where it stands.</h1>
+
+    <dl class="case__meta">
+      <div><dt>Role</dt><dd>Designer, and the person who built it</dd></div>
+      <div><dt>Type</dt><dd>Concept feature for LinkedIn</dd></div>
+      <div><dt>Context</dt><dd>Self-directed, 2026</dd></div>
+      <div><dt>Tools</dt><dd>Claude Code, React, Tailwind, Mobbin</dd></div>
+      <div><dt>Testing</dt><dd>4 people, working prototype</dd></div>
+    </dl>
+
+    <div class="case__nda">
+      A concept project. Not affiliated with or endorsed by LinkedIn. I matched
+      LinkedIn's real colours, icons and iOS patterns so the idea could be judged
+      in its actual context instead of in a vacuum, and the prototype keeps that
+      disclaimer visible on every screen.
+    </div>
+
+    <div class="case__summary">
+      <h2>In 30 seconds</h2>
+      <ul>
+        <li><strong>The problem:</strong> You ask someone in your network for a referral, and then nothing. No reply is not the same as no, but it feels the same. So you send the awkward follow-up, and now two people are uncomfortable.</li>
+        <li><strong>What I did:</strong> Designed and built a working Referral Status feature. Six plain statuses, only the referrer sets the human ones, and the requester can follow it without chasing anyone.</li>
+        <li><strong>The result:</strong> A real prototype, not a clickable mockup. Four people ran the whole two-sided journey on their own phones and all four finished it.</li>
+      </ul>
+    </div>
+
+    <h2>Why I built this</h2>
+    <p>
+      Referrals are the quiet engine of hiring. Almost everyone I know has asked for
+      one, and almost everyone has had the same experience after they asked: silence.
+    </p>
+    <p>
+      The silence is the actual problem. Not the no. A referrer who says "sorry, I
+      can't this time" has given you something useful. You move on. But silence gives
+      you nothing, so you fill it yourself. You reread your message. You wonder if it
+      was seen. You wait four days and send a second one that starts with "just
+      following up". Meanwhile the referrer is sitting on a message they fully intend
+      to answer, feeling slightly guilty every time they open the app.
+    </p>
+    <p>
+      One missing piece of information is making both people feel bad. That is a
+      design problem, not a people problem.
+    </p>
+
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/thread-card.webp" width="750" height="1624" loading="lazy" alt="A LinkedIn message thread with a Referral Request card inside it, showing the status Sent" /></div></div>
+        <p class="mock__label"><b>The ask lives in the conversation.</b> It is a card in the thread, not a form somewhere else, so the request stays where the relationship already is.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-considering.webp" width="750" height="1624" loading="lazy" alt="The Referral Status screen showing Looking into it, an explanation of what that means, and the full history" /></div></div>
+        <p class="mock__label"><b>The answer to "where is it?"</b> One screen: what the status is, what it means in plain words, and everything that has happened so far.</p>
+      </div>
+    </figure>
+
+    <h2>What I deliberately did not build</h2>
+    <p>
+      The obvious version of this feature is a nudge button. Or read receipts. Or a
+      reminder that pings the referrer every few days until they respond. All of those
+      solve the requester's anxiety by moving it onto the referrer.
+    </p>
+    <p>
+      So I set one rule early and kept it: <strong>nothing in this feature puts
+      pressure on the referrer.</strong> No nudges, no seen indicators, no countdowns
+      pointed at them. The whole job of the feature is to remove the reason anyone
+      needs to chase. If it ever created a new reason to chase, it had failed.
+    </p>
+    <p>
+      That single rule decided most of the smaller arguments later on.
+    </p>
+
+    <h2>Six statuses, and who is allowed to set them</h2>
+    <p>
+      This is the heart of the thing. Not the screens, the model underneath them.
+    </p>
+    <p>
+      I wrote six statuses and then wrote down, for each one, who is allowed to set
+      it. That second column turned out to matter more than the first.
+    </p>
+    <ul>
+      <li><strong>Sent.</strong> Set by the system when the request is created. It is with them now.</li>
+      <li><strong>Looking into it.</strong> Set by the referrer. They have seen it and are working on it. Still open.</li>
+      <li><strong>No reply yet.</strong> Set by the system only, and never by a person. It is an observation, not an accusation.</li>
+      <li><strong>Referred.</strong> Set by the referrer. Final.</li>
+      <li><strong>Can't refer.</strong> Set by the referrer. Final, and worded so it costs nothing to say.</li>
+      <li><strong>Withdrawn.</strong> Set by the requester. You changed your mind, or you got the job another way.</li>
+    </ul>
+    <p>
+      The interesting one is "No reply yet". It is the only status the system infers,
+      and it is the one that could most easily read as blame. So it is written as
+      neutrally as I could manage, and it is the only non-final status that can be
+      overwritten later. If the referrer responds a week after the system marked it
+      quiet, their answer replaces the guess. <strong>A human action always beats a
+      system assumption.</strong>
+    </p>
+
+    <figure class="mocks">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-sent.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Sent, with copy explaining there is no need to follow up" /></div></div>
+        <p class="mock__label"><b>Sent.</b> The copy does the work here. "There's no need to follow up" is the whole feature in six words.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/referrer-update.webp" width="750" height="1624" loading="lazy" alt="The referrer's view of the same request, with three options: looking into it, referred, or can't refer this time" /></div></div>
+        <p class="mock__label"><b>The referrer's side.</b> Three options, each one honest about whether it is final. Saying no is one tap and needs no explanation.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-referred.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Referred, with the full history of every update below it" /></div></div>
+        <p class="mock__label"><b>Referred.</b> The history stays. You can see the whole arc, and there is a gentle prompt to go and say thank you.</p>
+      </div>
+    </figure>
+
+    <h2>Three decisions I would not have got right on the first pass</h2>
+    <p>
+      Building it myself meant I hit the edges I would have drawn right over in Figma.
+      Three of them changed the design.
+    </p>
+    <p>
+      <strong>The current status is never stored.</strong> My first instinct was to
+      keep a "currentStatus" field on the request and update it. That gives you two
+      sources of truth, and the day they disagree, the screen confidently shows
+      something that never happened. So the status is always worked out from the most
+      recent update in the history. The history is the truth, and the badge is just
+      the last line of it read aloud.
+    </p>
+    <p>
+      <strong>The request is not shown until it actually exists.</strong> Showing it
+      optimistically and rolling it back on failure is fine for a like button. It is
+      not fine here, because the requester would see "Sent" for a message that never
+      left. So nothing appears until it is real.
+    </p>
+    <p>
+      <strong>One list decides which buttons exist.</strong> Every allowed status
+      change lives in a single list, and every button anywhere in the app is drawn
+      from it. There is no screen that can offer an action the model does not permit.
+      Which is also why the final statuses simply have no buttons, instead of showing
+      buttons that fail.
+    </p>
+
+    <h2>Two ways in, and I stopped guessing which one people would use</h2>
+    <p>
+      There are two honest moments where someone wants a referral: while they are
+      messaging a person, and while they are looking at a job. So the feature has two
+      entry points, from Messaging and from the Job Tracker.
+    </p>
+    <p>
+      I originally pointed testers at one of them, which was a mistake. It told me
+      whether my preferred path worked, and nothing about which path people reach for.
+      I removed the steer and recorded which one each person actually picked instead.
+    </p>
+
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/job-tracker.webp" width="750" height="1624" loading="lazy" alt="The Job Tracker, showing tracked jobs with the connections you have at each company and an Ask for referral button" /></div></div>
+        <p class="mock__label"><b>From the job.</b> You are already looking at the role. The app shows who you know there, so asking is one tap away.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/compose.webp" width="750" height="1624" loading="lazy" alt="The compose screen with a prefilled message and a required resume attachment" /></div></div>
+        <p class="mock__label"><b>The ask, prewritten.</b> The message is drafted for you and it ends with "no pressure at all if not", because the easiest referral to answer is one you are allowed to decline.</p>
+      </div>
+    </figure>
+
+    <h2>How I used AI, honestly</h2>
+    <p>
+      I did not hand-code this prototype and I am not going to pretend otherwise.
+    </p>
+    <p>
+      I used AI in three places. For secondary research, to gather what is already
+      known about referral hiring and what people complain about, which I then used to
+      frame the problem rather than as evidence on its own. For building, where I wrote
+      the spec and the status model and worked through the prototype with Claude Code
+      until the behaviour matched what I had specified. And for the interface details,
+      where I matched LinkedIn's real colours, icons and iOS patterns using Mobbin as
+      the reference.
+    </p>
+    <p>
+      What AI did not decide: the six statuses, who is allowed to set each one, the
+      rule that nothing may pressure the referrer, the wording on every screen, or
+      what to do when a tester got stuck. Those are the design, and they are mine.
+      The value of building it this way was speed of a different kind. I got to a
+      thing people could actually hold in about the time a static prototype would have
+      taken, and testing a real thing tells you more.
+    </p>
+
+    <h2>Testing it with real people</h2>
+    <p>
+      The hard part of testing this feature is that it has two sides. A tester has to
+      ask as one person, answer as another, then come back and see the result. That is
+      a lot to explain, and an unmoderated tester who gets lost just closes the tab.
+    </p>
+    <p>
+      So the testing setup became a design problem of its own. A short intro explains
+      the idea. A guide bar under the header names your next step, all the way through
+      the journey. A spotlight points at the control you need when you need it. At the
+      end, a short survey asks how it felt, whether it is useful and why, and what
+      could be better. Every response is saved in the tester's browser and exported as
+      a CSV.
+    </p>
+    <p>
+      Two details I only added after watching the first runs. Each new visit starts
+      fresh, so nobody lands in the middle of a stranger's half-finished journey. And
+      a refresh never wipes your progress, because a couple of people refreshed out of
+      habit and I did not want to lose them.
+    </p>
+
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/onboarding.webp" width="750" height="1624" loading="lazy" alt="The first screen of the four-screen intro shown to testers" /></div></div>
+        <p class="mock__label"><b>Four screens of intro.</b> Enough to explain a two-sided story, short enough that nobody skips it.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/test-guide.webp" width="750" height="1624" loading="lazy" alt="The dark guide bar showing step 2 of 6 with a spotlight pointing at the role switcher" /></div></div>
+        <p class="mock__label"><b>The guide bar and spotlight.</b> Step 2 of 6, with the next control lit up. This is how one tester plays two people without getting lost.</p>
+      </div>
+    </figure>
+
+    <p>
+      Four people ran it end to end. All four finished the journey without help, and
+      all four said they would use it. <!-- TODO Albin: replace this paragraph with
+      the real findings from the CSV at /feedback. Best shape: two or three specific
+      things people said or struggled with, then what you changed. Quotes land much
+      harder than a summary. -->
+    </p>
+    <p>
+      Four people is a small number and I am not going to dress it up as more than it
+      is. It is enough to tell me the idea reads and the flow holds. It is not enough
+      to tell me how this behaves at LinkedIn's scale, where the referrer is a busy
+      stranger and the requester is one of forty people who asked this month.
+    </p>
+
+    <h2>What is still open</h2>
+    <p>
+      One decision I left unresolved on purpose. When a requester withdraws, is that
+      permanent?
+    </p>
+    <p>
+      In the prototype it behaves as final, but nothing in the interface claims it is,
+      because I am genuinely not sure. Making it permanent is clean and protects the
+      referrer from a request that keeps coming back. Making it reversible matches how
+      people actually behave, since plans change and you might want to reopen the same
+      ask a week later. I would want real usage data before choosing, and I would
+      rather show the open question than invent a confident answer.
+    </p>
+
+    <h2>What I took from it</h2>
+    <p>
+      The feature is small. The thinking that made it work was almost entirely about
+      who is allowed to say what, and what the product is allowed to assume when
+      nobody says anything. Once that was settled, the screens were nearly obvious.
+    </p>
+    <p>
+      The other thing I took from it: building the prototype myself changed the
+      design. Three of the decisions I am proudest of came from hitting a real edge
+      case in a real build, not from drawing a happy path.
+    </p>
+
+    <a class="case__next" href="cinema-ticketing.html">
+      <span class="case__next-label">Next case study</span>
+      <span class="case__next-title">CinePass, a Cinema Ticketing App →</span>
+    </a>
+  </main>
+
+  <script src="../js/main.js?v=5"></script>
+</body>
+</html>

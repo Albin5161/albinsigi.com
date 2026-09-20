@@ -1150,6 +1150,97 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .shot-row { grid-template-columns: 1fr; }
 }
 
+/* Phone mockups: a screenshot sitting inside a device frame, with its own
+   caption. Used where the screen itself is the argument, not just evidence. */
+.mocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px 22px;
+  margin: 34px 0 8px;
+  justify-items: center;
+}
+.mocks--1 { grid-template-columns: 1fr; }
+.mocks--2 { grid-template-columns: repeat(2, 1fr); }
+.mocks--4 { grid-template-columns: repeat(4, 1fr); }
+.mocks > figcaption {
+  grid-column: 1 / -1;
+  font-size: 0.82rem; color: var(--gray);
+  text-align: center; margin-top: 6px;
+  max-width: 46em; line-height: 1.6;
+}
+.mock { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.mock__frame {
+  position: relative;
+  width: 100%; max-width: 268px;
+  padding: 9px;
+  background: #0e0e0e;
+  border-radius: 38px;
+  box-shadow:
+    0 26px 54px -26px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.12);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+.mock__frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 34px 64px -24px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.16);
+}
+/* A simulated iOS status bar, so the device frame does not sit on top of the
+   app's own header. Time on the left, icons on the right, island in the middle. */
+.mock__screen {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  background: var(--paper);
+}
+.mock__bar {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 30px;
+  padding: 0 16px 0 18px;
+  background: var(--paper);
+  font-size: 11px; font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.mock__bar::before { content: "9:41"; }
+.mock__bar::after {
+  content: "";
+  width: 40px; height: 11px;
+  background: var(--ink);
+  -webkit-mask: var(--status-icons) no-repeat center / contain;
+  mask: var(--status-icons) no-repeat center / contain;
+}
+/* the dynamic island */
+.mock__bar span {
+  position: absolute;
+  top: 5px; left: 50%;
+  transform: translateX(-50%);
+  width: 62px; height: 19px;
+  background: #0e0e0e;
+  border-radius: 999px;
+}
+:root {
+  --status-icons: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 12'%3E%3Cg fill='%23000'%3E%3Crect x='0' y='7' width='2.4' height='4' rx='.7'/%3E%3Crect x='3.7' y='5' width='2.4' height='6' rx='.7'/%3E%3Crect x='7.4' y='3' width='2.4' height='8' rx='.7'/%3E%3Crect x='11.1' y='1' width='2.4' height='10' rx='.7'/%3E%3Cpath d='M22 2.2c-2.8 0-5.4 1-7.4 2.7l1.3 1.4c1.7-1.4 3.8-2.2 6.1-2.2s4.4.8 6.1 2.2l1.3-1.4C27.4 3.2 24.8 2.2 22 2.2zm0 4c-1.7 0-3.3.6-4.5 1.6l1.3 1.4c.9-.7 2-1.1 3.2-1.1s2.3.4 3.2 1.1l1.3-1.4C25.3 6.8 23.7 6.2 22 6.2zm0 3.8-1.6 1.7h3.2L22 10z'/%3E%3Crect x='32' y='2' width='9.5' height='8' rx='2.2' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='33.2' y='3.2' width='7.1' height='5.6' rx='1.3'/%3E%3Crect x='42.3' y='4.6' width='1.3' height='2.8' rx='.6'/%3E%3C/g%3E%3C/svg%3E");
+}
+.mock__frame img {
+  display: block; width: 100%; height: auto;
+  background: var(--paper);
+}
+.mock__label {
+  font-size: 0.8rem; line-height: 1.55;
+  color: var(--gray); text-align: center;
+  max-width: 28em;
+}
+.mock__label b { color: var(--ink); font-weight: 700; }
+@media (max-width: 860px) {
+  .mocks, .mocks--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .mocks, .mocks--2, .mocks--4 { grid-template-columns: 1fr; }
+}
+
 /* Before/after compare slider: drag to reveal the new design over the old one */
 .compare-slider__frame {
   position: relative;
