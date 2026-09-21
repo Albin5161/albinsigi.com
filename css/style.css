@@ -1241,6 +1241,24 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .mocks, .mocks--2, .mocks--4 { grid-template-columns: 1fr; }
 }
 
+/* Annotations: numbered pins on a screenshot, with matching notes under it.
+   Pins are positioned in % of the screen, measured from the live prototype. */
+.mock__shot { position: relative; }
+.mock__pin {
+  position: absolute; transform: translate(-50%, -50%);
+  width: 18px; height: 18px; border-radius: 999px;
+  background: var(--ink); color: var(--paper);
+  font: 700 10px/18px var(--font-body); text-align: center;
+  box-shadow: 0 0 0 2px var(--paper), 0 2px 6px rgba(0, 0, 0, 0.28);
+}
+.notes { display: grid; gap: 7px; width: 100%; max-width: 30em; margin: 2px 0 0; padding: 0; list-style: none; text-align: left; }
+.notes li { display: grid; grid-template-columns: 18px 1fr; gap: 9px; font-size: 0.78rem; line-height: 1.45; color: var(--gray); }
+.notes li span {
+  width: 18px; height: 18px; margin-top: 1px; border-radius: 999px;
+  background: var(--ink); color: var(--paper);
+  font: 700 10px/18px var(--font-body); text-align: center;
+}
+
 /* A looping recording can sit in a device frame exactly like a screenshot */
 .mock__frame video { display: block; width: 100%; height: auto; background: var(--paper); }
 .mocks--hero .mock__frame { max-width: 300px; }
