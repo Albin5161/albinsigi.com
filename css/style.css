@@ -1241,6 +1241,200 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .mocks, .mocks--2, .mocks--4 { grid-template-columns: 1fr; }
 }
 
+/* A looping recording can sit in a device frame exactly like a screenshot */
+.mock__frame video { display: block; width: 100%; height: auto; background: var(--paper); }
+.mocks--hero .mock__frame { max-width: 300px; }
+
+/* ——— Product case study components ———
+   Built for the Referral Status study, written generically enough to reuse.
+   Black and white like the rest of the site; they never use h2 or ul, so they
+   stay out of the table of contents and away from the default bullets. */
+
+/* Small uppercase label shared by the components below */
+.eyebrow {
+  display: block;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* Jobs to be done: one card per person, When / I want to / So I can */
+.jtbd { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 10px; }
+.jtbd__card {
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px; background: var(--paper);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.jtbd__who { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; line-height: 1.25; }
+.jtbd__who small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.8rem; color: var(--gray); margin-top: 2px; }
+.jtbd__job { display: grid; gap: 8px; }
+.jtbd__job p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--ink); }
+.jtbd__job p span { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 1px; }
+.jtbd__feel { margin: 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.84rem; line-height: 1.55; }
+@media (max-width: 860px) { .jtbd { grid-template-columns: 1fr; } }
+
+/* Information architecture: existing places, with what this feature adds */
+.ia { margin: 26px 0 10px; border: 1px solid var(--line); border-radius: 16px; padding: clamp(18px, 3vw, 26px); background: var(--paper-soft); }
+.ia__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ia__col { display: flex; flex-direction: column; gap: 8px; }
+.ia__place {
+  font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+  padding: 10px 12px; border-radius: 10px;
+  background: var(--paper); border: 1px solid var(--line);
+}
+.ia__place small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.72rem; color: var(--gray); }
+.ia__item {
+  position: relative;
+  font-size: 0.8rem; line-height: 1.35; font-weight: 600;
+  padding: 8px 10px; margin-left: 14px; border-radius: 8px;
+  background: var(--ink); color: var(--paper);
+}
+.ia__item::before {
+  content: ""; position: absolute; left: -10px; top: -9px;
+  width: 9px; height: calc(50% + 9px);
+  border-left: 1.5px solid var(--gray-muted); border-bottom: 1.5px solid var(--gray-muted);
+  border-bottom-left-radius: 4px;
+}
+.ia__item small { display: block; font-weight: 500; font-size: 0.7rem; opacity: 0.72; }
+.ia__legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; font-size: 0.76rem; color: var(--gray); }
+.ia__legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+.ia__legend .is-existing i { background: var(--paper); border: 1px solid var(--gray-muted); }
+.ia__legend .is-new i { background: var(--ink); }
+@media (max-width: 760px) { .ia__cols { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; } }
+
+/* Swimlane flow: who does what, in order. On phones it becomes one list. */
+.flow { margin: 26px 0 10px; border: 1px solid var(--line); border-radius: 16px; padding: clamp(16px, 3vw, 24px); }
+.flow__grid {
+  display: grid;
+  grid-template-columns: 78px repeat(var(--steps), minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto);
+  gap: 8px;
+}
+.flow__lane {
+  grid-column: 1;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray);
+  display: flex; align-items: center;
+  border-right: 1px solid var(--line);
+}
+.flow__step {
+  grid-column: calc(var(--col) + 1);
+  font-size: 0.76rem; line-height: 1.35;
+  padding: 8px 9px; border-radius: 9px;
+  background: var(--paper-soft); border: 1px solid var(--line);
+  color: var(--ink);
+}
+.flow__step b { display: block; font-size: 0.64rem; font-weight: 700; color: var(--gray); letter-spacing: 0.06em; margin-bottom: 2px; }
+.flow__step--key { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.flow__step--key b { color: var(--gray-faint); }
+.flow__step--soft { background: transparent; border-style: dashed; color: var(--gray); }
+.flow [data-lane="requester"] { grid-row: 1; }
+.flow [data-lane="system"] { grid-row: 2; }
+.flow [data-lane="referrer"] { grid-row: 3; }
+.flow__note { margin: 14px 0 0; font-size: 0.8rem; }
+.flow__tag { display: none; }
+@media (max-width: 760px) {
+  .flow__grid { display: flex; flex-direction: column; gap: 8px; }
+  .flow__lane { display: none; }
+  .flow__tag {
+    display: inline-block; margin-bottom: 4px;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray);
+  }
+  .flow__step--key .flow__tag { color: var(--gray-faint); }
+  .flow__step { font-size: 0.86rem; }
+}
+
+/* The status model: six statuses and who may set each one */
+.model { width: 100%; border-collapse: collapse; margin: 22px 0 10px; font-size: 0.9rem; }
+.model th {
+  text-align: left; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); padding: 0 12px 10px 0; border-bottom: 1px solid var(--ink);
+}
+.model td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--gray); line-height: 1.45; }
+.model td:first-child { color: var(--ink); white-space: nowrap; }
+.model code { font-size: 0.78rem; color: var(--gray); }
+@media (max-width: 620px) {
+  .model thead { display: none; }
+  .model, .model tbody, .model tr, .model td { display: block; width: 100%; }
+  .model tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .model td { border: 0; padding: 2px 0; }
+  .model td[data-label]::before {
+    content: attr(data-label) ": ";
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray);
+  }
+}
+
+/* LinkedIn-style status pills, drawn in HTML so they stay crisp */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(0, 0, 0, 0.04);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px; font-weight: 500; color: #191919; white-space: nowrap;
+}
+.pill svg { width: 14px; height: 14px; stroke: #666; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* Feature breakdown */
+.modules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 10px; }
+.module { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.module__name { font-family: var(--font-display); font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+.module p { margin: 0; font-size: 0.88rem; line-height: 1.55; }
+.module--tint { background: var(--paper-soft); }
+@media (max-width: 680px) { .modules { grid-template-columns: 1fr; } }
+
+/* Design system foundation */
+.ds { margin: 24px 0 10px; display: grid; gap: 12px; }
+.ds__block { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.ds__block > p { margin: 8px 0 0; font-size: 0.86rem; line-height: 1.55; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 10px; margin-top: 12px; }
+.swatch { display: grid; gap: 6px; font-size: 0.76rem; line-height: 1.35; color: var(--gray); }
+.swatch span { display: block; height: 52px; border-radius: 10px; border: 1px solid var(--line); }
+.swatch b { color: var(--ink); font-weight: 600; font-size: 0.8rem; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.labels { display: grid; grid-template-columns: auto auto 1fr; gap: 6px 14px; margin-top: 12px; font-size: 0.84rem; align-items: center; }
+.labels code { font-size: 0.78rem; color: var(--gray); }
+.labels .arrow { color: var(--gray-muted); }
+.tokens { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tokens code { font-size: 0.74rem; padding: 4px 8px; border-radius: 6px; background: var(--paper-soft); border: 1px solid var(--line); color: var(--ink); }
+
+/* Outcomes: one card per business lever, each with a way to measure it */
+.impact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 10px; }
+.impact__card { border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+.impact__lever { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
+.impact__card p { margin: 0; font-size: 0.88rem; line-height: 1.55; }
+.impact__metric { padding-top: 10px; border-top: 1px solid var(--line); }
+.impact__metric p { color: var(--ink); }
+@media (max-width: 680px) { .impact { grid-template-columns: 1fr; } }
+
+/* Data names (the spec's stored values, motion tokens) in a real monospace */
+.model code, .labels code, .tokens code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; }
+
+/* These are <p> elements inside .case, so they must out-rank .case p's grey */
+.case .jtbd__who, .case .module__name, .case .impact__lever, .case .case__principle { color: var(--ink); }
+
+/* The swimlane breaks out of the reading column, like .shot--wide, but only
+   where that clears the page's table of contents (shown from 1241px, sitting
+   about 200px in from the right edge, longer for long section names).
+   Narrower, it stays in the column. */
+@media (min-width: 1560px) {
+  .flow--wide {
+    max-width: 1040px;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* A single sentence the section hangs on */
+.case__principle {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.2rem, 2.6vw, 1.55rem); line-height: 1.3; letter-spacing: -0.015em;
+  color: var(--ink);
+  border-left: 3px solid var(--ink); padding: 4px 0 4px 20px;
+  margin: 24px 0 26px; max-width: 34ch;
+}
+
 /* Before/after compare slider: drag to reveal the new design over the old one */
 .compare-slider__frame {
   position: relative;

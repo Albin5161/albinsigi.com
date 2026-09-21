@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Referral Status, a LinkedIn Concept | Albin Sigi</title>
-  <meta name="description" content="Case study: a concept feature that turns a LinkedIn referral request into something you can follow, so nobody has to send the awkward second follow-up." />
+  <meta name="description" content="Case study: a LinkedIn concept feature that gives every referral request a status both people can see, so job seekers get an answer without having to chase." />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Referral Status, a LinkedIn Concept | Albin Sigi" />
-  <meta property="og:description" content="Case study: a concept feature that turns a LinkedIn referral request into something you can follow, so nobody has to send the awkward second follow-up." />
+  <meta property="og:description" content="Case study: a LinkedIn concept feature that gives every referral request a status both people can see, so job seekers get an answer without having to chase." />
   <meta property="og:url" content="https://albinsigi.com/work/referral-status.html" />
   <meta property="og:image" content="https://albinsigi.com/assets/work/thumb-referral.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../css/fonts.css" />
-  <link rel="stylesheet" href="../css/style.css?v=5" />
+  <link rel="stylesheet" href="../css/style.css?v=6" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/work/referral-status.html" />
   <script defer src="/_vercel/insights/script.js"></script>
@@ -39,271 +39,548 @@
     <h1 class="case__title">You asked for a referral. Now you can see where it stands.</h1>
 
     <dl class="case__meta">
-      <div><dt>Role</dt><dd>Designer, and the person who built it</dd></div>
-      <div><dt>Type</dt><dd>Concept feature for LinkedIn</dd></div>
-      <div><dt>Context</dt><dd>Self-directed, 2026</dd></div>
+      <div><dt>Role</dt><dd>Product designer, research to working prototype</dd></div>
+      <div><dt>Product</dt><dd>LinkedIn, iOS and web</dd></div>
+      <div><dt>Context</dt><dd>Self-directed concept, 2026</dd></div>
       <div><dt>Tools</dt><dd>Claude Code, React, Tailwind, Mobbin</dd></div>
-      <div><dt>Testing</dt><dd>4 people, working prototype</dd></div>
+      <div><dt>Testing</dt><dd>4 unmoderated sessions</dd></div>
     </dl>
 
     <div class="case__nda">
-      A concept project. Not affiliated with or endorsed by LinkedIn. I matched
+      A concept project, not affiliated with or endorsed by LinkedIn. I matched
       LinkedIn's real colours, icons and iOS patterns so the idea could be judged
-      in its actual context instead of in a vacuum, and the prototype keeps that
-      disclaimer visible on every screen.
+      inside the product it belongs to, and the prototype keeps that disclaimer on
+      every screen.
     </div>
 
     <div class="case__summary">
       <h2>In 30 seconds</h2>
       <ul>
-        <li><strong>The problem:</strong> You ask someone in your network for a referral, and then nothing. No reply is not the same as no, but it feels the same. So you send the awkward follow-up, and now two people are uncomfortable.</li>
-        <li><strong>What I did:</strong> Designed and built a working Referral Status feature. Six plain statuses, only the referrer sets the human ones, and the requester can follow it without chasing anyone.</li>
-        <li><strong>The result:</strong> A real prototype, not a clickable mockup. Four people ran the whole two-sided journey on their own phones and all four finished it.</li>
+        <li><strong>The problem:</strong> You ask someone at a company to refer you, then hear nothing. You can't tell a busy person from a quiet no, so you send the awkward follow-up, and now both of you feel bad.</li>
+        <li><strong>What I did:</strong> Designed a shared referral request with six plain statuses that both people can see. Only the referrer can say yes or no, and the requester can follow along without chasing. I built it as a working prototype inside LinkedIn's real interface.</li>
+        <li><strong>The result:</strong> Four people ran the full two-sided journey on their own phones. All four finished without help and said they would use it.</li>
       </ul>
     </div>
 
-    <h2>Why I built this</h2>
-    <p>
-      Referrals are the quiet engine of hiring. Almost everyone I know has asked for
-      one, and almost everyone has had the same experience after they asked: silence.
-    </p>
-    <p>
-      The silence is the actual problem. Not the no. A referrer who says "sorry, I
-      can't this time" has given you something useful. You move on. But silence gives
-      you nothing, so you fill it yourself. You reread your message. You wonder if it
-      was seen. You wait four days and send a second one that starts with "just
-      following up". Meanwhile the referrer is sitting on a message they fully intend
-      to answer, feeling slightly guilty every time they open the app.
-    </p>
-    <p>
-      One missing piece of information is making both people feel bad. That is a
-      design problem, not a people problem.
-    </p>
+    <div class="case__stats">
+      <div><span class="case__stat-num">6</span><span class="case__stat-label">statuses, each with a rule for who can set it</span></div>
+      <div><span class="case__stat-num">0</span><span class="case__stat-label">new tabs added to LinkedIn</span></div>
+      <div><span class="case__stat-num">2</span><span class="case__stat-label">ways in, from a chat or a job</span></div>
+      <div><span class="case__stat-num">4/4</span><span class="case__stat-label">testers finished unaided</span></div>
+    </div>
 
-    <figure class="mocks mocks--2">
+    <figure class="mocks mocks--1 mocks--hero">
       <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/thread-card.webp" width="750" height="1624" loading="lazy" alt="A LinkedIn message thread with a Referral Request card inside it, showing the status Sent" /></div></div>
-        <p class="mock__label"><b>The ask lives in the conversation.</b> It is a card in the thread, not a form somewhere else, so the request stays where the relationship already is.</p>
-      </div>
-      <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-considering.webp" width="750" height="1624" loading="lazy" alt="The Referral Status screen showing Looking into it, an explanation of what that means, and the full history" /></div></div>
-        <p class="mock__label"><b>The answer to "where is it?"</b> One screen: what the status is, what it means in plain words, and everything that has happened so far.</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><video data-motion src="../assets/work/referral/status-change.mp4" poster="../assets/work/referral/status-change-poster.webp" width="750" height="1624" autoplay muted loop playsinline preload="metadata" aria-label="Recording: the status changes from Sent to Referred, and the two updates Albin missed fill into the history"></video></div></div>
+        <p class="mock__label"><b>What Albin sees when he opens it.</b> He last saw it at Sent, and Alex referred him in the meantime. Sent becomes Referred, and the two updates he missed fill into the history in the order they happened.</p>
       </div>
     </figure>
 
-    <h2>What I deliberately did not build</h2>
+    <h2>Product overview and context</h2>
     <p>
-      The obvious version of this feature is a nudge button. Or read receipts. Or a
-      reminder that pings the referrer every few days until they respond. All of those
-      solve the requester's anxiety by moving it onto the referrer.
+      Referral Status is a concept feature for LinkedIn. It turns a referral ask,
+      which today is a plain direct message, into a shared request with a status
+      that both people can see.
     </p>
     <p>
-      So I set one rule early and kept it: <strong>nothing in this feature puts
-      pressure on the referrer.</strong> No nudges, no seen indicators, no countdowns
-      pointed at them. The whole job of the feature is to remove the reason anyone
-      needs to chase. If it ever created a new reason to chase, it had failed.
+      On LinkedIn the ask already happens in Messaging. Someone applies for a role,
+      finds a connection at the company and writes to them. The person asked is often
+      a second-degree connection they met once at an event. From then on, the only
+      signal the job seeker gets is whether a reply arrives.
     </p>
     <p>
-      That single rule decided most of the smaller arguments later on.
+      Two people use the feature, and they want different things. The
+      <strong>requester</strong> is looking for work and needs an answer. The
+      <strong>referrer</strong> works at the company, wants to help when they can,
+      and has a full day of their own work. LinkedIn has a stake too, because it
+      wants the job search to keep happening on LinkedIn.
     </p>
 
-    <h2>Six statuses, and who is allowed to set them</h2>
+    <h2>The problem space</h2>
+
+    <h3>What each side is trying to get done</h3>
     <p>
-      This is the heart of the thing. Not the screens, the model underneath them.
+      I wrote the needs as jobs to be done, one for each side. The line about how it
+      feels under each job ended up shaping more of the design than the functional
+      part did.
+    </p>
+
+    <div class="jtbd">
+      <div class="jtbd__card">
+        <p class="jtbd__who">The requester<small>Albin, looking for work</small></p>
+        <div class="jtbd__job">
+          <p><span>When</span>I've applied for a role and asked someone there to refer me</p>
+          <p><span>I want to</span>know whether they've seen it and what is happening</p>
+          <p><span>So I can</span>decide whether to wait, move on or ask someone else</p>
+        </div>
+        <p class="jtbd__feel">How it feels: worried about looking pushy, and about waiting weeks on something that is already a no.</p>
+      </div>
+      <div class="jtbd__card">
+        <p class="jtbd__who">The referrer<small>Alex, works at the company</small></p>
+        <div class="jtbd__job">
+          <p><span>When</span>someone I barely know asks me to refer them</p>
+          <p><span>I want to</span>give an honest answer without writing a careful message</p>
+          <p><span>So I can</span>help when I can, and say no when I can't, without feeling bad about it</p>
+        </div>
+        <p class="jtbd__feel">How it feels: guilty about the message sitting unanswered, and unsure how to say no kindly.</p>
+      </div>
+      <div class="jtbd__card">
+        <p class="jtbd__who">LinkedIn<small>The platform in between</small></p>
+        <div class="jtbd__job">
+          <p><span>When</span>members use LinkedIn to look for work</p>
+          <p><span>We want to</span>see referral asks end in a clear answer</p>
+          <p><span>So we can</span>keep the job search, and the people in it, on LinkedIn</p>
+        </div>
+        <p class="jtbd__feel">What's at stake: every thread that goes quiet is a small reason to take the next ask somewhere else.</p>
+      </div>
+    </div>
+
+    <h3>Where it breaks today</h3>
+    <p>
+      A message can only be answered or unanswered. A referrer who is checking with
+      the hiring team looks the same as one who never opened it, so the requester
+      fills the silence themselves. They reread what they wrote, wait a few days and
+      send something that starts with "just following up". The referrer, who meant to
+      reply, now has two messages to feel guilty about.
     </p>
     <p>
-      I wrote six statuses and then wrote down, for each one, who is allowed to set
-      it. That second column turned out to matter more than the first.
+      Saying no is hard in the same channel. There is no small way to say "I can't
+      this time". It takes a written message, and writing a kind no to a near stranger
+      is exactly the kind of task people put off.
     </p>
+
+    <h3>What the business needs</h3>
+    <p>
+      LinkedIn's job products depend on job seekers keeping their search on LinkedIn,
+      and on employers getting good candidates from it. Referrals touch both. A
+      referral that ends in a clear answer is a good experience for the job seeker,
+      and a referred candidate who arrives with a resume is a better lead for the
+      employer. A thread that goes quiet helps neither of them.
+    </p>
+    <p>
+      So I held the design to one business goal: more referral asks should reach an
+      answer, and none of them should cost the referrer any goodwill.
+    </p>
+
+    <h2>Strategy and vision</h2>
+    <p class="case__principle">Every referral ask ends in a clear answer, and nobody has to chase to get it.</p>
+    <p>I turned that into four rules and checked every screen against them.</p>
     <ul>
-      <li><strong>Sent.</strong> Set by the system when the request is created. It is with them now.</li>
-      <li><strong>Looking into it.</strong> Set by the referrer. They have seen it and are working on it. Still open.</li>
-      <li><strong>No reply yet.</strong> Set by the system only, and never by a person. It is an observation, not an accusation.</li>
-      <li><strong>Referred.</strong> Set by the referrer. Final.</li>
-      <li><strong>Can't refer.</strong> Set by the referrer. Final, and worded so it costs nothing to say.</li>
-      <li><strong>Withdrawn.</strong> Set by the requester. You changed your mind, or you got the job another way.</li>
+      <li><strong>Nothing puts pressure on the referrer.</strong> No nudge button, no read receipts, no countdown aimed at them. Moving the requester's worry onto the referrer would make the silence worse.</li>
+      <li><strong>It lives where the ask already happens.</strong> The request sits in the chat and in the job tracker. It gets no tab of its own.</li>
+      <li><strong>The system can observe, but only people make promises.</strong> The app may say a request has gone quiet. Only the referrer can say yes or no.</li>
+      <li><strong>Saying no costs almost nothing.</strong> It takes one tap and no explanation, and the requester gets a kind message where there used to be silence.</li>
     </ul>
+
+    <h3>What I left out on purpose</h3>
     <p>
-      The interesting one is "No reply yet". It is the only status the system infers,
-      and it is the one that could most easily read as blame. So it is written as
-      neutrally as I could manage, and it is the only non-final status that can be
-      overwritten later. If the referrer responds a week after the system marked it
-      quiet, their answer replaces the guess. <strong>A human action always beats a
-      system assumption.</strong>
+      Reminders sent to the referrer were the first thing I cut, for the reason in
+      rule one. I also left out anything that happens after a referral is made. Once
+      Alex says Referred, the employer's hiring process takes over, and LinkedIn can't
+      see inside it honestly enough to report on it. And there are no counts or scores
+      showing how often someone refers people, because a public score would turn a
+      favour into a performance.
     </p>
 
-    <figure class="mocks">
-      <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-sent.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Sent, with copy explaining there is no need to follow up" /></div></div>
-        <p class="mock__label"><b>Sent.</b> The copy does the work here. "There's no need to follow up" is the whole feature in six words.</p>
+    <h2>Information architecture</h2>
+    <p>
+      The feature adds no new top-level place to LinkedIn. Every piece hangs off a
+      place people already use, so nobody has to learn where to find it.
+    </p>
+
+    <figure class="ia" aria-label="Where each part of the feature lives inside LinkedIn's existing navigation">
+      <div class="ia__cols">
+        <div class="ia__col">
+          <div class="ia__place">Messaging<small>existing</small></div>
+          <div class="ia__item">Referral request card<small>in the thread, with the live status</small></div>
+          <div class="ia__item">Badge on Messaging<small>new requests waiting for the referrer</small></div>
+        </div>
+        <div class="ia__col">
+          <div class="ia__place">Jobs<small>existing</small></div>
+          <div class="ia__item">Ask for referral<small>on jobs where you know someone</small></div>
+          <div class="ia__item">My Jobs<small>every ask and its status</small></div>
+        </div>
+        <div class="ia__col">
+          <div class="ia__place">Notifications<small>existing</small></div>
+          <div class="ia__item">Status updates<small>one for each update from the referrer</small></div>
+        </div>
+        <div class="ia__col">
+          <div class="ia__place">Task screens<small>no tab, opened from the others</small></div>
+          <div class="ia__item">Compose<small>write, review, send</small></div>
+          <div class="ia__item">Referral Status<small>one screen per request</small></div>
+        </div>
       </div>
-      <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/referrer-update.webp" width="750" height="1624" loading="lazy" alt="The referrer's view of the same request, with three options: looking into it, referred, or can't refer this time" /></div></div>
-        <p class="mock__label"><b>The referrer's side.</b> Three options, each one honest about whether it is final. Saying no is one tap and needs no explanation.</p>
-      </div>
-      <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-referred.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Referred, with the full history of every update below it" /></div></div>
-        <p class="mock__label"><b>Referred.</b> The history stays. You can see the whole arc, and there is a gentle prompt to go and say thank you.</p>
+      <div class="ia__legend">
+        <span class="is-existing"><i></i>Already in LinkedIn</span>
+        <span class="is-new"><i></i>Added by this feature</span>
       </div>
     </figure>
 
     <p>
-      One more thing had to be true for any of this to work: the update has to come
-      to you. If you have to go and look, you are still checking, and checking is just
-      a quieter version of chasing. So every update the referrer posts arrives as a
-      notification, and every ask you have made sits in one list.
+      Everything points at the Referral Status screen. The card in the chat, the
+      notification and the row in My Jobs all open it, so the answer lives in exactly
+      one place.
     </p>
 
-    <figure class="mocks mocks--2">
-      <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/notifications.webp" width="750" height="1624" loading="lazy" alt="The notifications tab, with an unread update saying the referral is being looked into" /></div></div>
-        <p class="mock__label"><b>It comes to you.</b> The update lands where LinkedIn updates already land, so nobody has to remember to go and check.</p>
+    <h3>The model underneath</h3>
+    <p>
+      Under the screens there are two things: a request, and a list of updates to it.
+      The status you see is always the latest update, worked out each time the screen
+      loads. There is no separate status field that could drift out of step with the
+      history.
+    </p>
+
+    <table class="model">
+      <thead><tr><th>Status</th><th>Who sets it</th><th>Final?</th><th>Stored as</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Sent</span></td><td data-label="Set by">The system, when the request is saved</td><td data-label="Final">No</td><td data-label="Stored as"><code>Pending</code></td></tr>
+        <tr><td><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>Looking into it</span></td><td data-label="Set by">The referrer</td><td data-label="Final">No, it can change again</td><td data-label="Stored as"><code>Considering</code></td></tr>
+        <tr><td><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.1 2.182a10 10 0 0 1 3.8 0"/><path d="M13.9 21.818a10 10 0 0 1-3.8 0"/><path d="M17.609 3.721a10 10 0 0 1 2.69 2.7"/><path d="M2.182 13.9a10 10 0 0 1 0-3.8"/><path d="M20.279 17.609a10 10 0 0 1-2.7 2.69"/><path d="M21.818 10.1a10 10 0 0 1 0 3.8"/><path d="M3.721 6.391a10 10 0 0 1 2.7-2.69"/><path d="M6.391 20.279a10 10 0 0 1-2.69-2.7"/></svg>No reply yet</span></td><td data-label="Set by">The system only, after a quiet period</td><td data-label="Final">No, any answer replaces it</td><td data-label="Stored as"><code>No Update Received</code></td></tr>
+        <tr><td><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Referred</span></td><td data-label="Set by">The referrer</td><td data-label="Final">Yes</td><td data-label="Stored as"><code>Referred</code></td></tr>
+        <tr><td><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" x2="15" y1="15" y2="9"/></svg>Can't refer</span></td><td data-label="Set by">The referrer</td><td data-label="Final">Yes</td><td data-label="Stored as"><code>Unable to Refer</code></td></tr>
+        <tr><td><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>Withdrawn</span></td><td data-label="Set by">The requester</td><td data-label="Final">Yes, for now</td><td data-label="Stored as"><code>Withdrawn</code></td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      The one I spent longest on is No reply yet. It is the only status the system
+      infers, and the easiest to read as blame, so its wording is flat and it can
+      always be replaced. If Alex answers a week after the request went quiet,
+      Alex's answer replaces the system's guess.
+    </p>
+
+    <h2>Core user flows</h2>
+    <p>
+      The feature has three moments: asking, answering and finding out. The swimlane
+      shows who does what, and in what order.
+    </p>
+
+    <figure class="flow flow--wide" aria-label="Swimlane of the main flow across requester, system and referrer">
+      <div class="flow__grid" style="--steps: 7">
+        <div class="flow__lane" data-lane="requester">Requester</div>
+        <div class="flow__lane" data-lane="system">System</div>
+        <div class="flow__lane" data-lane="referrer">Referrer</div>
+
+        <div class="flow__step" data-lane="requester" style="--col: 1"><span class="flow__tag">Requester</span><b>1</b>Opens a chat or a job</div>
+        <div class="flow__step" data-lane="requester" style="--col: 2"><span class="flow__tag">Requester</span><b>2</b>Reviews the drafted ask and sends it</div>
+        <div class="flow__step flow__step--key" data-lane="system" style="--col: 3"><span class="flow__tag">System</span><b>3</b>Saves it, then shows Sent</div>
+        <div class="flow__step" data-lane="referrer" style="--col: 4"><span class="flow__tag">Referrer</span><b>4</b>Sees the Messaging badge</div>
+        <div class="flow__step flow__step--key" data-lane="referrer" style="--col: 5"><span class="flow__tag">Referrer</span><b>5</b>Picks an answer, adds a note</div>
+        <div class="flow__step" data-lane="system" style="--col: 6"><span class="flow__tag">System</span><b>6</b>Records it and notifies Albin</div>
+        <div class="flow__step flow__step--key" data-lane="requester" style="--col: 7"><span class="flow__tag">Requester</span><b>7</b>Opens it and sees the change</div>
       </div>
-      <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/my-jobs.webp" width="750" height="1624" loading="lazy" alt="A list of all the referral requests the requester has sent, each with its current status" /></div></div>
-        <p class="mock__label"><b>All your asks in one place.</b> Most people ask several people at once. Four requests, four different statuses, and not one of them needs a follow-up message.</p>
-      </div>
+      <p class="flow__note">
+        Two paths sit off the main line. The requester can withdraw at any point before
+        a final answer. And if nothing happens for a while, the system marks the request
+        No reply yet. That second path is designed but not built yet, because I haven't
+        decided how long "a while" should be.
+      </p>
     </figure>
 
-    <h2>Three decisions I would not have got right on the first pass</h2>
+    <h3>Asking</h3>
     <p>
-      Building it myself meant I hit the edges I would have drawn right over in Figma.
-      Three of them changed the design.
+      People want a referral at two moments: while they're talking to someone, and
+      while they're looking at a job. So there are two ways in, and both lead to the
+      same compose screen. Halfway through testing I stopped pointing people at one
+      of them and recorded which one each person chose instead.
     </p>
-    <p>
-      <strong>The current status is never stored.</strong> My first instinct was to
-      keep a "currentStatus" field on the request and update it. That gives you two
-      sources of truth, and the day they disagree, the screen confidently shows
-      something that never happened. So the status is always worked out from the most
-      recent update in the history. The history is the truth, and the badge is just
-      the last line of it read aloud.
-    </p>
-    <p>
-      <strong>The request is not shown until it actually exists.</strong> Showing it
-      optimistically and rolling it back on failure is fine for a like button. It is
-      not fine here, because the requester would see "Sent" for a message that never
-      left. So nothing appears until it is real.
-    </p>
-    <p>
-      <strong>One list decides which buttons exist.</strong> Every allowed status
-      change lives in a single list, and every button anywhere in the app is drawn
-      from it. There is no screen that can offer an action the model does not permit.
-      Which is also why the final statuses simply have no buttons, instead of showing
-      buttons that fail.
-    </p>
-
-    <h2>Two ways in, and I stopped guessing which one people would use</h2>
-    <p>
-      There are two honest moments where someone wants a referral: while they are
-      messaging a person, and while they are looking at a job. So the feature has two
-      entry points, from Messaging and from the Job Tracker.
-    </p>
-    <p>
-      I originally pointed testers at one of them, which was a mistake. It told me
-      whether my preferred path worked, and nothing about which path people reach for.
-      I removed the steer and recorded which one each person actually picked instead.
-    </p>
-
     <figure class="mocks mocks--2">
       <div class="mock">
         <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/job-tracker.webp" width="750" height="1624" loading="lazy" alt="The Job Tracker, showing tracked jobs with the connections you have at each company and an Ask for referral button" /></div></div>
-        <p class="mock__label"><b>From the job.</b> You are already looking at the role. The app shows who you know there, so asking is one tap away.</p>
+        <p class="mock__label"><b>From a job.</b> You are already looking at the role, and the tracker shows who you know there.</p>
       </div>
       <div class="mock">
-        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/compose.webp" width="750" height="1624" loading="lazy" alt="The compose screen with a prefilled message and a required resume attachment" /></div></div>
-        <p class="mock__label"><b>The ask, prewritten.</b> The message is drafted for you and it ends with "no pressure at all if not", because the easiest referral to answer is one you are allowed to decline.</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/compose.webp" width="750" height="1624" loading="lazy" alt="The compose screen with a drafted message and a required resume attachment" /></div></div>
+        <p class="mock__label"><b>The ask, drafted for you.</b> It ends with "No pressure at all if not", because the easiest request to answer is one you are allowed to turn down.</p>
+      </div>
+    </figure>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/thread-card.webp" width="750" height="1624" loading="lazy" alt="A LinkedIn message thread with a Referral Request card inside it, showing the status Sent" /></div></div>
+        <p class="mock__label"><b>It lives in the chat.</b> The request is a card in the thread, next to the conversation that led to it.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-sent.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Sent, with copy explaining there is no need to follow up" /></div></div>
+        <p class="mock__label"><b>Sent.</b> The explanation tells Albin that people are busy, that he will hear when anything changes, and that there is no need to follow up.</p>
       </div>
     </figure>
 
-    <h2>How I used AI, honestly</h2>
+    <h3>Answering</h3>
     <p>
-      I did not hand-code this prototype and I am not going to pretend otherwise.
+      Alex gets three options, and each one says plainly whether it is final. The two
+      final answers ask for a confirmation because they can't be changed afterwards.
+      Looking into it skips the confirmation, since Alex can change it later.
     </p>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/referrer-update.webp" width="750" height="1624" loading="lazy" alt="The referrer's view of the request, with three options: looking into it, referred, or can't refer this time" /></div></div>
+        <p class="mock__label"><b>Alex's side.</b> Saying no is one tap and needs no explanation. An optional note is there for anyone who wants to add one.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-considering.webp" width="750" height="1624" loading="lazy" alt="The Referral Status screen showing Looking into it, an explanation of what that means, and the full history" /></div></div>
+        <p class="mock__label"><b>What Albin sees.</b> The status, what it means in plain words, and Alex's note in the history.</p>
+      </div>
+    </figure>
+
+    <h3>Finding out</h3>
     <p>
-      I used AI in three places. For secondary research, to gather what is already
-      known about referral hiring and what people complain about, which I then used to
-      frame the problem rather than as evidence on its own. For building, where I wrote
-      the spec and the status model and worked through the prototype with Claude Code
-      until the behaviour matched what I had specified. And for the interface details,
-      where I matched LinkedIn's real colours, icons and iOS patterns using Mobbin as
-      the reference.
+      The update comes to Albin as a notification. If he had to go and check,
+      checking would just be a quieter way of chasing.
     </p>
+    <figure class="mocks">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/notifications.webp" width="750" height="1624" loading="lazy" alt="The notifications tab, with an unread update saying the referral is being looked into" /></div></div>
+        <p class="mock__label"><b>It comes to you.</b> The update lands where LinkedIn updates already land.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/status-referred.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Referred, with the full history of every update below it" /></div></div>
+        <p class="mock__label"><b>Referred.</b> The history keeps the whole story, and the explanation suggests saying thank you.</p>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/my-jobs.webp" width="750" height="1624" loading="lazy" alt="A list of all the referral requests the requester has sent, each with its current status" /></div></div>
+        <p class="mock__label"><b>Every ask in one place.</b> Most people ask several contacts at once. Four requests here, none needing a follow-up.</p>
+      </div>
+    </figure>
+
+    <h2>Feature breakdown</h2>
+    <p>At a high level the feature is eight parts. The last one is a behaviour that runs across the others.</p>
+
+    <div class="modules">
+      <div class="module"><p class="module__name">Request composer</p><p>Drafts a warm, specific ask that is easy to decline. It needs a job and a resume, then shows a review step, because a sent request can't be taken back.</p></div>
+      <div class="module"><p class="module__name">Request card</p><p>Sits in the chat thread and shows the live status, with a link to the full record.</p></div>
+      <div class="module"><p class="module__name">Referral Status screen</p><p>The current status in plain words, what it means for whoever is reading, and the full history with notes.</p></div>
+      <div class="module"><p class="module__name">Referrer response</p><p>Three options and an optional note. Only the two final answers ask for a confirmation.</p></div>
+      <div class="module"><p class="module__name">Notifications</p><p>One for each update from the referrer. Opening the status marks them read, however you got there.</p></div>
+      <div class="module"><p class="module__name">My Jobs</p><p>Every request with its current status, for people who ask several contacts at once.</p></div>
+      <div class="module"><p class="module__name">Withdraw</p><p>The requester can close a request at any time before a final answer. The referrer is told there is nothing left to do.</p></div>
+      <div class="module module--tint"><p class="module__name">Change on arrival</p><p>The status screen remembers the last update each person saw. If the status has moved since, the old one leaves, the new one arrives, and whatever they missed fills into the history. Refreshing the page never replays it.</p></div>
+    </div>
+
+    <h2>Design system foundation</h2>
     <p>
-      What AI did not decide: the six statuses, who is allowed to set each one, the
-      rule that nothing may pressure the referrer, the wording on every screen, or
-      what to do when a tester got stuck. Those are the design, and they are mine.
-      The value of building it this way was speed of a different kind. I got to a
-      thing people could actually hold in about the time a static prototype would have
-      taken, and testing a real thing tells you more.
+      I built on LinkedIn's own design system. The feature had to look like it
+      shipped with the app, or testers would have been reacting to a different
+      product.
     </p>
 
-    <h2>Testing it with real people</h2>
+    <div class="ds">
+      <div class="ds__block">
+        <span class="eyebrow">Colour</span>
+        <div class="swatches">
+          <div class="swatch"><span style="background:#0A66C2"></span><b>#0A66C2</b>Accent, only on things you can tap</div>
+          <div class="swatch"><span style="background:#191919"></span><b>#191919</b>Primary text</div>
+          <div class="swatch"><span style="background:#666666"></span><b>#666666</b>Secondary text</div>
+          <div class="swatch"><span style="background:#F4F2EE"></span><b>#F4F2EE</b>Web canvas</div>
+          <div class="swatch"><span style="background:#E9E5DF"></span><b>#E9E5DF</b>iOS canvas</div>
+        </div>
+        <p>Blue means you can act on it, and nothing else uses it. I measured the greys from the iOS app and kept secondary text at #666, which is 5.7:1 on white and 4.6:1 on the grey iOS canvas, so it passes WCAG AA on both.</p>
+      </div>
+
+      <div class="ds__block">
+        <span class="eyebrow">Status language</span>
+        <div class="pills"><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Sent</span> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>Looking into it</span> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.1 2.182a10 10 0 0 1 3.8 0"/><path d="M13.9 21.818a10 10 0 0 1-3.8 0"/><path d="M17.609 3.721a10 10 0 0 1 2.69 2.7"/><path d="M2.182 13.9a10 10 0 0 1 0-3.8"/><path d="M20.279 17.609a10 10 0 0 1-2.7 2.69"/><path d="M21.818 10.1a10 10 0 0 1 0 3.8"/><path d="M3.721 6.391a10 10 0 0 1 2.7-2.69"/><path d="M6.391 20.279a10 10 0 0 1-2.69-2.7"/></svg>No reply yet</span> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Referred</span> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" x2="15" y1="15" y2="9"/></svg>Can't refer</span> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>Withdrawn</span></div>
+        <p>Every status gets the same grey pill with an icon and a word. A green and red scheme would have made Can't refer look like a failure, when the point was to make saying no feel normal. The icons are enough to tell the six apart without colour.</p>
+      </div>
+
+      <div class="ds__block">
+        <span class="eyebrow">Words</span>
+        <div class="labels">
+          <code>Pending</code><span class="arrow" aria-hidden="true">→</span><span>Sent</span>
+          <code>Considering</code><span class="arrow" aria-hidden="true">→</span><span>Looking into it</span>
+          <code>No Update Received</code><span class="arrow" aria-hidden="true">→</span><span>No reply yet</span>
+          <code>Unable to Refer</code><span class="arrow" aria-hidden="true">→</span><span>Can't refer</span>
+        </div>
+        <p>The data keeps the names from the spec, and people only ever see the plain ones. I made this rule strict after noticing my own onboarding said Pending while the badge right next to it said Sent.</p>
+      </div>
+
+      <div class="ds__block">
+        <span class="eyebrow">Motion</span>
+        <div class="tokens"><code>status-out</code><code>status-in</code><code>icon-in</code><code>entry-expand</code><code>grow</code><code>ring-once</code></div>
+        <p>Motion appears only where something changed. All the timing lives in one function: the old status holds for 650ms when you open the screen, so you can read what it was, and for 120ms when you caused the change yourself, so the tap feels answered. Only Referred gets a drawn check and one soft ring. With reduced motion switched on, you see the end state straight away.</p>
+      </div>
+    </div>
+
+    <h2>Key decisions and trade-offs</h2>
+
+    <h3>1. No nudge button</h3>
     <p>
-      The hard part of testing this feature is that it has two sides. A tester has to
-      ask as one person, answer as another, then come back and see the result. That is
-      a lot to explain, and an unmoderated tester who gets lost just closes the tab.
+      The obvious feature here is a button that reminds the referrer. I didn't build
+      it. It deals with the requester's worry by handing it to the referrer, and a
+      referrer who feels chased is more likely to ignore the next ask as well.
     </p>
-    <p>
-      So the testing setup became a design problem of its own. A short intro explains
-      the idea. A guide bar under the header names your next step, all the way through
-      the journey. A spotlight points at the control you need when you need it. At the
-      end, a short survey asks how it felt, whether it is useful and why, and what
-      could be better. Every response is saved in the tester's browser and exported as
-      a CSV.
-    </p>
-    <p>
-      Two details I only added after watching the first runs. Each new visit starts
-      fresh, so nobody lands in the middle of a stranger's half-finished journey. And
-      a refresh never wipes your progress, because a couple of people refreshed out of
-      habit and I did not want to lose them.
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> the requester has less control, because they can't
+      prompt Alex. What they can do is withdraw and ask someone else, and No reply yet
+      tells them when that is a reasonable thing to do.
     </p>
 
+    <h3>2. The status is worked out from the history, never stored</h3>
+    <p>
+      Keeping a current status next to the history gives you two versions of the
+      truth. The day they disagree, the screen confidently shows something that never
+      happened. So the status is always read from the latest entry in the history.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> every screen reads the whole history to show one
+      word. With lists this short the cost is tiny, and it removes a whole class of
+      bugs.
+    </p>
+
+    <h3>3. Nothing appears until it is saved</h3>
+    <p>
+      Showing the request straight away and taking it back if saving fails is fine for
+      a like button. Here it would mean showing Sent for a request that never left,
+      which is the exact uncertainty the feature exists to remove.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> there is a short wait after tapping Send. The
+      button shows that it is working, so the wait reads as progress.
+    </p>
+
+    <h3>4. Statuses have no colour</h3>
+    <p>
+      Every status uses the same neutral pill. Colour would put a verdict on each one,
+      and a red Can't refer is the opposite of what the referrer needs to feel when
+      they choose it.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> colour would make a long list faster to scan. I
+      gave up a little scanning speed for statuses that don't judge anyone, and the
+      icons make up most of the difference.
+    </p>
+
+    <h3>5. A resume is required</h3>
+    <p>
+      Alex is putting their name behind Albin. A resume lets them do that with some
+      confidence, and saves them asking for one, which would be another message in the
+      thread.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> it adds a step, and some people will stop there.
+      I would measure that drop-off before keeping the rule.
+    </p>
+
+    <h3>6. Only real news moves</h3>
+    <p>
+      The change only plays when something is new since you last looked, and only
+      Referred gets a moment of its own. Can't refer gets the plain change, because
+      celebrating a no would say the wrong thing.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> Can't refer feels flatter than Referred. I did
+      that on purpose, but tone is easy to get wrong there, so it is one of the first
+      things I would test with real referrers.
+    </p>
+
+    <h2>Outcomes and impact</h2>
+    <p>
+      This is a concept, so there is no production data. What I have is a small
+      usability test. After that comes how I expect the feature to move LinkedIn's
+      numbers, and how I would check.
+    </p>
+
+    <h3>How I tested it</h3>
+    <p>
+      The feature has two sides, so a tester has to ask as one person, answer as the
+      other, then come back and see the result. That is a lot to explain, and an
+      unmoderated tester who gets lost just closes the tab. So the test setup became a
+      design problem of its own: a short intro, a guide bar that always names the next
+      step, a spotlight on the control you need, and a short survey at the end.
+    </p>
     <figure class="mocks mocks--2">
       <div class="mock">
         <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/onboarding.webp" width="750" height="1624" loading="lazy" alt="The first screen of the four-screen intro shown to testers" /></div></div>
-        <p class="mock__label"><b>Four screens of intro.</b> Enough to explain a two-sided story, short enough that nobody skips it.</p>
+        <p class="mock__label"><b>A four-screen intro.</b> The later screens animate the statuses and the role switch, so testers see both sides before they play them.</p>
       </div>
       <div class="mock">
         <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><img src="../assets/work/referral/test-guide.webp" width="750" height="1624" loading="lazy" alt="The dark guide bar showing step 2 of 6 with a spotlight pointing at the role switcher" /></div></div>
         <p class="mock__label"><b>The guide bar and spotlight.</b> Step 2 of 6, with the next control lit up. This is how one tester plays two people without getting lost.</p>
       </div>
     </figure>
-
     <p>
-      Four people ran it end to end. All four finished the journey without help, and
-      all four said they would use it.
-    </p>
-    <p>
-      Four people is a small number and I am not going to dress it up as more than it
-      is. It is enough to tell me the idea reads and the flow holds. It is not enough
-      to tell me how this behaves at LinkedIn's scale, where the referrer is a busy
-      stranger and the requester is one of forty people who asked this month.
+      Four people ran it end to end on their own phones. All four finished without
+      help, and all four said they would use it. That tells me the idea is understood
+      and the flow holds together. It can't tell me how a real referrer behaves, a busy
+      stranger with a full inbox, because in my test one person played both sides.
     </p>
 
-    <h2>What is still open</h2>
+    <h3>Where it would move the business</h3>
+    <div class="impact">
+      <div class="impact__card">
+        <span class="eyebrow">Lever</span>
+        <p class="impact__lever">Get new users</p>
+        <p>The hardest ask is the first one. A drafted message that says "no pressure", and a promise that you won't have to chase, lower the bar for people who have never asked for a referral.</p>
+        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Share of active job seekers who send their first referral request.</p></div>
+      </div>
+      <div class="impact__card">
+        <span class="eyebrow">Lever</span>
+        <p class="impact__lever">Retain existing users</p>
+        <p>An open request is a reason to come back. There is a status to check and a notification to open, and the job search stays on LinkedIn while it runs.</p>
+        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>30-day return rate for people with an open request, against people who asked in a plain message.</p></div>
+      </div>
+      <div class="impact__card">
+        <span class="eyebrow">Lever</span>
+        <p class="impact__lever">Generate revenue</p>
+        <p>LinkedIn earns from employers as well as job seekers. A referred candidate who arrives with a resume and a clear yes is a better lead, which strengthens LinkedIn's hiring products. I would not charge for the answer itself, since that brings back the pressure the feature removes.</p>
+        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Interview rate for candidates referred through a request.</p></div>
+      </div>
+      <div class="impact__card">
+        <span class="eyebrow">Lever</span>
+        <p class="impact__lever">Cut costs</p>
+        <p>Fewer "just following up" messages means fewer threads that sour, and fewer members muting or reporting each other over pushy asks.</p>
+        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Follow-up messages per request, and the report and block rate on referral threads.</p></div>
+      </div>
+    </div>
+
+    <div class="case__summary case__measure">
+      <h2>The one number I would put first</h2>
+      <p>
+        <strong>Resolution rate:</strong> the share of requests that reach Referred,
+        Can't refer or Withdrawn within 14 days. It measures the vision directly, since
+        it counts the asks that ended in an answer. The 14 days is my starting guess, and I would tune it once there is data on how
+        long referrers usually take.
+      </p>
+      <p>
+        Its guardrail is the referrer's mute and block rate. If resolution goes up while
+        that stays flat, the feature is working. If resolution goes up because referrers
+        feel pushed, the guardrail will show it.
+      </p>
+    </div>
+
+    <h2>Reflections and what's next</h2>
+
+    <h3>What I would do next</h3>
+    <ul>
+      <li><strong>Decide when a request counts as quiet.</strong> No reply yet is fully modelled, but nothing triggers it yet. The right delay depends on how long referrers usually take, and I want real data before picking a number.</li>
+      <li><strong>Decide whether Withdrawn is permanent.</strong> In the prototype it behaves as final, but no screen says so, because I'm not sure. Permanent protects the referrer from a request that keeps coming back. Reversible matches how people behave when plans change.</li>
+      <li><strong>Test with real referrers.</strong> Nobody in my test was asked by a stranger, so the referrer's side is the least proven part of the design.</li>
+      <li><strong>Close the loop after Referred.</strong> The hiring process is out of scope, but letting the requester say "I got an interview" would give the referrer a way to be thanked.</li>
+    </ul>
+
+    <h3>How I worked, and where AI fit</h3>
     <p>
-      One decision I left unresolved on purpose. When a requester withdraws, is that
-      permanent?
+      I used AI in three places. For secondary research, to gather what is already
+      known about referral hiring, which I used to frame the problem and not as
+      evidence. For building, where I wrote the spec and the status model and worked
+      through the prototype with Claude Code until it behaved the way I had specified.
+      And for matching LinkedIn's interface, with Mobbin as the reference for the real
+      iOS patterns.
     </p>
     <p>
-      In the prototype it behaves as final, but nothing in the interface claims it is,
-      because I am genuinely not sure. Making it permanent is clean and protects the
-      referrer from a request that keeps coming back. Making it reversible matches how
-      people actually behave, since plans change and you might want to reopen the same
-      ask a week later. I would want real usage data before choosing, and I would
-      rather show the open question than invent a confident answer.
+      The decisions were mine: the six statuses and who may set them, the rule against
+      pressuring the referrer, the wording on every screen, and what to change when a
+      tester got stuck. Building a real prototype meant testers held something that
+      worked, in about the time a clickable mockup would have taken. It also caught
+      things a mockup would not have. Decisions 2 and 3 were already in my spec, but
+      decision 6 came from watching the build run: the old status was leaving before
+      the page had finished fading in, so nobody could read what had changed.
     </p>
 
-    <h2>What I took from it</h2>
+    <h3>What I took from it</h3>
     <p>
-      The feature is small. The thinking that made it work was almost entirely about
-      who is allowed to say what, and what the product is allowed to assume when
-      nobody says anything. Once that was settled, the screens were nearly obvious.
-    </p>
-    <p>
-      The other thing I took from it: building the prototype myself changed the
-      design. Three of the decisions I am proudest of came from hitting a real edge
-      case in a real build, not from drawing a happy path.
+      Most of the work was deciding who is allowed to say what, and what the product
+      may assume when nobody says anything. Once that was settled, the screens came
+      quickly.
     </p>
 
     <a class="case__next" href="cinema-ticketing.html">
@@ -312,6 +589,16 @@
     </a>
   </main>
 
-  <script src="../js/main.js?v=5"></script>
+  <script src="../js/main.js?v=6"></script>
+  <script>
+    // Reduced motion: show the recording's final frame instead of playing it.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('video[data-motion]').forEach(function (v) {
+        v.removeAttribute('autoplay');
+        v.pause();
+        v.load();
+      });
+    }
+  </script>
 </body>
 </html>
