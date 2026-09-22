@@ -1197,17 +1197,17 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .mock__bar {
   position: relative;
   display: flex; align-items: center; justify-content: space-between;
-  height: 30px;
-  padding: 0 16px 0 18px;
+  height: 32px;
+  padding: 0 14px 0 20px;
   background: var(--paper);
-  font-size: 11px; font-weight: 700;
+  font: 600 10.5px/1 -apple-system, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
   color: var(--ink);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 .mock__bar::before { content: "9:41"; }
 .mock__bar::after {
   content: "";
-  width: 40px; height: 11px;
+  width: 42px; height: 7.5px;
   background: var(--ink);
   -webkit-mask: var(--status-icons) no-repeat center / contain;
   mask: var(--status-icons) no-repeat center / contain;
@@ -1215,18 +1215,28 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 /* the dynamic island */
 .mock__bar span {
   position: absolute;
-  top: 5px; left: 50%;
+  top: 5.5px; left: 50%;
   transform: translateX(-50%);
-  width: 62px; height: 19px;
+  width: 74px; height: 22px;
   background: #0e0e0e;
   border-radius: 999px;
 }
 :root {
-  --status-icons: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 12'%3E%3Cg fill='%23000'%3E%3Crect x='0' y='7' width='2.4' height='4' rx='.7'/%3E%3Crect x='3.7' y='5' width='2.4' height='6' rx='.7'/%3E%3Crect x='7.4' y='3' width='2.4' height='8' rx='.7'/%3E%3Crect x='11.1' y='1' width='2.4' height='10' rx='.7'/%3E%3Cpath d='M22 2.2c-2.8 0-5.4 1-7.4 2.7l1.3 1.4c1.7-1.4 3.8-2.2 6.1-2.2s4.4.8 6.1 2.2l1.3-1.4C27.4 3.2 24.8 2.2 22 2.2zm0 4c-1.7 0-3.3.6-4.5 1.6l1.3 1.4c.9-.7 2-1.1 3.2-1.1s2.3.4 3.2 1.1l1.3-1.4C25.3 6.8 23.7 6.2 22 6.2zm0 3.8-1.6 1.7h3.2L22 10z'/%3E%3Crect x='32' y='2' width='9.5' height='8' rx='2.2' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='33.2' y='3.2' width='7.1' height='5.6' rx='1.3'/%3E%3Crect x='42.3' y='4.6' width='1.3' height='2.8' rx='.6'/%3E%3C/g%3E%3C/svg%3E");
+  --status-icons: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2067%2012'%3E%3Cg%20fill='%23000'%3E%3Crect%20x='0'%20y='7.1'%20width='3'%20height='4.2'%20rx='1'/%3E%3Crect%20x='4.7'%20y='5'%20width='3'%20height='6.3'%20rx='1'/%3E%3Crect%20x='9.4'%20y='2.9'%20width='3'%20height='8.4'%20rx='1'/%3E%3Crect%20x='14.1'%20y='.8'%20width='3'%20height='10.5'%20rx='1'/%3E%3Cg%20fill='none'%20stroke='%23000'%20stroke-width='2'%20stroke-linecap='round'%3E%3Cpath%20d='M22.55%207.1A8.2%208.2%200%200%201%2036.75%207.1'/%3E%3Cpath%20d='M25.23%208.65A5.1%205.1%200%200%201%2034.07%208.65'/%3E%3C/g%3E%3Ccircle%20cx='29.65'%20cy='10.4'%20r='1.35'/%3E%3Crect%20x='42.5'%20y='.7'%20width='22'%20height='10.6'%20rx='3'%20fill='none'%20stroke='%23000'%20stroke-width='1'%20opacity='.35'/%3E%3Crect%20x='44'%20y='2.2'%20width='19'%20height='7.6'%20rx='1.9'/%3E%3Crect%20x='65.3'%20y='4'%20width='1.3'%20height='4'%20rx='.65'%20opacity='.35'/%3E%3C/g%3E%3C/svg%3E");
 }
 .mock__frame img {
   display: block; width: 100%; height: auto;
   background: var(--paper);
+}
+/* Labels a phone as one of two ways into the same screen (Flow 1 / Flow 2) */
+.mock .mock__flow {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 0 0 2px; font-size: 0.82rem; font-weight: 600; color: var(--ink);
+}
+.mock .mock__flow span {
+  font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--ink); color: var(--paper);
+  padding: 4px 9px; border-radius: 999px;
 }
 .mock__label {
   font-size: 0.8rem; line-height: 1.55;
@@ -1276,19 +1286,40 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   color: var(--gray);
 }
 
-/* Jobs to be done: one card per person, When / I want to / So I can */
-.jtbd { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 10px; }
+/* Jobs to be done: one card per person, When / I want to / So I can.
+   Every line here is the point of the section, so nothing in it is set in
+   light grey: the labels earn their quietness from size, not from contrast. */
+.jtbd { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0 10px; }
 .jtbd__card {
-  border: 1px solid var(--line); border-radius: 14px;
-  padding: 20px; background: var(--paper);
-  display: flex; flex-direction: column; gap: 14px;
+  border: 1px solid #dcdcdc; border-radius: 16px;
+  padding: 24px 22px 20px; background: var(--paper);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.035);
+  display: flex; flex-direction: column; gap: 18px;
 }
-.jtbd__who { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; line-height: 1.25; }
-.jtbd__who small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.8rem; color: var(--gray); margin-top: 2px; }
-.jtbd__job { display: grid; gap: 8px; }
-.jtbd__job p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--ink); }
-.jtbd__job p span { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 1px; }
-.jtbd__feel { margin: 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.84rem; line-height: 1.55; }
+.jtbd__who { font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; line-height: 1.25; }
+.jtbd__who small {
+  display: block; font-family: var(--font-body); font-weight: 500;
+  font-size: 0.82rem; color: #5a5a5a; margin-top: 3px;
+}
+.jtbd__job { display: grid; gap: 15px; }
+.jtbd__job p { margin: 0; font-size: 0.97rem; line-height: 1.55; color: var(--ink); }
+.jtbd__job p span {
+  display: block; font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: #4a4a4a; margin-bottom: 4px;
+}
+/* The feeling note is an aside, so it gets a panel instead of lighter ink, and
+   sits on the bottom edge so the three cards line up however long the jobs run. */
+.jtbd .jtbd__feel {
+  margin: auto 0 0; padding: 13px 15px;
+  border-radius: 11px; background: var(--paper-soft);
+  font-size: 0.87rem; line-height: 1.6; color: #3d3d3d;
+}
+.jtbd .jtbd__feel b {
+  display: block; font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: #4a4a4a; margin-bottom: 4px;
+}
 @media (max-width: 860px) { .jtbd { grid-template-columns: 1fr; } }
 
 /* Information architecture: existing places, with what this feature adds */
@@ -1414,20 +1445,33 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .swatch span { display: block; height: 52px; border-radius: 10px; border: 1px solid var(--line); }
 .swatch b { color: var(--ink); font-weight: 600; font-size: 0.8rem; }
 .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.labels { display: grid; grid-template-columns: auto auto 1fr; gap: 6px 14px; margin-top: 12px; font-size: 0.84rem; align-items: center; }
-.labels code { font-size: 0.78rem; color: var(--gray); }
-.labels .arrow { color: var(--gray-muted); }
 .tokens { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .tokens code { font-size: 0.74rem; padding: 4px 8px; border-radius: 6px; background: var(--paper-soft); border: 1px solid var(--line); color: var(--ink); }
 
 /* Outcomes: one card per business lever, each with a way to measure it */
-.impact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 10px; }
-.impact__card { border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+/* AARRR, one row per stage. Stacked rather than tiled, because the five stages
+   are a funnel and reading them in order is half of what they say. */
+.impact { display: grid; gap: 12px; margin: 24px 0 10px; }
+.impact__card {
+  border: 1px solid #dcdcdc; border-radius: 14px; padding: 20px 22px;
+  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 6px 26px;
+  align-items: start;
+}
+.impact__card .eyebrow {
+  grid-row: 1 / span 3; align-self: stretch;
+  padding-top: 5px; color: var(--ink);
+  border-right: 1px solid var(--line);
+}
 .impact__lever { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
-.impact__card p { margin: 0; font-size: 0.88rem; line-height: 1.55; }
-.impact__metric { padding-top: 10px; border-top: 1px solid var(--line); }
+.impact__card p { margin: 0; font-size: 0.9rem; line-height: 1.6; color: #333; }
+.impact__card .impact__lever { color: var(--ink); }
+.impact__metric { margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--line); }
+.impact__metric .eyebrow { border: 0; padding: 0; color: #4a4a4a; margin-bottom: 3px; }
 .impact__metric p { color: var(--ink); }
-@media (max-width: 680px) { .impact { grid-template-columns: 1fr; } }
+@media (max-width: 680px) {
+  .impact__card { grid-template-columns: 1fr; gap: 8px; }
+  .impact__card .eyebrow { grid-row: auto; border-right: 0; padding-top: 0; }
+}
 
 /* Data names (the spec's stored values, motion tokens) in a real monospace */
 .model code, .labels code, .tokens code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; }
