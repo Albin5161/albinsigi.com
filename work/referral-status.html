@@ -60,7 +60,7 @@
         <li><strong>The problem:</strong> You ask someone at a company to refer you, then hear nothing. You can't tell a busy person from a quiet no, so you send the awkward follow-up, and now both of you feel bad.</li>
         <li><strong>What I did:</strong> Designed a shared referral request with six plain statuses that both people can see. Only the referrer can say yes or no, and the requester can follow along without chasing. I built it as a working prototype inside LinkedIn's real interface.</li>
         <li><strong>The result:</strong> Four people ran the full two-sided journey on their own phones. All four finished without help and said they would use it.</li>
-        <li><strong>How I framed it:</strong> Jobs to be done for the two people involved, then AARRR to work out where the feature would actually move LinkedIn: acquisition, activation, retention, referral and revenue. The AARRR pass is what killed the nudge button and set the one number I would report.</li>
+        <li><strong>How I framed it:</strong> Jobs to be done for the two people involved, then AARRR to work out where this would actually move LinkedIn. Four of the five stages didn't survive the check. The one that did is activation, and it sets the number I would report.</li>
       </ul>
     </div>
 
@@ -521,51 +521,38 @@
       stranger with a full inbox, because in my test one person played both sides.
     </p>
 
-    <h3>Where it would move the business, stage by stage</h3>
+    <h3>What it actually moves</h3>
     <p>
-      I walked the feature through AARRR, the five stages a member passes through:
-      acquisition, activation, retention, referral and revenue. Referral is the one
-      people usually have to stretch to fill. Here it is the product itself, which is
-      what made the framework worth using.
+      I ran the feature through AARRR: acquisition, activation, retention, referral,
+      revenue. Four of the five don't survive an honest look at what this is. One
+      does, and it is the whole case for building it.
     </p>
     <div class="impact">
       <div class="impact__card">
-        <span class="eyebrow">Acquisition</span>
-        <p class="impact__lever">More people ask at all</p>
-        <p>The hardest referral ask is the first one. A drafted message that says "no pressure", and a promise that you won't have to chase, lower the bar for people who have never asked anyone.</p>
-        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Share of active job seekers who send a first referral request.</p></div>
-      </div>
-      <div class="impact__card">
         <span class="eyebrow">Activation</span>
-        <p class="impact__lever">That first ask ends in an answer</p>
-        <p>Sending isn't the win. The moment the feature proves itself is when a real person's request comes back with Referred or Can't refer instead of going quiet, because that is what nothing else on LinkedIn does today.</p>
-        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Share of first requests that reach an answer from the referrer, not from the system.</p></div>
-      </div>
-      <div class="impact__card">
-        <span class="eyebrow">Retention</span>
-        <p class="impact__lever">An open request is a reason to come back</p>
-        <p>There is a status to check and a notification to open, so the job search stays on LinkedIn while the request runs. The status screen is deliberately worth opening: it holds the whole history, not just the latest word.</p>
-        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>30-day return rate for people with an open request, against people who asked in a plain message.</p></div>
-      </div>
-      <div class="impact__card">
-        <span class="eyebrow">Referral</span>
-        <p class="impact__lever">Answering once makes the next ask easier</p>
-        <p>This stage is usually a stretch. Here it is the whole product. A referrer who got through one request in two taps, and was thanked for it, is a referrer who opens the next one. That is also why saying no had to cost nothing.</p>
-        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Share of referrers who answer a second request, and requesters who go on to ask someone else.</p></div>
-      </div>
-      <div class="impact__card">
-        <span class="eyebrow">Revenue</span>
-        <p class="impact__lever">A better lead for the employer</p>
-        <p>LinkedIn earns from employers as well as job seekers. A referred candidate who arrives with a resume and a clear yes is a stronger lead, which strengthens LinkedIn's hiring products. I would not charge for the answer itself, since that brings back the pressure the feature removes.</p>
-        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Interview rate for candidates referred through a request.</p></div>
+        <div class="impact__body">
+        <p class="impact__lever">The first ask comes back with an answer</p>
+        <p>Sending is not the win. Anyone can send a message today. The feature proves itself the first time a request comes back saying Referred or Can't refer, from a person, instead of going quiet, because that is the thing LinkedIn cannot do now.</p>
+        <p>It also activates two people per request, and only one of them opted in. The requester finally gets an answer. The referrer, who never chose to try this, finds out that answering costs one tap and that saying no is allowed.</p>
+        <div class="impact__metric"><span class="eyebrow">I would measure</span><p>Share of first requests that reach an answer from the referrer, not from the system, within 14 days. It is the first-timer slice of the headline number below.</p></div>
+        </div>
       </div>
     </div>
+
+    <h3>What it doesn't move, and why I wouldn't claim it</h3>
+    <ul>
+      <li><strong>Acquisition.</strong> Nobody joins LinkedIn because referral asks have a status, and everyone involved in one is already a member. This deepens use inside the base. It does not grow it.</li>
+      <li><strong>Retention.</strong> An open request is a reason to come back, but the feature exists to stop people checking anxiously. The number could sit flat while the feature works perfectly. The honest retention gain is on the referrer's side, where there was no reason to come back before.</li>
+      <li><strong>Referral.</strong> The name collides with the product and it is tempting to claim. A referral request travels between two people who are already members, so it is a loop inside the product, not a way in.</li>
+      <li><strong>Revenue.</strong> A referred candidate who arrives with a resume and a clear yes is a better lead for the employer, which helps LinkedIn's hiring products. Real, but too far downstream to put on this feature's scorecard. I would not charge for the answer itself, since that brings back the pressure the feature removes.</li>
+    </ul>
 
     <div class="case__summary case__measure">
       <h2>The one number I would put first</h2>
       <p>
         <strong>Resolution rate:</strong> the share of requests that reach Referred,
-        Can't refer or Withdrawn within 14 days. It measures the vision directly, since
+        Can't refer or Withdrawn within 14 days. Activation is its first-timer slice;
+        this is the same measure across everybody. It measures the vision directly, since
         it counts the asks that ended in an answer. The 14 days is my starting guess, and I would tune it once there is data on how
         long referrers usually take.
       </p>
