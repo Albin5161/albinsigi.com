@@ -456,10 +456,10 @@
       nothing says Sent until the request has really landed.
     </p>
     <p class="case__tradeoff">
-      <strong>The trade-off:</strong> a wait of about three seconds after tapping Send,
-      where a more relaxed product would have shown Sent straight away. I spent that
-      wait instead of hiding it: the envelope seals while it runs, and only lifts off
-      once the request is really gone.
+      <strong>The trade-off:</strong> you wait about three seconds after tapping Send.
+      Most apps would say Sent straight away and quietly fix it later if the send
+      failed. I made you wait instead, and filled the wait with the envelope sealing,
+      so the word Sent is never a guess.
     </p>
 
     <h3>3. LinkedIn's colour rules, and no red</h3>
@@ -476,18 +476,7 @@
       and Referred gets the success badge on top.
     </p>
 
-    <h3>4. A resume is required</h3>
-    <p>
-      Alex is putting their name behind Albin. A resume lets them do that with some
-      confidence, and saves them asking for one, which would be another message in the
-      thread.
-    </p>
-    <p class="case__tradeoff">
-      <strong>The trade-off:</strong> it adds a step, and some people will stop there.
-      I would measure that drop-off before keeping the rule.
-    </p>
-
-    <h3>5. Only real news moves</h3>
+    <h3>4. Only real news moves</h3>
     <p>
       The change only plays when something is new since you last looked, and only
       Referred gets a moment of its own. Can't refer gets the plain change, because
@@ -497,19 +486,6 @@
       <strong>The trade-off:</strong> Can't refer feels flatter than Referred. I did
       that on purpose, but tone is easy to get wrong there, so it is one of the first
       things I would test with real referrers.
-    </p>
-
-    <h3>6. Referred is a vouch</h3>
-    <p>
-      My first Referred moment brought the two avatars together into a hug, with a
-      heart. In the prototype it looked romantic, which is wrong for two people who
-      have met once. A hug is about a relationship, and a referral is something
-      else: Alex putting their name behind Albin. So Alex's name is now stamped onto
-      Albin's application, and LinkedIn's success badge confirms it.
-    </p>
-    <p class="case__tradeoff">
-      <strong>The trade-off:</strong> the vouch is quieter and less warm than the hug.
-      That suits LinkedIn, where even the celebration illustrations show high-fives.
     </p>
 
     <h2>Outcomes and impact</h2>
@@ -626,9 +602,10 @@
       tester got stuck. Building a real prototype meant testers held something that
       worked, in about the time a clickable mockup would have taken. It also caught
       things a mockup would not have. Decision 2 was already in my spec, but
-      decision 5 came from watching the build run: the old status was leaving before
-      the page had finished fading in, so nobody could read what had changed. And
-      decision 6 only became obvious once the hug was actually moving on a screen.
+      decision 4 came from watching the build run: the old status was leaving before
+      the page had finished fading in, so nobody could read what had changed. And the
+      Referred moment was two avatars pulling into a hug until I saw it move, at which
+      point it read as romantic for two people who have met once, and became a vouch.
     </p>
 
     <h3>What I took from it</h3>
@@ -646,14 +623,35 @@
 
   <script src="../js/main.js?v=8"></script>
   <script>
-    // Reduced motion: show the recording's final frame instead of playing it.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('video[data-motion]').forEach(function (v) {
-        v.removeAttribute('autoplay');
-        v.pause();
-        v.load();
-      });
-    }
+    (function () {
+      var videos = document.querySelectorAll('video[data-motion]');
+      // Reduced motion: show the recording's final frame instead of playing it.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        videos.forEach(function (v) {
+          v.removeAttribute('autoplay');
+          v.pause();
+          v.load();
+        });
+        return;
+      }
+      // Autoplay on a muted video is allowed, but browsers defer it until the
+      // element is on screen and some never pick it up after a fast scroll. So
+      // ask for play as each recording comes into view, and stop it on the way
+      // out to save the battery. A rejected play() just leaves the poster up.
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var v = e.target;
+          if (e.isIntersecting) {
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.2 });
+      videos.forEach(function (v) { io.observe(v); });
+    })();
   </script>
 </body>
 </html>
