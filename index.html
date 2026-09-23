@@ -13,7 +13,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="stylesheet" href="css/fonts.css" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/" />
   <script type="application/ld+json">
@@ -174,9 +174,25 @@
             <p class="term__prompt" aria-label="ls ./ai-explorations">
               <strong>albin@portfolio</strong>:~$ <span id="term-typed"></span><span class="term__cursor" aria-hidden="true"></span>
             </p>
-            <p class="term__result">5 experiments found. Things I build on my own time, with AI as my engineering team.</p>
+            <p class="term__result">6 experiments found. Things I build on my own time, with AI as my engineering team.</p>
 
             <div class="ai-grid">
+              <a class="ai-card ai-card--film" href="assets/ai/india-through-claude/film-h.mp4" target="_blank" rel="noopener" data-film-open aria-haspopup="dialog">
+                <p class="ai-card__name">&gt; india-through-claudes-eyes <span class="ai-card__status ai-card__status--live">[film]</span></p>
+                <div class="film-cuts" aria-hidden="true">
+                  <img src="assets/ai/india-through-claude/cuts/eye.webp" width="128" height="128" loading="lazy" alt="" style="--i:0" />
+                  <img src="assets/ai/india-through-claude/cuts/sun.webp" width="128" height="128" loading="lazy" alt="" style="--i:1" />
+                  <img src="assets/ai/india-through-claude/cuts/chai.webp" width="128" height="128" loading="lazy" alt="" style="--i:2" />
+                  <img src="assets/ai/india-through-claude/cuts/wheel.webp" width="128" height="128" loading="lazy" alt="" style="--i:3" />
+                  <img src="assets/ai/india-through-claude/cuts/light.webp" width="128" height="128" loading="lazy" alt="" style="--i:4" />
+                  <img src="assets/ai/india-through-claude/cuts/ball.webp" width="128" height="128" loading="lazy" alt="" style="--i:5" />
+                  <img src="assets/ai/india-through-claude/cuts/holi.webp" width="128" height="128" loading="lazy" alt="" style="--i:6" />
+                  <img src="assets/ai/india-through-claude/cuts/clock.webp" width="128" height="128" loading="lazy" alt="" style="--i:7" />
+                </div>
+                <p class="ai-card__desc">A 30-second papercraft stop-motion of Claude seeing India for the first time. Every frame, and every note of the Desi soundtrack, is made in code.</p>
+                <p class="ai-card__tools">claude code · canvas · python audio synth · ffmpeg</p>
+                <p class="ai-card__link">→ watch it here</p>
+              </a>
               <a class="ai-card" href="https://kathakali-run-byalbin.vercel.app/" target="_blank" rel="noopener">
                 <p class="ai-card__name">&gt; kathakali-run <span class="ai-card__status ai-card__status--live">[live]</span></p>
                 <p class="ai-card__desc">A Kerala-themed endless runner you play with hand gestures. Show a palm to jump, a fist to duck.</p>
@@ -217,6 +233,46 @@
           </div>
         </div>
       </div>
+    <!-- the film plays inside a terminal window (js/main.js); without JS the card opens the mp4 -->
+    <dialog class="film" id="film" aria-labelledby="film-title">
+      <div class="film__bar">
+        <span class="term__dot" aria-hidden="true"></span><span class="term__dot" aria-hidden="true"></span><span class="term__dot" aria-hidden="true"></span>
+        <span class="film__title" id="film-title">india-through-claudes-eyes.mp4</span>
+        <button class="film__close" type="button" data-film-close aria-label="Close the film">esc ✕</button>
+      </div>
+      <div class="film__body">
+        <p class="film__prompt"><strong>albin@portfolio</strong>:~$ play ./india-through-claudes-eyes</p>
+        <video class="film__video" controls playsinline preload="none" aria-label="India through Claude's eyes, a 30-second stop-motion animation"></video>
+        <p class="film__label">// every scene hands off to the next through a circle. jump to a match cut:</p>
+        <div class="film__cuts">
+          <button class="film__cut" type="button" data-cut="4" data-t="3.2">
+            <span class="film__pair" aria-hidden="true"><img src="assets/ai/india-through-claude/cuts/eye.webp" width="128" height="128" loading="lazy" alt="" /><img src="assets/ai/india-through-claude/cuts/sun.webp" width="128" height="128" loading="lazy" alt="" /></span>
+            0:04 eye → sun
+          </button>
+          <button class="film__cut" type="button" data-cut="8" data-t="7.2">
+            <span class="film__pair" aria-hidden="true"><img src="assets/ai/india-through-claude/cuts/sun.webp" width="128" height="128" loading="lazy" alt="" /><img src="assets/ai/india-through-claude/cuts/chai.webp" width="128" height="128" loading="lazy" alt="" /></span>
+            0:08 sun → chai
+          </button>
+          <button class="film__cut" type="button" data-cut="12" data-t="11.2">
+            <span class="film__pair" aria-hidden="true"><img src="assets/ai/india-through-claude/cuts/chai.webp" width="128" height="128" loading="lazy" alt="" /><img src="assets/ai/india-through-claude/cuts/wheel.webp" width="128" height="128" loading="lazy" alt="" /></span>
+            0:12 chai → wheel
+          </button>
+          <button class="film__cut" type="button" data-cut="16" data-t="15.2">
+            <span class="film__pair" aria-hidden="true"><img src="assets/ai/india-through-claude/cuts/light.webp" width="128" height="128" loading="lazy" alt="" /><img src="assets/ai/india-through-claude/cuts/ball.webp" width="128" height="128" loading="lazy" alt="" /></span>
+            0:16 red light → ball
+          </button>
+          <button class="film__cut" type="button" data-cut="19" data-t="18.2">
+            <span class="film__pair" aria-hidden="true"><img src="assets/ai/india-through-claude/cuts/ball.webp" width="128" height="128" loading="lazy" alt="" /><img src="assets/ai/india-through-claude/cuts/holi.webp" width="128" height="128" loading="lazy" alt="" /></span>
+            0:19 ball → holi
+          </button>
+          <button class="film__cut" type="button" data-cut="23" data-t="22.2">
+            <span class="film__pair" aria-hidden="true"><img src="assets/ai/india-through-claude/cuts/holi.webp" width="128" height="128" loading="lazy" alt="" /><img src="assets/ai/india-through-claude/cuts/clock.webp" width="128" height="128" loading="lazy" alt="" /></span>
+            0:23 thali → clock
+          </button>
+        </div>
+        <p class="film__note">// Every frame is drawn by code at 12 per second, like real stop-motion. The sitar, tabla and dhol are synthesized in Python, no samples. One source renders both the 9:16 and 16:9 cuts. I directed it; Claude Code built it.</p>
+      </div>
+    </dialog>
     </section>
 
     <!-- ================= VISUAL EXPLORATIONS ================= -->
@@ -413,6 +469,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>

@@ -635,3 +635,48 @@ if (timeEl) {
     update();
   });
 })();
+
+/* ---- AI section: the film plays inside a terminal window ----
+   Picks the 9:16 or 16:9 cut to fit the screen. Without <dialog>
+   support the card stays a plain link to the mp4. */
+(function () {
+  const dialog = document.getElementById("film");
+  const opener = document.querySelector("[data-film-open]");
+  if (!dialog || !opener || typeof dialog.showModal !== "function") return;
+  const video = dialog.querySelector(".film__video");
+  const cuts = [...dialog.querySelectorAll(".film__cut")];
+  const base = assetPrefix + "assets/ai/india-through-claude/";
+
+  const pickCut = () => {
+    const portrait = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
+    dialog.classList.toggle("film--portrait", portrait);
+    const src = base + (portrait ? "film-v.mp4" : "film-h.mp4");
+    if (!video.src.endsWith(src)) {
+      video.poster = base + (portrait ? "poster-v.webp" : "poster-h.webp");
+      video.src = src;
+    }
+  };
+  const play = (t) => {
+    video.currentTime = t;
+    video.play().catch(() => {}); // blocked autoplay just leaves the controls visible
+  };
+
+  opener.addEventListener("click", (e) => {
+    e.preventDefault();
+    pickCut();
+    dialog.showModal();
+    play(0);
+  });
+  dialog.querySelector("[data-film-close]").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); }); // backdrop
+  dialog.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.preventDefault(); dialog.close(); } });
+  dialog.addEventListener("close", () => video.pause());
+  cuts.forEach((b) => b.addEventListener("click", () => play(+b.dataset.t)));
+  video.addEventListener("timeupdate", () => {
+    const t = video.currentTime;
+    cuts.forEach((b) => {
+      const c = +b.dataset.cut;
+      b.classList.toggle("is-current", t >= c - 0.8 && t < c + 1.2);
+    });
+  });
+})();
