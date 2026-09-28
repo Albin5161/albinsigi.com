@@ -1513,6 +1513,10 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .model td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--gray); line-height: 1.45; }
 .model td:first-child { color: var(--ink); white-space: nowrap; }
 .model code { font-size: 0.78rem; color: var(--gray); }
+/* Edge cases that are still open: long first column, so it wraps */
+.model--cases td:first-child { white-space: normal; font-weight: 600; }
+@media (min-width: 621px) { .model--cases td:first-child { width: 34%; } }
+.model--cases td { vertical-align: top; }
 @media (max-width: 620px) {
   .model thead { display: none; }
   .model, .model tbody, .model tr, .model td { display: block; width: 100%; }

@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://albinsigi.com/assets/work/thumb-referral.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="../css/fonts.css" />
-  <link rel="stylesheet" href="../css/style.css?v=8" />
+  <link rel="stylesheet" href="../css/style.css?v=9" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/work/referral-status.html" />
   <script defer src="/_vercel/insights/script.js"></script>
@@ -384,6 +384,108 @@
       </div>
     </figure>
 
+    <h2>Edge cases</h2>
+    <p>
+      I listed the edge cases in my flow document before building anything, grouped
+      by the moment they happen in. Most of them are built. A few are left open on
+      purpose, because answering them means making a product decision I don't have
+      evidence for yet.
+    </p>
+
+    <h3>When asking goes wrong</h3>
+    <p>
+      Asking is the one step that can't be undone, so most of the protection sits here.
+      Every error says what is missing and why it matters, and nothing Albin typed is
+      ever lost.
+    </p>
+    <figure class="mocks">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-compose-missing.webp" width="750" height="1624" loading="lazy" alt="The compose screen after tapping Review with no job and no resume attached, showing an error under each" /><span class="mock__pin" style="left:56.7%;top:60.8%" aria-hidden="true">1</span><span class="mock__pin" style="left:50%;top:78.5%" aria-hidden="true">2</span><span class="mock__pin" style="left:36%;top:33.7%" aria-hidden="true">3</span></div></div></div>
+        <p class="mock__label"><b>Something is missing.</b> Each gap is named where it is, and says why Alex needs it.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>No job: Alex needs to know which role it is.</li><li><span aria-hidden="true">2</span>No resume: it is what lets Alex vouch with confidence.</li><li><span aria-hidden="true">3</span>The message stays exactly as written.</li></ol>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-send-failed.webp" width="750" height="1624" loading="lazy" alt="A screen titled That didn't go through, with the message kept and buttons to edit it or try again" /><span class="mock__pin" style="left:26%;top:22%" aria-hidden="true">1</span><span class="mock__pin" style="left:40%;top:27.1%" aria-hidden="true">2</span><span class="mock__pin" style="left:34.7%;top:48.9%" aria-hidden="true">3</span></div></div></div>
+        <p class="mock__label"><b>The save fails.</b> The envelope opens back up, and the screen says plainly that the request didn't go.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>It didn't send, and nothing is lost.</li><li><span aria-hidden="true">2</span>The message is kept, word for word.</li><li><span aria-hidden="true">3</span>Try again, or go back and change it.</li></ol>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-no-connections.webp" width="750" height="1624" loading="lazy" alt="The Job Tracker, where a Netflix role shows a muted label reading No connections at Netflix yet" /><span class="mock__pin" style="left:77.13%;top:69.57%" aria-hidden="true">1</span></div></div></div>
+        <p class="mock__label"><b>Nobody to ask.</b> The button stays, muted, with the reason written on it.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>A missing button leaves people wondering. A reason answers the question.</li></ol>
+      </div>
+    </figure>
+
+    <h3>When nobody answers</h3>
+    <p>
+      Silence is the case the whole feature was built for. After a quiet period the
+      system marks the request No reply yet, says the request is still open, and names
+      itself as the author, so it never looks as if Alex said it. Any later answer from
+      Alex replaces it.
+    </p>
+    <p>
+      Nothing triggers No reply yet in the prototype, because I haven't decided how
+      long a quiet period should be. I staged these two screens by writing the status
+      into the prototype's data. The screens and the wording are the real build.
+    </p>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-no-reply.webp" width="750" height="1624" loading="lazy" alt="The status screen showing No reply yet, explaining the request is still open and will update if Alex responds" /><span class="mock__pin" style="left:76.5%;top:40.5%" aria-hidden="true">1</span><span class="mock__pin" style="left:83%;top:59.88%" aria-hidden="true">2</span><span class="mock__pin" style="left:48.59%;top:45.91%" aria-hidden="true">3</span></div></div></div>
+        <p class="mock__label"><b>No reply yet.</b> Flat wording, still open, and no hint that silence means no.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>Still open, and what happens if Alex answers later.</li><li><span aria-hidden="true">2</span>Created automatically: the system's guess, never put in Alex's mouth.</li><li><span aria-hidden="true">3</span>Withdrawing is there if Albin wants it, but nothing suggests it.</li></ol>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-late-answer.webp" width="750" height="1624" loading="lazy" alt="The status screen showing Looking into it, with No reply yet still listed in the history below" /><span class="mock__pin" style="left:61.7%;top:27.7%" aria-hidden="true">1</span><span class="mock__pin" style="left:75.91%;top:67.73%" aria-hidden="true">2</span></div></div></div>
+        <p class="mock__label"><b>Alex answers late.</b> The answer replaces the system's guess, and the guess stays in the history.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>A person's answer always wins over the system's guess.</li><li><span aria-hidden="true">2</span>The quiet week stays on the record.</li></ol>
+      </div>
+    </figure>
+
+    <h3>When an answer is final</h3>
+    <p>
+      Two things can't be changed afterwards: a final answer from Alex, and a
+      withdrawal from Albin. Both ask once before they happen. Looking into it skips
+      the question, because Alex can change it later.
+    </p>
+    <figure class="mocks">
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-referrer-confirm.webp" width="750" height="1624" loading="lazy" alt="Alex has picked I've referred Albin, and a confirmation asks whether to send it, since it can't be changed afterwards" /><span class="mock__pin" style="left:88%;top:50.03%" aria-hidden="true">1</span><span class="mock__pin" style="left:34%;top:79.2%" aria-hidden="true">2</span></div></div></div>
+        <p class="mock__label"><b>Alex picks a final answer.</b> One question before it goes, because it can't be taken back.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>The option says it is final before Alex picks it.</li><li><span aria-hidden="true">2</span>A short confirmation, only for final answers.</li></ol>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-withdraw-confirm.webp" width="750" height="1624" loading="lazy" alt="The requester's status screen with an inline confirmation: Withdraw this request? Alex won't need to do anything more" /><span class="mock__pin" style="left:45%;top:51.7%" aria-hidden="true">1</span><span class="mock__pin" style="left:40.69%;top:56.34%" aria-hidden="true">2</span></div></div></div>
+        <p class="mock__label"><b>Albin withdraws.</b> The confirmation says what it means for Alex, in one line.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>Alex won't need to do anything more.</li><li><span aria-hidden="true">2</span>Keeping it is one tap, right next to Withdraw.</li></ol>
+      </div>
+      <div class="mock">
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/edge-withdrawn-referrer.webp" width="750" height="1624" loading="lazy" alt="Alex's view of a withdrawn request, with no options and a line saying there is nothing more to do" /><span class="mock__pin" style="left:40%;top:37.5%" aria-hidden="true">1</span><span class="mock__pin" style="left:93%;top:41.4%" aria-hidden="true">2</span></div></div></div>
+        <p class="mock__label"><b>What Alex sees.</b> No options left, and a plain line that nothing is expected of them.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>Alex is told Albin withdrew it.</li><li><span aria-hidden="true">2</span>No buttons, because the status model allows no moves from here.</li></ol>
+      </div>
+    </figure>
+
+    <h3>Left open on purpose</h3>
+    <p>
+      These cases are known and written down, and none of them is solved yet. Each one
+      waits on a decision or on data.
+    </p>
+    <table class="model model--cases">
+      <thead><tr><th>Case</th><th>What happens today</th><th>Why it is open</th></tr></thead>
+      <tbody>
+        <tr><td>Albin withdraws, then Alex answers late</td><td data-label="Today">It stays Withdrawn, and Alex has nothing left to answer</td><td data-label="Open because">I haven't decided whether Withdrawn is final</td></tr>
+        <tr><td>Albin withdraws at the same moment Alex answers</td><td data-label="Today">Not handled</td><td data-label="Open because">It depends on the same decision</td></tr>
+        <tr><td>How long before a request counts as quiet</td><td data-label="Today">Nothing triggers No reply yet</td><td data-label="Open because">I need data on how long referrers usually take</td></tr>
+        <tr><td>Both people have the request open</td><td data-label="Today">A change shows the next time the other person opens it, not live</td><td data-label="Open because">Fine for a test. A real build would need live updates</td></tr>
+        <tr><td>A referrer with many requests</td><td data-label="Today">Each one arrives in its own chat, with no list of their own</td><td data-label="Open because">A risk at scale, and outside what this test asks</td></tr>
+        <tr><td>A role with no job posting</td><td data-label="Today">The ask stays a normal message</td><td data-label="Open because">A deliberate boundary I would revisit with data</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Two I haven't designed at all yet: asking the same person twice for the same job,
+      and a referrer who leaves the company while a request is still open.
+    </p>
+
     <h2>Feature breakdown</h2>
     <p>At a high level the feature is eight parts. The last one is a behaviour that runs across the others.</p>
 
@@ -488,6 +590,139 @@
       things I would test with real referrers.
     </p>
 
+    <h2>How it got here</h2>
+    <p>
+      The screens above are the last of several versions. Some changes came from
+      reviewing the build against my own rules, some from checking LinkedIn's real
+      patterns, and one from noticing the test itself was skewing the results. These
+      are the ones that changed the design most.
+    </p>
+
+    <h3>Before the prototype</h3>
+    <ul>
+      <li><strong>Five ideas became one.</strong> I compared reminders to the referrer, suggested next steps, messages setting expectations, a withdraw button and a shared status. Only the status explained the silence itself. The others either pushed the referrer or only worked once a status existed.</li>
+      <li><strong>The model got smaller.</strong> Separate seeker and referrer objects became one member with a role. A Created status went, because nobody would ever see it. And the current status stopped being a stored field, so it can never disagree with the history.</li>
+      <li><strong>Withdrawn stopped being settled.</strong> I argued the opposite case against my own spec, and the case for letting a late answer reopen a request came out stronger. It is still undecided, and the prototype treats it as final for now.</li>
+      <li><strong>Three screens became five, with a second way in.</strong> My first test build covered only the chat, the composer and the status screen. It assumed you already knew who to ask, so I added the ask from the Job tracker, which shows who you know at the company.</li>
+    </ul>
+
+    <h3>1. The words for each status</h3>
+    <p>
+      My first build showed the names from my data model: Pending, Considering, No
+      Update Received. They were accurate, and they read like a system log. No Update
+      Received was the worst, because it sounds like an error, and reading silence as
+      bad news is exactly what the feature exists to stop. So each status got one plain
+      word, and later the colours LinkedIn already uses in its Job tracker.
+    </p>
+    <figure class="mocks">
+      <div class="mock">
+        <p class="mock__flow"><span>Version 1</span> The model's words</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-my-jobs-v1.webp" width="750" height="1624" loading="lazy" alt="An early My Jobs list with grey outlined tags reading Considering, Pending, Referred and No Update Received" /></div></div></div>
+        <p class="mock__label"><b>Stored names on screen.</b> Pending, Considering, No Update Received, all in the same grey outline.</p>
+      </div>
+      <div class="mock">
+        <p class="mock__flow"><span>Version 2</span> Plain words</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-my-jobs-v2.webp" width="750" height="1624" loading="lazy" alt="My Jobs with grey tags reading Looking into it, Sent, Referred and No reply yet" /></div></div></div>
+        <p class="mock__label"><b>One plain word each.</b> Sent, Looking into it, No reply yet. Still all grey, because of a rule in my own spec.</p>
+      </div>
+      <div class="mock">
+        <p class="mock__flow"><span>Final</span> LinkedIn's colours</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/my-jobs.webp" width="750" height="1624" loading="lazy" alt="The final My Jobs list with green tags for live requests and a grey tag for No reply yet" /></div></div></div>
+        <p class="mock__label"><b>LinkedIn's own rules.</b> Green while live or good news, grey once quiet or closed. Decision 3 explains why.</p>
+      </div>
+    </figure>
+
+    <h3>2. Every status explains itself</h3>
+    <p>
+      My spec said only No reply yet would get an explanation, because it was the only
+      status whose wording I had worked through. Every other status showed a label and
+      a time. On screen, that left Albin with a bare Pending and the question he started
+      with: is this normal, and should I follow up? So every status got one sentence,
+      written for whoever is reading it. Albin and Alex read different ones.
+    </p>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <p class="mock__flow"><span>Before</span> A label and a time</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-status-v1.webp" width="750" height="1624" loading="lazy" alt="An early status screen showing only Pending and a timestamp, with no explanation" /></div></div></div>
+        <p class="mock__label"><b>Pending, and nothing else.</b> The reader still has to guess what it means and what to do.</p>
+      </div>
+      <div class="mock">
+        <p class="mock__flow"><span>After</span> What it means</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/status-sent.webp" width="750" height="1624" loading="lazy" alt="The final status screen showing Sent, with a sentence saying there is no need to follow up" /></div></div></div>
+        <p class="mock__label"><b>Sent, and what that means.</b> People are busy, Albin will hear when it changes, and there is no need to follow up.</p>
+      </div>
+    </figure>
+
+    <h3>3. Only the system can say nobody answered</h3>
+    <p>
+      The first referrer screen built its buttons straight from the status model, and
+      the model allowed No Update Received after Pending. So Alex could tell Albin, in
+      so many words, that Alex hadn't replied. It was valid by the rules and made no
+      sense to a person. No reply yet became something only the system can set, and
+      Alex's options were rewritten as things Alex would actually say, each marked final
+      or not.
+    </p>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <p class="mock__flow"><span>Before</span> Status names as buttons</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-referrer-v1.webp" width="750" height="1624" loading="lazy" alt="An early referrer screen with four buttons: Considering, No Update Received, Referred and Unable to Refer" /><span class="mock__pin" style="left:80.3%;top:42.3%" aria-hidden="true">1</span></div></div></div>
+        <p class="mock__label"><b>Four status names.</b> Correct by the model, but not how anyone talks.</p>
+        <ol class="notes"><li><span aria-hidden="true">1</span>Alex could report Alex's own silence.</li></ol>
+      </div>
+      <div class="mock">
+        <p class="mock__flow"><span>After</span> Things Alex would say</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/referrer-update.webp" width="750" height="1624" loading="lazy" alt="The final referrer screen with three first-person options, each saying whether it is final" /></div></div></div>
+        <p class="mock__label"><b>Three answers in Alex's voice.</b> Each one says whether it is final, and silence is no longer an option.</p>
+      </div>
+    </figure>
+
+    <h3>4. From a hug to a vouch</h3>
+    <p>
+      The first Referred moment brought the two avatars together under a heart, in
+      LinkedIn's Love reaction colour. As a still it looked warm. Moving, it read as
+      romantic, between two people who met once at an event. A referral is someone
+      putting their name behind you, so the final version stamps Alex's name onto
+      Albin's application.
+    </p>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <p class="mock__flow"><span>Before</span> A hug</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-referred-hug.webp" width="750" height="1624" loading="lazy" alt="An earlier Referred moment: Alex's and Albin's avatars pressed together under a red heart" /></div></div></div>
+        <p class="mock__label"><b>Two avatars and a heart.</b> Warm, and far too personal for a near stranger.</p>
+      </div>
+      <div class="mock">
+        <p class="mock__flow"><span>After</span> A vouch</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/answer-referred-poster.webp" width="750" height="1624" loading="lazy" alt="The final Referred moment: a Referred by Alex Johnson tag on Albin's application, with a success badge" /></div></div></div>
+        <p class="mock__label"><b>Alex's name on the application.</b> What a referral actually is, confirmed by LinkedIn's success badge.</p>
+      </div>
+    </figure>
+    <p>
+      Sending went through the same kind of round. I built two versions, an envelope
+      and the review folding into the chat card, and compared them side by side. I kept
+      the envelope, then slowed it twice, to about three seconds, because a request you
+      can't take back shouldn't flick past.
+    </p>
+
+    <h3>5. A test that doesn't lead</h3>
+    <p>
+      The test guide's first step used to light up only one way to ask, from the Job
+      tracker. Early testers were all steered the same way, which told me nothing about
+      which way people prefer. Halfway through testing, the guide changed to light up
+      both equally, say "Pick either one", and record which one each tester chose.
+    </p>
+    <figure class="mocks mocks--2">
+      <div class="mock">
+        <p class="mock__flow"><span>Before</span> One way lit up</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-guide-v1.webp" width="750" height="1624" loading="lazy" alt="The test guide's first step, with only From Job Tracker highlighted and a Tap here label" /></div></div></div>
+        <p class="mock__label"><b>Tap here.</b> Only From Job Tracker is ringed, so everyone takes it.</p>
+      </div>
+      <div class="mock">
+        <p class="mock__flow"><span>After</span> Both lit up</p>
+        <div class="mock__frame"><div class="mock__screen"><div class="mock__bar" aria-hidden="true"><span></span></div><div class="mock__shot"><img src="../assets/work/referral/iter-guide-v2.webp" width="750" height="1624" loading="lazy" alt="The test guide's first step, with both From Messaging and From Job Tracker highlighted and a Pick either one label" /></div></div></div>
+        <p class="mock__label"><b>Pick either one.</b> Both ways ringed equally, and the choice is saved with the tester's feedback.</p>
+      </div>
+    </figure>
+
     <h2>Outcomes and impact</h2>
     <p>
       This is a concept, so there is no production data. What I have is a small
@@ -590,9 +825,8 @@
       worked, in about the time a clickable mockup would have taken. It also caught
       things a mockup would not have. Decision 2 was already in my spec, but
       decision 4 came from watching the build run: the old status was leaving before
-      the page had finished fading in, so nobody could read what had changed. And the
-      Referred moment was two avatars pulling into a hug until I saw it move, at which
-      point it read as romantic for two people who have met once, and became a vouch.
+      the page had finished fading in, so nobody could read what had changed. The hug
+      that became a vouch, in How it got here, was caught the same way.
     </p>
 
     <h3>What I took from it</h3>
