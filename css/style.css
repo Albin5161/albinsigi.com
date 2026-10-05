@@ -1823,3 +1823,11 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .work-preview,
   .work-preview.is-visible { transition: opacity 0.15s linear; transform: none; }
 }
+
+/* Case study sections read like slides: one idea, a few short lines, then space.
+   Still one vertical scroll. */
+.case .slide { padding: clamp(36px, 7vh, 68px) 0; border-top: 1px solid var(--line); }
+.case .slide > h2:first-child { margin-top: 0; }
+.case .slide > :last-child { margin-bottom: 0; }
+.case .slide .case__summary { margin-bottom: 0; }
+.case .slide .case__stats { margin-top: 0; }

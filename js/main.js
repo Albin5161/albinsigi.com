@@ -464,7 +464,10 @@ if (timeEl) {
 (function () {
   const caseMain = document.querySelector("main.case");
   if (!caseMain) return;
-  const headings = Array.from(caseMain.querySelectorAll("h2"));
+  // A page can mark its main chapters with data-toc="Short name"; then only
+  // those show in the list. Pages without any marks list every h2, as before.
+  const marked = Array.from(caseMain.querySelectorAll("h2[data-toc]"));
+  const headings = marked.length ? marked : Array.from(caseMain.querySelectorAll("h2"));
   if (headings.length < 3) return;
 
   const slug = (s) =>
@@ -482,7 +485,7 @@ if (timeEl) {
     a.innerHTML =
       '<span class="case-toc__tick" aria-hidden="true"></span>' +
       '<span class="case-toc__label"></span>';
-    a.querySelector(".case-toc__label").textContent = h.textContent;
+    a.querySelector(".case-toc__label").textContent = h.dataset.toc || h.textContent;
     nav.appendChild(a);
     return a;
   });
