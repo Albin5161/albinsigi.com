@@ -24,103 +24,6 @@ if (flipPhoto) {
   flipPhoto.addEventListener("click", () => flipPhoto.classList.toggle("is-flipped"));
 }
 
-/* ============================================================
-   Hero dot grid | dots lean toward the cursor, then settle back
-   ============================================================ */
-const canvas = document.getElementById("dot-canvas");
-if (canvas && !reducedMotion) {
-  const ctx = canvas.getContext("2d");
-  const GAP = 26;
-  const dots = [];
-  let mouseX = -9999, mouseY = -9999;
-  let width = 0, height = 0, dpr = 1;
-  let rafId = null, heroVisible = true;   // run only while the hero is on-screen and the tab is active
-
-  function build() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const rect = canvas.parentElement.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    dots.length = 0;
-    for (let y = GAP; y < height; y += GAP) {
-      for (let x = GAP; x < width; x += GAP) {
-        dots.push({ ox: x, oy: y, x, y });
-      }
-    }
-  }
-
-  function frame() {
-    ctx.clearRect(0, 0, width, height);
-    const RADIUS = 140;
-
-    for (const d of dots) {
-      const dx = mouseX - d.ox;
-      const dy = mouseY - d.oy;
-      const dist = Math.hypot(dx, dy);
-
-      let tx = d.ox, ty = d.oy;
-      let size = 1.1;
-      let shade = 210; // light gray
-
-      if (dist < RADIUS) {
-        const pull = (1 - dist / RADIUS) * 10;
-        tx = d.ox + (dx / (dist || 1)) * pull;
-        ty = d.oy + (dy / (dist || 1)) * pull;
-        size = 1.1 + (1 - dist / RADIUS) * 1.8;
-        shade = 210 - (1 - dist / RADIUS) * 190; // darkens to near black
-      }
-
-      d.x += (tx - d.x) * 0.14;
-      d.y += (ty - d.y) * 0.14;
-
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgb(${shade}, ${shade}, ${shade})`;
-      ctx.fill();
-    }
-    rafId = requestAnimationFrame(frame);
-  }
-
-  function start() { if (rafId == null) rafId = requestAnimationFrame(frame); }
-  function stop() { if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; } }
-  function sync() { (heroVisible && !document.hidden) ? start() : stop(); }
-
-  const hero = canvas.parentElement;
-  hero.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
-  });
-  hero.addEventListener("mouseleave", () => {
-    mouseX = -9999;
-    mouseY = -9999;
-  });
-
-  window.addEventListener("resize", build);
-  build();
-
-  // Only animate while the hero is actually visible and the tab is active,
-  // so the rAF loop stops once the visitor scrolls past or switches away.
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver((entries) => {
-      heroVisible = entries[0].isIntersecting;
-      sync();
-    }, { threshold: 0 }).observe(hero);
-  } else {
-    start();
-  }
-  document.addEventListener("visibilitychange", sync);
-
-  // fonts can change the hero's height after first paint; rebuild so the
-  // grid always reaches the bottom of the hero
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
-  if ("ResizeObserver" in window) new ResizeObserver(build).observe(hero);
-}
-
 /* ---- AI section: type the terminal command when it scrolls in ---- */
 const termTyped = document.getElementById("term-typed");
 if (termTyped) {
@@ -186,10 +89,14 @@ if (cursor && window.matchMedia("(hover: hover)").matches && !reducedMotion) {
 
   let cx = -100, cy = -100, tx = -100, ty = -100;
 
+  // homepage: the first fold (hero and ticker) keeps the plain system cursor
+  const firstFold = document.querySelector(".marquee") || document.querySelector(".hero");
+
   window.addEventListener("mousemove", (e) => {
     tx = e.clientX;
     ty = e.clientY;
-    cursor.classList.add("is-active");
+    const inFirstFold = firstFold && e.clientY < firstFold.getBoundingClientRect().bottom;
+    cursor.classList.toggle("is-active", !inFirstFold);
   });
 
   document.querySelectorAll("a, button").forEach((el) => {

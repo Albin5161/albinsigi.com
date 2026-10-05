@@ -12,8 +12,11 @@
   <meta property="og:image" content="https://albinsigi.com/assets/photo-now-og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="stylesheet" href="css/fonts.css" />
-  <link rel="stylesheet" href="css/style.css?v=10" />
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-500-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/onest-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/satoshi-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=20" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/" />
   <script type="application/ld+json">
@@ -60,23 +63,22 @@
   <main id="main-content">
     <!-- ================= HERO ================= -->
     <section class="hero">
-      <canvas class="hero__canvas" id="dot-canvas" aria-hidden="true"></canvas>
       <div class="hero__content">
         <div class="hero__main">
-          <p class="hero__eyebrow reveal">Product Designer, 3+ years</p>
           <h1 class="hero__title">
-            <span class="reveal">I make complex</span>
-            <span class="reveal">products <em>simple</em></span>
-            <span class="reveal">to use.</span>
+            <span class="reveal">I'm the API</span>
+            <span class="reveal">between users</span>
+            <span class="reveal">and business.</span>
           </h1>
           <div class="hero__row reveal">
             <p class="hero__intro">
-              Hi, I'm Albin. The last product I designed was launched by the
-              Delhi Police Commissioner and is used by officers every day.
-              I handle the full process: research, flows, visual design and handoff.
+              Hi, I'm Albin, a product designer with 3+ years of experience.
+              The last product I designed was launched by the Delhi Police
+              Commissioner, is used by officers every day, and led to two more
+              government contracts. I handle the whole process, from research
+              to handoff.
             </p>
             <div class="hero__side">
-              <p class="hero__status"><span class="pulse-dot" aria-hidden="true"></span> Available for Product Design roles</p>
               <div class="hero__social">
                 <a href="mailto:sigi.albin@gmail.com">Email</a>
                 <a href="https://www.linkedin.com/in/albin-sigi/" target="_blank" rel="noopener">LinkedIn</a>
@@ -94,6 +96,7 @@
             <span class="flip-photo__caption flip-photo__caption--now">me, now</span>
             <span class="flip-photo__caption flip-photo__caption--then">me, when the career plan was "astronaut"</span>
           </div>
+          <p class="hero__status"><span class="pulse-dot" aria-hidden="true"></span> Available for Product Design roles</p>
         </aside>
       </div>
     </section>
@@ -110,7 +113,7 @@
     <section class="work" id="work">
       <div class="section-head reveal">
         <h2>Selected work</h2>
-        <p>Five projects. Each one is a full case study, with the process, the decisions and the results.</p>
+        <p>Five case studies, each with the process, the decisions and the results.</p>
       </div>
 
       <div class="work-list">
@@ -136,7 +139,7 @@
           <span class="work-row__index">03</span>
           <span class="work-row__main">
             <span class="work-row__title">Citizen Safety App</span>
-            <span class="work-row__desc">A safety app for India. Report incidents, send SOS alerts and keep your family safe. Designed to production-ready across six modules.</span>
+            <span class="work-row__desc">A safety app for India. Report incidents, send SOS alerts and keep your family safe. Six modules, all designed to production-ready screens.</span>
             <span class="work-row__tags">Sole designer · Mobile · 6 modules</span>
           </span>
           <span class="work-row__arrow" aria-hidden="true">→</span>
@@ -321,19 +324,24 @@
         </div>
       </div>
       <div class="about__text">
-        <h2 class="reveal">Three years of designing things that <em>ship</em>.</h2>
+        <h2 class="reveal">Three years of designing things that ship.</h2>
         <p class="reveal">
           I was the only designer at Tejis.ai, an AI startup building products for Indian
-          law enforcement. Before that I worked at TCS on e-learning products, inside a large
-          delivery team with review cycles and enterprise clients. That work belongs to TCS,
-          so it cannot be shown here, but it is where I learned to take feedback and ship on
-          someone else's deadline. On the side, I designed a medical records app that helped
-          a hospital win a national quality accreditation. I am based in Kerala, India and
-          open to remote and relocation.
+          law enforcement. On the side, I designed a medical records app that helped a
+          hospital win a national quality accreditation.
+        </p>
+        <p class="reveal">
+          Before that I worked at TCS on <span class="nowrap">e-learning</span> products, inside a large delivery team
+          with review cycles and enterprise clients. That work belongs to TCS, so I can't
+          show it here, but it's where I learned to take feedback and ship on someone
+          else's deadline.
+        </p>
+        <p class="reveal">
+          I'm based in Kerala, India, and open to remote roles or relocating.
         </p>
         <ul class="about__points">
           <li class="reveal"><strong>I work end to end.</strong> Research, user flows, wireframes, final visuals and developer handoff. No gaps for a team to fill.</li>
-          <li class="reveal"><strong>I have shipped under pressure.</strong> Real clients, short timelines, government stakeholders. The work still made it to launch.</li>
+          <li class="reveal"><strong>I've shipped under pressure.</strong> Real clients, short timelines, government stakeholders. The work still made it to launch.</li>
           <li class="reveal"><strong>I design with systems.</strong> Tokens and reusable components, so quality holds up as the product grows.</li>
         </ul>
       </div>
@@ -375,8 +383,8 @@
 
     <!-- ================= CONTACT ================= -->
     <section class="contact" id="contact">
-      <p class="contact__eyebrow reveal">Hiring, or just want to talk?</p>
-      <h2 class="contact__title reveal">Let's work <em>together</em>.</h2>
+      <h2 class="contact__title reveal">Let's work together.</h2>
+      <p class="contact__lede reveal">Hiring, or just want to talk?</p>
       <div class="contact__actions reveal">
         <button class="contact__email" id="copy-email" type="button">
           sigi.albin@gmail.com <span class="contact__copy-hint" id="copy-hint">click to copy</span>
@@ -469,6 +477,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=11"></script>
 </body>
 </html>

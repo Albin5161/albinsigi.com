@@ -1,4 +1,30 @@
+/* TRIAL: Inter, loaded from Google Fonts so it can be judged in the browser.
+   Not for shipping. If it stays, self-host the files like the rest and delete
+   this import; if it goes, delete this import and the TRIAL block at the end
+   of style.css. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap");
+
 /* self-hosted fonts: no third-party CDN dependency */
+
+/* metric-matched fallbacks: the system face is resized to the web font's width
+   and height, so text holds its line breaks while the real font is loading. */
+@font-face {
+  font-family: "Onest Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 500 600;
+  ascent-override: 97%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Satoshi Fallback";
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 98.9%;
+  ascent-override: 102%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
 
 @font-face {
   font-family: "Satoshi";
@@ -24,13 +50,13 @@
   font-display: swap;
 }
 
+/* first-fold headline only (Medium) */
 @font-face {
-  font-family: "Instrument Serif";
-  src: url("../assets/fonts/instrument-serif-400-italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
+  font-family: "Plus Jakarta Sans";
+  src: url("../assets/fonts/plus-jakarta-sans-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
