@@ -42,7 +42,8 @@
 
     <dl class="case__meta">
       <div><dt>Role</dt><dd>Product designer</dd></div>
-      <div><dt>Product</dt><dd>Amazon MX Player, iPhone app</dd></div>
+      <div><dt>Product</dt><dd>Amazon MX Player</dd></div>
+      <div><dt>Platform studied</dt><dd>iPhone app</dd></div>
       <div><dt>Context</dt><dd>Self-directed concept, 2026</dd></div>
       <div><dt>Tools</dt><dd>Claude Code, React, FigJam</dd></div>
       <div><dt>Research</dt><dd>246 reviews, and my own time in the app</dd></div>
@@ -72,16 +73,26 @@
 
 <section class="slide">
 <h2 data-toc="Research">Research & Competitive Benchmarking</h2>
-<p>I read 246 low-star reviews and looked at how YouTube, Hulu and Netflix handle ad breaks.</p>
-<p>My first idea was wrong. A stuck ad looked like the main problem, but Android reviews barely mention it. Not knowing when the break ends is the wider one.</p>
+<p>I read 246 low-star reviews, used the app, and looked at how YouTube, Hulu and Netflix handle ad breaks.</p>
+<div class="modules">
+<div class="module"><p class="module__name">01 · Too many ads</p><p>The top complaint in reviews, on iPhone and on Android.</p></div>
+<div class="module"><p class="module__name">02 · Ads that freeze or repeat</p><p>An ad never loads and locks you out. Or the same ad comes back.</p></div>
+<div class="module"><p class="module__name">03 · No sign of the end</p><p>From my own viewing. The timer covers one ad, not the break.</p></div>
+<div class="module module--tint"><p class="module__name">The opening</p><p>I can't change that viewers see ads. I can change how clear the wait is.</p></div>
+</div>
+<p>My first idea was wrong. A stuck ad looked like the main problem, but Android reviews barely mention it.</p>
 </section>
 
 <section class="slide">
 <h2 data-toc="Goals">Design Goals & Constraints</h2>
 <p class="case__principle">Keep every ad. Make the wait clear and safe.</p>
+<p>The goal is not fewer ads. Ads pay for the app. The goal is a wait you can see the end of.</p>
+<div class="modules">
+<div class="module"><p class="module__name">For the viewer</p><p>Less guessing. Less frustration. A break with a clear end.</p></div>
+<div class="module"><p class="module__name">For the business</p><p>The same number of ads. Every slot still filled. Fewer viewers leaving.</p></div>
+</div>
 <ul>
-<li>No ad is removed. Ads pay for the app.</li>
-<li>No new parts. Every change reuses what the player already has.</li>
+<li>No new visual parts. The timer and the text are the player's own.</li>
 <li>What works stays: the warning, the ad count, the Learn more button.</li>
 </ul>
 </section>
@@ -89,10 +100,11 @@
 <section class="slide">
 <h2 data-toc="Design changes">Key Design Changes & Rationale</h2>
 <ul>
-<li><strong>Show the whole break.</strong> "Back in 01:24" replaces a timer for one ad. It answers the only question I had.</li>
-<li><strong>Never leave the viewer stuck.</strong> A failed ad is swapped for another. If that fails too, a short eye break fills the gap.</li>
+<li><strong>Show the whole break.</strong> "Back in 01:24" replaces a timer for one ad.</li>
+<li><strong>Never leave the viewer stuck.</strong> A failed ad is swapped for another, so the break keeps moving.</li>
 <li><strong>No repeats.</strong> The same ad never plays twice in one break.</li>
 </ul>
+<p><strong>An idea I'm exploring:</strong> if no ad can load at all, a short eye break replaces the black screen. I would test it first.</p>
 </section>
 
 <section class="slide">
@@ -106,17 +118,18 @@
 <figure class="shot shot--grid shot--2">
 <img src="../assets/work/mx/today-stuck.webp" width="1000" height="566" loading="lazy" alt="Today: a black screen with the label Ad: 2 of 4 (00:20), stuck on an ad that never loads" />
 <img src="../assets/work/mx/proposed-eye.webp" width="1000" height="566" loading="lazy" alt="The concept: a black screen with the message No ad could load, so here is an eye break. Look at something far away for a few seconds." />
-<figcaption>When no ad loads. Stuck today. A short eye break in the concept.</figcaption>
+<figcaption>When no ad loads. Stuck today. The concept tries another ad first. This eye break is the fallback I'm exploring.</figcaption>
 </figure>
 </section>
 
 <section class="slide">
 <h2 data-toc="If this were real">What I'd Validate If This Were Real</h2>
-<p><strong>The one number:</strong> how many viewers leave during an ad break. The number of ads played must not drop.</p>
+<p><strong>The main number:</strong> the share of viewers who leave during an ad break. It should go down.</p>
+<p><strong>What must not get worse:</strong></p>
 <ul>
-<li>Does knowing the end make four ads easier to sit through?</li>
-<li>How long should the longest break be?</li>
-<li>Does an eye break feel helpful or odd?</li>
+<li>Ads shown per session. This must not drop.</li>
+<li>Episodes watched to the end. This should go up.</li>
+<li>Time spent watching. This should hold or grow.</li>
 </ul>
 </section>
 
@@ -145,7 +158,7 @@
 <p>A working prototype. You can make an ad fail, slow the network, and switch between today and the concept.</p>
 <figure class="mocks">
 <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/mx/phone-proposed-ad.webp" width="806" height="1522" loading="lazy" alt="The episode page with an ad playing. The label reads Ad: 1 of 4 (Back in 01:24)" /></div></div><p class="mock__label"><b>The whole break, counted.</b></p></div>
-<div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/mx/phone-proposed-eye.webp" width="806" height="1522" loading="lazy" alt="The episode page when no ad could load. The player shows an eye break message, and the label still counts down the break" /></div></div><p class="mock__label"><b>No ad loads. The clock runs on.</b></p></div>
+<div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/mx/phone-proposed-eye.webp" width="806" height="1522" loading="lazy" alt="The episode page when no ad could load. The player shows an eye break message, and the label still counts down the break" /></div></div><p class="mock__label"><b>No ad loads.</b> The fallback I'm exploring.</p></div>
 <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/mx/phone-proposed-return.webp" width="806" height="1522" loading="lazy" alt="The episode page after the break. The show is back and the player controls are showing" /></div></div><p class="mock__label"><b>Back to the show.</b></p></div>
 </figure>
 </section>
@@ -155,7 +168,7 @@
 <div class="case__stats">
 <div><span class="case__stat-num">3</span><span class="case__stat-label">changes to the break</span></div>
 <div><span class="case__stat-num">0</span><span class="case__stat-label">ads removed</span></div>
-<div><span class="case__stat-num">0</span><span class="case__stat-label">new parts in the player</span></div>
+<div><span class="case__stat-num">0</span><span class="case__stat-label">new visual parts</span></div>
 <div><span class="case__stat-num">4</span><span class="case__stat-label">times I changed my mind</span></div>
 </div>
 <p>Nothing shipped, so there is no result to claim. What I have is a small, careful change to a moment most viewers dislike, and a clear way to test it.</p>
