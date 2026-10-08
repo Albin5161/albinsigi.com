@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Xplore, a Travel App Built on Real APIs | Albin Sigi</title>
+  <meta name="description" content="Case study: Xplore turns a saved Instagram reel, Instagram post or YouTube video into a planned trip. Designed and built as a live app on real APIs: Gemini, Google Places, YouTube and Supabase." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Xplore, a Travel App Built on Real APIs | Albin Sigi" />
+  <meta property="og:description" content="Case study: Xplore turns a saved Instagram reel, Instagram post or YouTube video into a planned trip. Designed and built as a live app on real APIs: Gemini, Google Places, YouTube and Supabase." />
+  <meta property="og:url" content="https://albinsigi.com/work/xplore.html" />
+  <meta property="og:image" content="https://albinsigi.com/assets/photo-now-og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="../assets/fonts/onest-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/fonts/satoshi-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../css/fonts.css?v=5" />
+  <link rel="stylesheet" href="../css/style.css?v=18" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="canonical" href="https://albinsigi.com/work/xplore.html" />
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__brand" href="../index.html" aria-label="Albin Sigi"><span class="nav__mark" aria-hidden="true">✳</span> <span class="nav__brand-text">Albin Sigi</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="nav__cta" href="https://drive.google.com/file/d/1_pjqeDO0RBVGOVzTcRX2xzrHd2riNp9h/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header>
+
+  <main class="case" id="main-content">
+    <a class="case__back" href="../index.html#work">← Back to all work</a>
+
+    <p class="case__category">Case study 02 · Mobile app · Built and live</p>
+    <h1 class="case__title">Saw it in a video? Go there for real. A travel app that turns saved reels, posts and YouTube videos into a planned trip.</h1>
+
+    <dl class="case__meta">
+      <div><dt>Role</dt><dd>Product designer, from idea to live app</dd></div>
+      <div><dt>Type</dt><dd>Self-directed project, 2026</dd></div>
+      <div><dt>Platform</dt><dd>iOS, Android and web from one codebase</dd></div>
+      <div><dt>Tools</dt><dd>Claude Code, Expo, TypeScript, Supabase</dd></div>
+      <div><dt>Live app</dt><dd><a class="case__ext" href="https://xplore.expo.app/" target="_blank" rel="noopener">xplore.expo.app</a></dd></div>
+    </dl>
+
+    <div class="case__summary">
+      <h2>In 30 seconds</h2>
+      <ul>
+        <li><strong>The problem:</strong> People save travel videos and never go. The places stay inside the video, with no map and no plan.</li>
+        <li><strong>What I did:</strong> Designed and built Xplore. Paste an Instagram reel, an Instagram post or a YouTube video, and it finds every place in it, puts them on a map and plans the days.</li>
+        <li><strong>Why it is different:</strong> This is not a mockup with fake data. It runs on real APIs: Gemini reads the video, Google Places finds each place, and Supabase runs group voting.</li>
+        <li><strong>See it live:</strong> the web build is at <a class="case__ext" href="https://xplore.expo.app/" target="_blank" rel="noopener">xplore.expo.app</a>.</li>
+      </ul>
+    </div>
+
+    <h2>The problem</h2>
+    <p>
+      A travel reel names four places in 40 seconds. A YouTube vlog names eleven in half an
+      hour. An Instagram post hides them in the caption. You save it. Then you have to go back,
+      pause, type each name into a map, and work out the order yourself. Most people stop
+      there, so the saved folder grows and the trip never happens.
+    </p>
+    <p>
+      Xplore does that work for you. One link goes in. A plan you can follow comes out.
+    </p>
+
+    <figure class="mocks mocks--1">
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/onboarding.webp" width="780" height="1688" loading="lazy" alt="The opening screen of Xplore: a reel on the left, a map with three numbered stops on the right, and the line Saw it in a video? Go there for real." /></div></div><p class="mock__label"><b>The promise, on the first screen.</b></p></div>
+    </figure>
+
+    <h2>How it works</h2>
+    <p>Four steps, from a link to a plan.</p>
+
+    <figure class="mocks mocks--4">
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/home.webp" width="780" height="1688" loading="lazy" alt="The home screen with one field, holding a pasted YouTube link" /></div></div><p class="mock__label"><b>1. Paste a link.</b> Home has one job, so it has one field.</p></div>
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/found.webp" width="780" height="1688" loading="lazy" alt="The reading screen for a 30 minute Gokarna travel video: 11 places found, listed under the video" /></div></div><p class="mock__label"><b>2. It reads the video.</b> A 30 minute vlog becomes 11 places.</p></div>
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/verify.webp" width="780" height="1688" loading="lazy" alt="A list of the 11 places with a photo and a tick on each, under the heading Did we get these right?" /></div></div><p class="mock__label"><b>3. You check it.</b> Untick anything the AI got wrong.</p></div>
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/plan.webp" width="780" height="1688" loading="lazy" alt="The finished plan: a Google map with the day's route and a three-day plan for Gokarna" /></div></div><p class="mock__label"><b>4. You get a plan.</b> Days, times and the route on a real map.</p></div>
+      <figcaption>Screens from the live app, after pasting a real YouTube travel video.</figcaption>
+    </figure>
+
+    <h2>Real APIs, not mock data</h2>
+    <p>
+      Most design projects stop at a prototype with made-up content. I wanted to know if the
+      idea survives real data. So every part of Xplore that looks smart is doing real work on a
+      real server.
+    </p>
+
+    <div class="case__stats">
+      <div><span class="case__stat-num">8</span><span class="case__stat-label">outside services</span></div>
+      <div><span class="case__stat-num">9</span><span class="case__stat-label">server endpoints</span></div>
+      <div><span class="case__stat-num">1</span><span class="case__stat-label">codebase, three platforms</span></div>
+      <div><span class="case__stat-num">0</span><span class="case__stat-label">sign-up screens</span></div>
+    </div>
+
+    <div class="modules">
+      <div class="module"><p class="module__name">Google Gemini</p><p>Reads the caption and description of a video and returns a clean list of places.</p></div>
+      <div class="module"><p class="module__name">YouTube Data API</p><p>Gets the title, description and length of a YouTube video.</p></div>
+      <div class="module"><p class="module__name">Apify</p><p>Reads Instagram reels and posts, which have no open API of their own.</p></div>
+      <div class="module"><p class="module__name">Google Places API</p><p>Turns each place name into a real place with an address, a location and a photo. Also runs the search when you add a place by hand.</p></div>
+      <div class="module"><p class="module__name">Google Maps</p><p>Draws the map for real cities on the web.</p></div>
+      <div class="module"><p class="module__name">Wikipedia and Wikimedia</p><p>Free photos and city notes, tried first before a paid Google photo.</p></div>
+      <div class="module"><p class="module__name">Supabase</p><p>The database, sign-in without an account, and live updates when friends vote.</p></div>
+      <div class="module"><p class="module__name">PostHog</p><p>Analytics, to see how people use the app.</p></div>
+    </div>
+
+    <figure class="mocks mocks--1">
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/map.webp" width="780" height="1688" loading="lazy" alt="The Map tab: a Google map of the Karnataka coast with a photo pin for each saved place, and the list of 11 Gokarna spots below" /></div></div><p class="mock__label"><b>Your map.</b> A real Google map. Every pin came out of one video.</p></div>
+    </figure>
+
+    <h2>What happens when you paste a link</h2>
+    <ul>
+      <li><strong>1. The phone checks the link.</strong> If it was read on this phone in the last 30 days, the answer is instant.</li>
+      <li><strong>2. The server gets the text.</strong> YouTube's API for a video, Apify for a reel or a post.</li>
+      <li><strong>3. Gemini lists the places.</strong> It follows strict rules, and it must say "I don't know" instead of guessing.</li>
+      <li><strong>4. Google Places finds each one.</strong> Five at a time, with coordinates and a photo.</li>
+      <li><strong>5. You confirm.</strong> Only the places you keep ticked are saved.</li>
+    </ul>
+    <p>
+      Every result is saved for 30 days and shared. So if two people paste the same video, the
+      second one costs nothing and loads at once.
+    </p>
+
+    <h2>Key decisions</h2>
+
+    <h3>1. AI reads the video. Rules plan the trip.</h3>
+    <p>
+      Finding place names in a messy caption is a language problem, and AI is good at that.
+      Planning a day is mostly maths: minutes, kilometres and what fits. AI is not reliable at
+      that. So the planner is plain rules that run on the phone. It is instant, free, works
+      offline and gives the same answer every time.
+    </p>
+
+    <figure class="mocks mocks--2">
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/days.webp" width="780" height="1688" loading="lazy" alt="A planner question: How many days? It says the 11 places need about 3 days, and marks the 3 day option as fitting all your places" /></div></div><p class="mock__label"><b>Five short questions.</b> Each answer shows what it means for your places.</p></div>
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/plan-day.webp" width="780" height="1688" loading="lazy" alt="One day of the plan on a Google map, then each stop with its time, how long to stay and the travel time to the next one" /></div></div><p class="mock__label"><b>The plan explains itself.</b> Each stop says why it sits where it does.</p></div>
+    </figure>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> travel times are estimates from distance and terrain, not
+      live traffic. And the rules still leave long waits between parts of some days.
+    </p>
+
+    <h3>2. The AI can be wrong, so you get the last word</h3>
+    <p>
+      The check screen says it plainly: "Xplore's AI picked these out, and it can make
+      mistakes." Every place is shown with its photo and its area, so you can judge it in a
+      second. You untick anything that is wrong, and only the rest is saved.
+    </p>
+
+    <h3>3. No sign-up</h3>
+    <p>
+      Asking for an email before showing any value loses people. Xplore signs each install in
+      quietly, with no account. Your saved places stay on your device. Only trips you choose to
+      share go to the database.
+    </p>
+    <p class="case__tradeoff">
+      <strong>The trade-off:</strong> there is no backup. Clear your browser and your saved
+      places are gone.
+    </p>
+
+    <h3>4. Built to stay free</h3>
+    <p>
+      Real APIs cost money, so cost became a design problem. Results are shared between users.
+      Free Wikimedia photos are tried before Google's. Daily limits sit under each provider's
+      free allowance. And if the counter itself breaks, the app says no instead of spending.
+    </p>
+
+    <h2>Plan with friends</h2>
+    <p>
+      A trip is rarely one person's choice. You can share a plan, and each person keeps, swaps
+      or drops every stop. Votes show up live for everyone. A shared plan travels as a ticket,
+      so it feels like something worth opening.
+    </p>
+
+    <figure class="mocks mocks--1">
+      <div class="mock"><div class="mock__frame"><div class="mock__screen"><img src="../assets/work/xplore/ticket.webp" width="780" height="1688" loading="lazy" alt="A three-day Gokarna plan shown as a ticket with its stops and times, and buttons to share it or save it as a picture, a story or a PDF" /></div></div><p class="mock__label"><b>The plan as a ticket.</b> Share it, or save it as a picture, a story or a PDF.</p></div>
+    </figure>
+
+    <h2>When things go wrong</h2>
+    <p>With real APIs, things fail. Each failure has its own answer, written for people.</p>
+    <ul>
+      <li><strong>A reel or post can't be read:</strong> you add the places by search instead.</li>
+      <li><strong>A video names no places:</strong> the app offers the city's best-known spots.</li>
+      <li><strong>One place can't be found:</strong> that one is dropped, not the whole video.</li>
+      <li><strong>Gemini fails:</strong> it tries twice, then switches to a second model.</li>
+      <li><strong>No internet:</strong> planning still works, because it runs on the phone.</li>
+    </ul>
+
+    <h2>Honest limits</h2>
+    <ul>
+      <li>Xplore is a working prototype, used by a small group of testers. It is not a large product.</li>
+      <li>Only the web build is live. There are no App Store or Play Store builds yet.</li>
+      <li>The four example cities inside the app play saved sample data. Every other link, like the Gokarna video on this page, goes through the real APIs.</li>
+      <li>Daily limits keep it free, so it is not built for many users at once.</li>
+    </ul>
+
+    <h2>What comes next</h2>
+    <ul>
+      <li>Fix the long waits the planner leaves between parts of a day.</li>
+      <li>Accounts, so saved trips survive a new phone.</li>
+      <li>A native map and phone builds for the app stores.</li>
+    </ul>
+
+    <a class="case__next" href="referral-status.html">
+      <span class="case__next-label">Next case study</span>
+      <span class="case__next-title">Referral Status, a LinkedIn Concept →</span>
+    </a>
+  </main>
+
+  <script src="../js/main.js?v=11"></script>
+</body>
+</html>

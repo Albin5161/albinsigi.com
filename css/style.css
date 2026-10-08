@@ -1382,6 +1382,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .mock__label b { color: var(--ink); font-weight: 700; }
 @media (max-width: 860px) {
   .mocks, .mocks--4 { grid-template-columns: repeat(2, 1fr); }
+  .mocks--1 { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .mocks, .mocks--2, .mocks--4 { grid-template-columns: 1fr; }
