@@ -14,7 +14,7 @@
   <link rel="preload" href="../assets/fonts/onest-600-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="../assets/fonts/satoshi-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="../css/fonts.css?v=5" />
-  <link rel="stylesheet" href="../css/style.css?v=21" />
+  <link rel="stylesheet" href="../css/style.css?v=22" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/work/mx-ad-break.html" />
   <script defer src="/_vercel/insights/script.js"></script>
@@ -104,12 +104,26 @@
 
 <section class="slide">
 <h2 data-toc="Design changes">Key Design Changes & Rationale</h2>
-<ul>
-<li><strong>Show the whole break.</strong> "Back in 01:24" replaces a timer for one ad.</li>
-<li><strong>Never leave the viewer stuck.</strong> A failed ad is swapped for another, so the break keeps moving.</li>
-<li><strong>No repeats.</strong> The same ad never plays twice in one break.</li>
-</ul>
+<table class="case__table">
+<thead><tr><th>What I changed</th><th>What it should move</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>The timer shows the whole break: "Back in 01:24"</td><td>More viewers stay through the break</td><td>You can wait for an end you can see</td></tr>
+<tr><td>A failed ad is swapped for another</td><td>Fewer breaks end on a stuck screen, and more ad slots play an ad</td><td>The break keeps moving, and the slot still earns</td></tr>
+<tr><td>No ad plays twice in one break</td><td>Fewer viewers leave out of annoyance</td><td>Repeats are a top complaint. This is my weakest link</td></tr>
+</tbody>
+</table>
 <p><strong>An idea I'm exploring:</strong> if no ad can load at all, a short eye break replaces the black screen. I would test it first.</p>
+<table class="case__table">
+<thead><tr><th>Ideas I dropped</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Fix only the stuck ad</td><td>Android reviews barely mention it</td></tr>
+<tr><td>A progress bar for the break</td><td>The app has no such bar, and I add no new parts</td></tr>
+<tr><td>Split the break into two shorter ones</td><td>A YouTube survey found viewers prefer ads grouped</td></tr>
+<tr><td>Let the viewer choose when ads play</td><td>One more step, and ads may be sold by position</td></tr>
+<tr><td>Point to an ad-free plan</td><td>None exists on iPhone</td></tr>
+<tr><td>An eye exercise over a playing ad</td><td>It takes attention the advertiser paid for</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="slide">
@@ -129,13 +143,13 @@
 
 <section class="slide">
 <h2 data-toc="If this were real">What I'd Validate If This Were Real</h2>
-<p><strong>The main number:</strong> the share of viewers who leave during an ad break. It should go down.</p>
-<p><strong>What must not get worse:</strong></p>
+<p><strong>The north star:</strong> episodes watched to the end, per viewer, each week. A finished episode means the viewer got their show, and MX Player showed its ads.</p>
+<p><strong>What feeds it:</strong></p>
 <ul>
-<li>Ads shown per session. This must not drop.</li>
-<li>Episodes watched to the end. This should go up.</li>
-<li>Time spent watching. This should hold or grow.</li>
+<li>The share of ad breaks a viewer stays through.</li>
+<li>The share of ad slots that play an ad.</li>
 </ul>
+<p><strong>What must not get worse:</strong> ads shown per session.</p>
 </section>
 
 <section class="slide">
