@@ -1931,4 +1931,7 @@ strong, b { font-weight: 600; }
 .case__table th { font-size: var(--text-micro); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); }
 .case__table td:first-child { color: var(--ink); font-weight: 500; }
 .case__table th:last-child, .case__table td:last-child { padding-right: 0; }
+/* a table whose first column holds what people said: lighter, and wider */
+.case__table--said td:first-child { font-weight: 400; color: var(--ink-soft); width: 44%; }
+.case__table--said td:first-child strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 680px) { .case__table { font-size: 0.85rem; } .case__table th, .case__table td { padding-right: 10px; } }
