@@ -853,6 +853,14 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .case__summary li::before { content: "✳"; position: absolute; left: 0; font-size: 0.75em; top: 0.35em; color: var(--ink); }
 .case__summary strong { color: var(--ink); }
 
+/* narrated preview film inside the summary box */
+.case__film { margin-top: clamp(18px, 2.5vw, 26px); }
+.case__film video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+}
+.case__film figcaption { margin-top: 10px; font-size: var(--text-meta); color: var(--gray); }
+
 .case__ext { border-bottom: 1.5px solid var(--line); padding-bottom: 1px; transition: border-color 0.25s; }
 .case__ext:hover { border-color: var(--ink); }
 
