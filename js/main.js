@@ -398,17 +398,25 @@ if (timeEl) {
   });
   document.body.appendChild(nav);
 
-  // Labels sit in the gutter beside the text. On narrower screens the longest
-  // one would run into the reading column, so flag the rail as tight (see CSS).
+  // Labels sit in the gutter beside the text. When the longest one would run
+  // into the reading column, switch to short names ("The problem: a real…"
+  // becomes "The problem") and cap the width to the free space.
   const labels = links.map((a) => a.querySelector(".case-toc__label"));
+  const full = labels.map((l) => l.textContent);
+  const short = full.map((t) => t.split(/[:,]/)[0].trim());
   function fitLabels() {
-    if (!nav.offsetParent && getComputedStyle(nav).display === "none") return;
-    const widest = Math.ceil(Math.max(...labels.map((l) => l.offsetWidth)) * 1.08); // current one is bold
-    nav.style.setProperty("--toc-label-w", widest + "px");
-    const cs = getComputedStyle(caseMain);
-    const textRight = caseMain.getBoundingClientRect().right - parseFloat(cs.paddingRight);
-    const labelLeft = nav.getBoundingClientRect().right - 44 - widest;
-    nav.classList.toggle("case-toc--tight", labelLeft < textRight + 24);
+    if (getComputedStyle(nav).display === "none") return;
+    let textRight = 0;
+    caseMain.querySelectorAll("p").forEach((p) => {
+      if (!p.closest("figure")) textRight = Math.max(textRight, p.getBoundingClientRect().right);
+    });
+    const room = Math.floor(nav.getBoundingClientRect().right - 44 - textRight - 16);
+    nav.style.removeProperty("--toc-label-max");
+    labels.forEach((l, i) => (l.textContent = full[i]));
+    const widest = Math.max(...labels.map((l) => l.offsetWidth)) * 1.05; // current one is bold
+    if (widest <= room) return;
+    labels.forEach((l, i) => (l.textContent = short[i]));
+    nav.style.setProperty("--toc-label-max", Math.max(room, 80) + "px");
   }
   fitLabels();
   window.addEventListener("resize", fitLabels, { passive: true });

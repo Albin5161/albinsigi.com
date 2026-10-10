@@ -917,24 +917,13 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   opacity: 1; transform: translateY(-50%);
   color: var(--ink); font-weight: 600;
 }
-/* Tight gutter (set in main.js when the longest label would run into the text):
-   no persistent label, and hovering the rail opens the labels on a white card. */
-.case-toc::before {
-  content: ""; position: absolute; z-index: -1;
-  top: -14px; bottom: -14px; right: -16px;
-  width: calc(var(--toc-label-w, 320px) + 82px);
-  background: var(--paper);
-  border: 1px solid var(--line); border-radius: 14px;
-  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.28);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.25s var(--ease-out);
-}
-.case-toc--tight:hover::before { opacity: 1; }
-.case-toc--tight:not(:hover) .case-toc__link.is-current .case-toc__label { opacity: 0; }
+/* Narrow gutter: main.js sets --toc-label-max to the free space beside the
+   text and shortens the labels, so they never run into the reading column. */
+.case-toc__label { max-width: var(--toc-label-max, none); overflow: hidden; text-overflow: ellipsis; }
 /* hide where there is no room for a side rail */
 @media (max-width: 1240px) { .case-toc { display: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .case-toc__tick, .case-toc__label, .case-toc::before { transition: none; }
+  .case-toc__tick, .case-toc__label { transition: none; }
 }
 /* anchored headings clear the fixed nav */
 .case h2 { scroll-margin-top: 90px; }
