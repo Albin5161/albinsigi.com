@@ -398,6 +398,22 @@ if (timeEl) {
   });
   document.body.appendChild(nav);
 
+  // Labels sit in the gutter beside the text. On narrower screens the longest
+  // one would run into the reading column, so flag the rail as tight (see CSS).
+  const labels = links.map((a) => a.querySelector(".case-toc__label"));
+  function fitLabels() {
+    if (!nav.offsetParent && getComputedStyle(nav).display === "none") return;
+    const widest = Math.ceil(Math.max(...labels.map((l) => l.offsetWidth)) * 1.08); // current one is bold
+    nav.style.setProperty("--toc-label-w", widest + "px");
+    const cs = getComputedStyle(caseMain);
+    const textRight = caseMain.getBoundingClientRect().right - parseFloat(cs.paddingRight);
+    const labelLeft = nav.getBoundingClientRect().right - 44 - widest;
+    nav.classList.toggle("case-toc--tight", labelLeft < textRight + 24);
+  }
+  fitLabels();
+  window.addEventListener("resize", fitLabels, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLabels);
+
   // scrollspy: active = last heading whose top has passed a line near the top
   let ticking = false;
   function updateActive() {
@@ -536,13 +552,35 @@ if (timeEl) {
     const before = el.querySelector(".compare-slider__before");
     const handle = el.querySelector(".compare-slider__handle");
     if (!range || !before || !handle) return;
-    const update = () => {
-      const v = range.value;
+    const update = (pos) => {
+      const v = typeof pos === "number" ? pos : range.value;
       before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
       handle.style.left = v + "%";
     };
     range.addEventListener("input", update);
     update();
+
+    // Hint that it drags: the divider sways a little while the slider is on
+    // screen, and stops for good the first time someone touches it.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0, start = 0, touched = false;
+    const sway = (t) => {
+      if (!start) start = t;
+      const p = ((t - start) % 3200) / 3200;           // one sway, then a rest
+      const k = p < 0.5 ? Math.sin(p * 4 * Math.PI) : 0;
+      update(50 + k * 7);                              // range steps are whole numbers; draw the fraction
+      raf = requestAnimationFrame(sway);
+    };
+    const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+    const io = new IntersectionObserver(([e]) => {
+      if (touched) return;
+      if (e.isIntersecting && !raf) { start = 0; raf = requestAnimationFrame(sway); }
+      else if (!e.isIntersecting) { stop(); update(); }
+    }, { threshold: 0.5 });
+    io.observe(el);
+    const done = () => { touched = true; stop(); io.disconnect(); };
+    ["pointerdown", "keydown", "touchstart"].forEach((ev) =>
+      range.addEventListener(ev, done, { once: true, passive: true }));
   });
 })();
 
