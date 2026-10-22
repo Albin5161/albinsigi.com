@@ -560,10 +560,17 @@ if (timeEl) {
     const before = el.querySelector(".compare-slider__before");
     const handle = el.querySelector(".compare-slider__handle");
     if (!range || !before || !handle) return;
+    const tagBefore = el.querySelector(".compare-slider__tag--before");
+    const tagAfter = el.querySelector(".compare-slider__tag--after");
+    const frame = el.querySelector(".compare-slider__frame");
     const update = (pos) => {
       const v = typeof pos === "number" ? pos : range.value;
       before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
       handle.style.left = v + "%";
+      // A label only stays while its own side is showing behind it
+      const x = (v / 100) * frame.clientWidth;
+      if (tagBefore) tagBefore.classList.toggle("is-hidden", x < tagBefore.offsetLeft + tagBefore.offsetWidth);
+      if (tagAfter) tagAfter.classList.toggle("is-hidden", x > tagAfter.offsetLeft);
     };
     range.addEventListener("input", update);
     update();

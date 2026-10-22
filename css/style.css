@@ -1681,7 +1681,9 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   padding: 5px 11px; border-radius: 999px;
   pointer-events: none; z-index: 2;
   background: var(--ink); color: var(--paper);
+  transition: opacity 0.2s;
 }
+.compare-slider__tag.is-hidden { opacity: 0; }
 .compare-slider__tag--before { left: 14px; }
 .compare-slider__tag--after { right: 14px; background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
 .compare-slider__handle {
