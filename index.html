@@ -16,7 +16,7 @@
   <link rel="preload" href="assets/fonts/onest-600-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/satoshi-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/fonts.css?v=6" />
-  <link rel="stylesheet" href="css/style.css?v=31" />
+  <link rel="stylesheet" href="css/style.css?v=32" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/" />
   <script type="application/ld+json">
@@ -145,42 +145,51 @@
           </span>
           <span class="work-row__arrow" aria-hidden="true">→</span>
         </a>
-        <a class="work-row reveal" href="work/citizen-safety-app.html" data-preview="assets/work/thumb-safety.webp">
-          <span class="work-row__index">04</span>
-          <span class="work-row__main">
-            <span class="work-row__title">Citizen Safety App</span>
-            <span class="work-row__desc">A safety app for India. Report incidents, send SOS alerts and keep your family safe. Six modules, all designed to production-ready screens.</span>
-            <span class="work-row__tags">Sole designer · Mobile · 6 modules</span>
-          </span>
-          <span class="work-row__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="work-row reveal" href="work/nucleus-design-system.html" data-preview="assets/work/thumb-nucleus.webp">
-          <span class="work-row__index">05</span>
-          <span class="work-row__main">
-            <span class="work-row__title">Nucleus Design System</span>
-            <span class="work-row__desc">A design system built from scratch. 10 components, 150+ variants, all running on a three-tier token structure.</span>
-            <span class="work-row__tags">Design system · Tokens · Figma</span>
-          </span>
-          <span class="work-row__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="work-row reveal" href="work/cinema-ticketing.html" data-preview="assets/work/thumb-cinema.webp">
-          <span class="work-row__index">06</span>
-          <span class="work-row__main">
-            <span class="work-row__title">CinePass, a Cinema Ticketing App</span>
-            <span class="work-row__desc">A ticket booking app that fixes two real problems: not knowing when the interval ends, and missing films before they leave theatres.</span>
-            <span class="work-row__tags">Personal project · Mobile · User tested</span>
-          </span>
-          <span class="work-row__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="work-row reveal" href="work/mx-ad-break.html" data-preview="assets/work/thumb-mx.webp">
-          <span class="work-row__index">07</span>
-          <span class="work-row__main">
-            <span class="work-row__title">The Ad Break, an MX Player Concept</span>
-            <span class="work-row__desc">Four ads in a row, and no sign of when your show is back. A small concept that shows the end and never leaves you stuck.</span>
-            <span class="work-row__tags">Concept feature · Built in code · Not yet tested</span>
-          </span>
-          <span class="work-row__arrow" aria-hidden="true">→</span>
-        </a>
+        <!-- the rest start folded (js/main.js); without JS they simply show -->
+        <div class="work-more" id="work-more">
+          <div class="work-more__inner">
+            <a class="work-row reveal" href="work/citizen-safety-app.html" data-preview="assets/work/thumb-safety.webp">
+              <span class="work-row__index">04</span>
+              <span class="work-row__main">
+                <span class="work-row__title">Citizen Safety App</span>
+                <span class="work-row__desc">A safety app for India. Report incidents, send SOS alerts and keep your family safe. Six modules, all designed to production-ready screens.</span>
+                <span class="work-row__tags">Sole designer · Mobile · 6 modules</span>
+              </span>
+              <span class="work-row__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="work-row reveal" href="work/nucleus-design-system.html" data-preview="assets/work/thumb-nucleus.webp">
+              <span class="work-row__index">05</span>
+              <span class="work-row__main">
+                <span class="work-row__title">Nucleus Design System</span>
+                <span class="work-row__desc">A design system built from scratch. 10 components, 150+ variants, all running on a three-tier token structure.</span>
+                <span class="work-row__tags">Design system · Tokens · Figma</span>
+              </span>
+              <span class="work-row__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="work-row reveal" href="work/cinema-ticketing.html" data-preview="assets/work/thumb-cinema.webp">
+              <span class="work-row__index">06</span>
+              <span class="work-row__main">
+                <span class="work-row__title">CinePass, a Cinema Ticketing App</span>
+                <span class="work-row__desc">A ticket booking app that fixes two real problems: not knowing when the interval ends, and missing films before they leave theatres.</span>
+                <span class="work-row__tags">Personal project · Mobile · User tested</span>
+              </span>
+              <span class="work-row__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="work-row reveal" href="work/mx-ad-break.html" data-preview="assets/work/thumb-mx.webp">
+              <span class="work-row__index">07</span>
+              <span class="work-row__main">
+                <span class="work-row__title">The Ad Break, an MX Player Concept</span>
+                <span class="work-row__desc">Four ads in a row, and no sign of when your show is back. A small concept that shows the end and never leaves you stuck.</span>
+                <span class="work-row__tags">Concept feature · Built in code · Not yet tested</span>
+              </span>
+              <span class="work-row__arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+        <button class="work-toggle" type="button" aria-expanded="true" aria-controls="work-more" hidden>
+          <span class="work-toggle__label">Show fewer</span>
+          <span class="work-toggle__icon" aria-hidden="true">+</span>
+        </button>
       </div>
     </section>
 
@@ -196,59 +205,98 @@
             <p class="term__prompt" aria-label="ls ./ai-explorations">
               <strong>albin@portfolio</strong>:~$ <span id="term-typed"></span><span class="term__cursor" aria-hidden="true"></span>
             </p>
-            <p class="term__result">6 experiments found. Things I build on my own time, with AI as my engineering team.</p>
+            <p class="term__result">6 experiments found. Things I build on my own time, with Claude Code as my engineering team.</p>
 
             <div class="ai-grid">
-              <a class="ai-card ai-card--film" href="assets/ai/india-through-claude/film-h.mp4" target="_blank" rel="noopener" data-film-open aria-haspopup="dialog">
-                <p class="ai-card__name">&gt; india-through-claudes-eyes <span class="ai-card__status ai-card__status--live">[film]</span></p>
-                <div class="film-cuts" aria-hidden="true">
-                  <img src="assets/ai/india-through-claude/cuts/eye.webp" width="128" height="128" loading="lazy" alt="" style="--i:0" />
-                  <img src="assets/ai/india-through-claude/cuts/sun.webp" width="128" height="128" loading="lazy" alt="" style="--i:1" />
-                  <img src="assets/ai/india-through-claude/cuts/chai.webp" width="128" height="128" loading="lazy" alt="" style="--i:2" />
-                  <img src="assets/ai/india-through-claude/cuts/wheel.webp" width="128" height="128" loading="lazy" alt="" style="--i:3" />
-                  <img src="assets/ai/india-through-claude/cuts/light.webp" width="128" height="128" loading="lazy" alt="" style="--i:4" />
-                  <img src="assets/ai/india-through-claude/cuts/ball.webp" width="128" height="128" loading="lazy" alt="" style="--i:5" />
-                  <img src="assets/ai/india-through-claude/cuts/holi.webp" width="128" height="128" loading="lazy" alt="" style="--i:6" />
-                  <img src="assets/ai/india-through-claude/cuts/clock.webp" width="128" height="128" loading="lazy" alt="" style="--i:7" />
-                </div>
-                <p class="ai-card__desc">A 30-second papercraft stop-motion of Claude seeing India for the first time. Every frame, and every note of the Desi soundtrack, is made in code.</p>
-                <p class="ai-card__tools">claude code · canvas · python audio synth · ffmpeg</p>
-                <p class="ai-card__link">→ watch it here</p>
+              <a class="ai-card" href="assets/ai/india-through-claude/film-h.mp4" target="_blank" rel="noopener" data-film-open aria-haspopup="dialog">
+                <span class="ai-card__shot">
+                  <span class="ai-card__window">
+                    <span class="ai-card__winbar" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img src="assets/ai/india-through-claude/poster-h.webp" width="1280" height="720" loading="lazy" alt="A papercraft character with big eyes under a marigold garland, from the film" />
+                    <span class="ai-card__play" aria-hidden="true">&#9654; play &middot; 0:30</span>
+                  </span>
+                </span>
+                <span class="ai-card__text">
+                  <span class="ai-card__name">&gt; india-through-claudes-eyes <span class="ai-card__status">[film]</span></span>
+                  <span class="ai-card__desc">A 30-second papercraft stop-motion of Claude seeing India for the first time. Every frame, and every note of the Desi soundtrack, is made in code.</span>
+                  <span class="ai-card__tools">canvas · python audio synth · ffmpeg</span>
+                  <span class="ai-card__link">→ watch it here</span>
+                </span>
               </a>
 
               <a class="ai-card" href="https://name-genius-gules.vercel.app" target="_blank" rel="noopener">
-                <p class="ai-card__name">&gt; name-genius <span class="ai-card__status ai-card__status--live">[live]</span></p>
-                <p class="ai-card__desc">An AI naming tool that turns a startup idea into brand names and checks live which domains you can actually register.</p>
-                <p class="ai-card__tools">claude code · react · typescript · gemini api · rdap · web audio</p>
-                <p class="ai-card__link">→ find a name in your browser</p>
+                <span class="ai-card__shot">
+                  <span class="ai-card__window">
+                    <span class="ai-card__winbar" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img src="assets/ai/previews/name-genius.webp" width="1120" height="700" loading="lazy" alt="Name Genius home page: Find a name worth building on" />
+                  </span>
+                </span>
+                <span class="ai-card__text">
+                  <span class="ai-card__name">&gt; name-genius</span>
+                  <span class="ai-card__desc">An AI naming tool that turns a startup idea into brand names and checks live which domains you can actually register.</span>
+                  <span class="ai-card__tools">react · typescript · gemini api · rdap · web audio</span>
+                  <span class="ai-card__link">→ find a name in your browser</span>
+                </span>
               </a>
 
               <a class="ai-card" href="https://kathakali-run-byalbin.vercel.app/" target="_blank" rel="noopener">
-                <p class="ai-card__name">&gt; kathakali-run <span class="ai-card__status ai-card__status--live">[live]</span></p>
-                <p class="ai-card__desc">A Kerala-themed endless runner you play with hand gestures. Show a palm to jump, a fist to duck.</p>
-                <p class="ai-card__tools">claude code · mediapipe · canvas</p>
-                <p class="ai-card__link">→ play it in your browser</p>
+                <span class="ai-card__shot">
+                  <span class="ai-card__window">
+                    <span class="ai-card__winbar" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img src="assets/ai/previews/kathakali.webp" width="1120" height="700" loading="lazy" alt="Kathakali Run start screen with hand gesture controls" />
+                  </span>
+                </span>
+                <span class="ai-card__text">
+                  <span class="ai-card__name">&gt; kathakali-run</span>
+                  <span class="ai-card__desc">A Kerala-themed endless runner you play with hand gestures. Show a palm to jump, a fist to duck.</span>
+                  <span class="ai-card__tools">mediapipe · canvas</span>
+                  <span class="ai-card__link">→ play it in your browser</span>
+                </span>
               </a>
 
               <a class="ai-card" href="https://nucleus-ds-byalbin.vercel.app/" target="_blank" rel="noopener">
-                <p class="ai-card__name">&gt; nucleus-ds <span class="ai-card__status ai-card__status--live">[live]</span></p>
-                <p class="ai-card__desc">My design system running as a real React component library with a documentation site. Not just Figma frames.</p>
-                <p class="ai-card__tools">claude code · react · design tokens</p>
-                <p class="ai-card__link">→ browse the live components</p>
+                <span class="ai-card__shot">
+                  <span class="ai-card__window">
+                    <span class="ai-card__winbar" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img src="assets/ai/previews/nucleus.webp" width="1120" height="700" loading="lazy" alt="Nucleus Design System documentation site home" />
+                  </span>
+                </span>
+                <span class="ai-card__text">
+                  <span class="ai-card__name">&gt; nucleus-ds</span>
+                  <span class="ai-card__desc">My design system running as a real React component library with a documentation site. Not just Figma frames.</span>
+                  <span class="ai-card__tools">react · design tokens</span>
+                  <span class="ai-card__link">→ browse the live components</span>
+                </span>
               </a>
 
               <a class="ai-card" href="https://rewind-player.netlify.app/" target="_blank" rel="noopener">
-                <p class="ai-card__name">&gt; rewind <span class="ai-card__status ai-card__status--live">[live]</span></p>
-                <p class="ai-card__desc">A nostalgic Hindi music player. Each song gets its own visual world that matches how the music feels.</p>
-                <p class="ai-card__tools">claude code · youtube api · netlify</p>
-                <p class="ai-card__link">→ open the player</p>
+                <span class="ai-card__shot">
+                  <span class="ai-card__window">
+                    <span class="ai-card__winbar" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img src="assets/ai/previews/rewind.webp" width="1120" height="700" loading="lazy" alt="Rewind player showing a purple cassette tape and a row of tapes to choose from" />
+                  </span>
+                </span>
+                <span class="ai-card__text">
+                  <span class="ai-card__name">&gt; rewind</span>
+                  <span class="ai-card__desc">A nostalgic Hindi music player. Each song gets its own visual world that matches how the music feels.</span>
+                  <span class="ai-card__tools">youtube api · netlify</span>
+                  <span class="ai-card__link">→ open the player</span>
+                </span>
               </a>
 
               <a class="ai-card" href="https://www.linkedin.com/posts/albin-sigi_uxdesign-productdesign-chromeextension-ugcPost-7466125003256938497-8rTg/?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAADeyPd0BMr95qrjz79GqWFvMWsOehcZe0-Q" target="_blank" rel="noopener">
-                <p class="ai-card__name">&gt; ai-face-swap <span class="ai-card__status">[prototype]</span></p>
-                <p class="ai-card__desc">A Chrome extension that puts your face on ecommerce models, so you can see the outfit on yourself before buying.</p>
-                <p class="ai-card__tools">claude code · facefusion · plasmo</p>
-                <p class="ai-card__link">→ watch the demo on LinkedIn</p>
+                <span class="ai-card__shot">
+                  <span class="ai-card__window">
+                    <span class="ai-card__winbar" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img src="assets/ai/previews/face-swap.webp" width="1120" height="700" loading="lazy" alt="Illustration of a shop page where the extension shows the outfit on your own face" />
+                  </span>
+                </span>
+                <span class="ai-card__text">
+                  <span class="ai-card__name">&gt; ai-face-swap <span class="ai-card__status">[prototype]</span></span>
+                  <span class="ai-card__desc">A Chrome extension that puts your face on ecommerce models, so you can see the outfit on yourself before buying.</span>
+                  <span class="ai-card__tools">facefusion · plasmo</span>
+                  <span class="ai-card__link">→ watch the demo on LinkedIn</span>
+                </span>
               </a>
             </div>
 
@@ -422,8 +470,8 @@
             <figcaption>Hilltop, Kottayam</figcaption>
           </figure>
           <figure class="life__tile life__tile--p5">
-            <img src="assets/life/red-fort-marble.webp" width="1300" height="1733" loading="lazy" alt="A white marble pavilion at the Red Fort in Delhi, shot from below so its corner and arches line up in perfect symmetry" />
-            <figcaption>Red Fort, Delhi</figcaption>
+            <img src="assets/life/humayuns-tomb-marble.webp" width="1300" height="1733" loading="lazy" alt="A white marble pavilion at Humayun's Tomb in Delhi, shot from below so its corner and arches line up in perfect symmetry" />
+            <figcaption>Humayun's Tomb, Delhi</figcaption>
           </figure>
         </div>
       </div>
@@ -525,6 +573,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=19"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>

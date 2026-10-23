@@ -163,6 +163,37 @@ if (timeEl) {
     .catch(() => {});
 })();
 
+/* ---- Work list: case studies 4 to 7 start folded behind a toggle ---- */
+(function () {
+  const more = document.getElementById("work-more");
+  const toggle = document.querySelector(".work-toggle");
+  if (!more || !toggle) return;
+  const label = toggle.querySelector(".work-toggle__label");
+  const icon = toggle.querySelector(".work-toggle__icon");
+  const count = more.querySelectorAll(".work-row").length;
+
+  function set(open) {
+    more.classList.toggle("is-folded", !open);
+    more.inert = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+    label.textContent = open ? "Show fewer" : `${count} more case studies`;
+    icon.textContent = open ? "\u2212" : "+";
+  }
+  set(false);
+  toggle.hidden = false;
+
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    if (open) return set(true);
+    // fold instantly and scroll by the same amount, so the button stays under the pointer
+    const before = toggle.getBoundingClientRect().top;
+    more.classList.add("no-anim");
+    set(false);
+    window.scrollBy({ top: toggle.getBoundingClientRect().top - before, behavior: "instant" });
+    requestAnimationFrame(() => more.classList.remove("no-anim"));
+  });
+})();
+
 /* ---- Work-row hover preview (pointer devices only) ----
    Shows a small thumbnail near the cursor when a project row is hovered,
    easing toward the pointer. Disabled on touch and reduced-motion. */
