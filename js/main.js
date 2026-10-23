@@ -231,15 +231,19 @@ if (timeEl) {
   });
 })();
 
-/* Doodle hover sounds: tiny synthesized effects, no audio files.
+/* Doodle hover sounds: real recordings (a strum from Albin's own guitar
+   video, a camera shutter and a child's laugh from Mixkit's free sound
+   library), plus a synthesized whoosh for the plane.
    Browsers only allow audio after a real user gesture (click/tap/key),
    so the context unlocks on the first interaction and hovers stay
-   silent until then. Skipped on touch and reduced-motion. */
+   silent until then. Doodles are hover-only; the "little Albin" giggle
+   also plays on tap. All skipped with reduced motion. */
 (function () {
   const cards = document.querySelectorAll(".doodle[data-sound]");
-  if (!cards.length) return;
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const kid = document.querySelector(".about__giggle");
+  if (!cards.length && !kid) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   let ctx = null;
   function ensureCtx() {
@@ -252,7 +256,7 @@ if (timeEl) {
     return ctx.state === "running" ? ctx : null;
   }
   ["pointerdown", "keydown"].forEach((ev) =>
-    window.addEventListener(ev, () => ensureCtx(), { once: true, passive: true })
+    window.addEventListener(ev, () => { ensureCtx(); if (ctx) loadSamples(ctx); }, { once: true, passive: true })
   );
 
   function noiseBuffer(c, seconds) {
@@ -262,55 +266,38 @@ if (timeEl) {
     return buf;
   }
 
-  /* Karplus-Strong plucked string: a noise burst fed through a short
-     averaging delay line decays into a convincingly string-like tone. */
-  const pluckCache = {};
-  function pluckBuffer(c, freq) {
-    const key = Math.round(freq);
-    if (pluckCache[key]) return pluckCache[key];
-    const seconds = 1.1;
-    const buf = c.createBuffer(1, Math.floor(c.sampleRate * seconds), c.sampleRate);
-    const data = buf.getChannelData(0);
-    const N = Math.round(c.sampleRate / freq);
-    for (let i = 0; i < N; i++) data[i] = Math.random() * 2 - 1;
-    for (let i = N; i < data.length; i++) {
-      data[i] = 0.997 * 0.5 * (data[i - N] + data[i - N + 1]);
-    }
-    pluckCache[key] = buf;
-    return buf;
+  /* Recorded sounds: fetched once, the first time sound is allowed,
+     so they cost nothing on page load (about 50 KB together). */
+  const SAMPLES = { guitar: 0.75, camera: 0.5, giggle: 0.8 };   // name: volume
+  const buffers = {};
+  let loading = null;
+  function loadSamples(c) {
+    if (!loading) loading = Promise.all(Object.keys(SAMPLES).map((name) =>
+      fetch(assetPrefix + "assets/sounds/" + name + ".mp3")
+        .then((r) => r.arrayBuffer())
+        .then((data) => new Promise((ok, fail) => c.decodeAudioData(data, ok, fail)))
+        .then((buf) => { buffers[name] = buf; })
+        .catch(() => {})
+    ));
+    return loading;
+  }
+  function sample(c, name) {
+    const run = () => {
+      if (!buffers[name]) return;
+      const src = c.createBufferSource();
+      src.buffer = buffers[name];
+      const g = c.createGain();
+      g.gain.value = SAMPLES[name];
+      src.connect(g).connect(c.destination);
+      src.start();
+    };
+    if (buffers[name]) run(); else loadSamples(c).then(run);
   }
 
   const play = {
-    guitar(c) {
-      // G major strum, low to high: G3 B3 D4 G4
-      [196.0, 246.94, 293.66, 392.0].forEach((freq, i) => {
-        const t = c.currentTime + i * 0.045;
-        const src = c.createBufferSource();
-        src.buffer = pluckBuffer(c, freq);
-        const lp = c.createBiquadFilter();
-        lp.type = "lowpass";
-        lp.frequency.value = 3200;
-        const g = c.createGain();
-        g.gain.value = 0.085;
-        src.connect(lp).connect(g).connect(c.destination);
-        src.start(t);
-      });
-    },
-    camera(c) {
-      [0, 0.07].forEach((off) => {
-        const t = c.currentTime + off;
-        const src = c.createBufferSource();
-        src.buffer = noiseBuffer(c, 0.04);
-        const hp = c.createBiquadFilter();
-        hp.type = "highpass";
-        hp.frequency.value = 1800;
-        const g = c.createGain();
-        g.gain.setValueAtTime(0.09, t);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
-        src.connect(hp).connect(g).connect(c.destination);
-        src.start(t);
-      });
-    },
+    guitar(c) { sample(c, "guitar"); },
+    camera(c) { sample(c, "camera"); },
+    giggle(c) { sample(c, "giggle"); },
     plane(c) {
       const t = c.currentTime;
       const src = c.createBufferSource();
@@ -329,7 +316,7 @@ if (timeEl) {
     },
   };
 
-  cards.forEach((card) => {
+  if (finePointer) cards.forEach((card) => {
     let last = 0;
     card.addEventListener("mouseenter", () => {
       const now = performance.now();
@@ -340,6 +327,33 @@ if (timeEl) {
       if (c && fn) fn(c);
     });
   });
+
+  /* "little Albin" giggles: on hover or tap, and once when the line is first
+     read, if the visitor has already clicked something (browser rule). */
+  if (kid) {
+    let last = 0;
+    const giggle = (fromTap) => {
+      const now = performance.now();
+      if (now - last < 900) return;
+      let c = ensureCtx();
+      // a tap is itself the gesture that unlocks sound, so wait for it once
+      if (!c && fromTap === true && ctx) { ctx.resume().then(() => giggle()); return; }
+      if (!c) return;
+      last = now;
+      play.giggle(c);
+      kid.classList.remove("is-giggling"); void kid.offsetWidth; kid.classList.add("is-giggling");
+    };
+    if (finePointer) kid.addEventListener("mouseenter", () => giggle());
+    kid.addEventListener("click", () => giggle(true));
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        setTimeout(() => giggle(), 500);
+      }, { threshold: 1, rootMargin: "0px 0px -25% 0px" });
+      io.observe(kid);
+    }
+  }
 })();
 
 /* Back-to-top button on case study pages. Injected here so every case
@@ -640,6 +654,40 @@ if (timeEl) {
     cuts.forEach((b) => {
       const c = +b.dataset.cut;
       b.classList.toggle("is-current", t >= c - 0.8 && t < c + 1.2);
+    });
+  });
+})();
+
+/* ---- About: the guitar and travel clips ----
+   They load only when they come near the screen and pause when they leave,
+   so they cost nothing on first load. With reduced motion they stay still
+   until someone presses the sound button. */
+(function () {
+  const videos = document.querySelectorAll(".life__video");
+  if (!videos.length) return;
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const load = (v) => { if (!v.getAttribute("src")) v.src = v.dataset.src; };
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(({ target: v, isIntersecting }) => {
+        if (isIntersecting) { load(v); if (!still || !v.muted) v.play().catch(() => {}); }
+        else if (v.getAttribute("src")) v.pause();
+      });
+    }, { rootMargin: "200px 0px" });
+    videos.forEach((v) => io.observe(v));
+  } else {
+    videos.forEach(load);
+  }
+
+  document.querySelectorAll(".life__sound").forEach((btn) => {
+    const v = btn.closest(".life__tile").querySelector("video");
+    btn.addEventListener("click", () => {
+      load(v);
+      v.muted = !v.muted;
+      if (!v.muted) { v.currentTime = 0; v.play().catch(() => {}); }
+      btn.setAttribute("aria-pressed", String(!v.muted));
+      btn.textContent = v.muted ? "Tap for sound" : "Mute";
     });
   });
 })();

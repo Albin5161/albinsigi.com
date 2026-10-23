@@ -16,7 +16,7 @@
   <link rel="preload" href="assets/fonts/onest-600-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/satoshi-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/fonts.css?v=6" />
-  <link rel="stylesheet" href="css/style.css?v=26" />
+  <link rel="stylesheet" href="css/style.css?v=31" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://albinsigi.com/" />
   <script type="application/ld+json">
@@ -96,7 +96,7 @@
             <span class="flip-photo__caption flip-photo__caption--now">me, now</span>
             <span class="flip-photo__caption flip-photo__caption--then">me, when the career plan was "astronaut"</span>
           </div>
-          <p class="hero__status"><span class="pulse-dot" aria-hidden="true"></span> Available for Product Design roles</p>
+          <p class="hero__status"><span class="pulse-dot" aria-hidden="true"></span> Now building: Xplore, a travel app</p>
         </aside>
       </div>
     </section>
@@ -337,33 +337,27 @@
 
     <!-- ================= ABOUT ================= -->
     <section class="about" id="about">
-      <div class="about__portrait reveal" aria-hidden="true">
-        <div class="portrait-card">
-          <img src="assets/photo-now.webp" alt="" onerror="this.remove()" />
-          <span>✳</span>
-        </div>
-      </div>
       <div class="about__text">
-        <h2 class="reveal">Three years of designing things that ship.</h2>
+        <h2 class="reveal">Hey, I'm Albin!</h2>
         <p class="reveal">
-          I was the only designer at Tejis.ai, an AI startup building products for Indian
-          law enforcement. On the side, I designed a medical records app that helped a
-          hospital win a national quality accreditation.
+          As a kid, I wanted to be an astronaut. I never made it to space, so now I design
+          for people down here instead.
         </p>
         <p class="reveal">
-          Before that I worked at TCS on <span class="nowrap">e-learning</span> products, inside a large delivery team
-          with review cycles and enterprise clients. That work belongs to TCS, so I can't
-          show it here, but it's where I learned to take feedback and ship on someone
-          else's deadline.
+          I grew up in Kerala and studied BCA. I spent over two years at TCS, learning how big
+          teams ship, then became the only designer at an AI startup building tools for Indian
+          law enforcement.
         </p>
         <p class="reveal">
-          I'm based in Kerala, India, and open to remote roles or relocating.
+          Off the clock, I'm usually holding a guitar, a camera, or planning my next trip.
+          I love shooting vlogs and little videos to keep the memories. Follow me on
+          <a class="about__link" href="https://www.instagram.com/im_albin_/" target="_blank" rel="noopener">Instagram</a>
+          to see what I share next.
         </p>
-        <ul class="about__points">
-          <li class="reveal"><strong>I work end to end.</strong> Research, user flows, wireframes, final visuals and developer handoff. No gaps for a team to fill.</li>
-          <li class="reveal"><strong>I've shipped under pressure.</strong> Real clients, short timelines, government stakeholders. The work still made it to launch.</li>
-          <li class="reveal"><strong>I design with systems.</strong> Tokens and reusable components, so quality holds up as the product grows.</li>
-        </ul>
+        <p class="reveal about__kid">
+          You'll spot <button class="about__giggle" type="button" aria-label="little Albin (plays a giggle)">little Albin</button> tagging along as you scroll. As kids, we'll happily go
+          anywhere with anyone, so he's coming with you.
+        </p>
       </div>
       <div class="about__doodles reveal">
         <p class="about__doodles-lead">Outside work</p>
@@ -396,6 +390,39 @@
               <path d="M22.5 31l-1 8 5-5.5" />
             </svg>
             <figcaption>travels often</figcaption>
+          </figure>
+        </div>
+
+        <!-- the real thing behind the doodles: videos load only when scrolled near (js/main.js) -->
+        <div class="life">
+          <figure class="life__tile life__tile--guitar">
+            <video class="life__video" data-src="assets/life/guitar.mp4" poster="assets/life/guitar-poster.webp" muted loop playsinline preload="none" aria-label="Albin playing an acoustic guitar at home, in black and white"></video>
+            <button class="life__sound" type="button" aria-pressed="false">Tap for sound</button>
+            <figcaption>Plays guitar</figcaption>
+          </figure>
+          <figure class="life__tile life__tile--p1">
+            <img src="assets/life/humayuns-tomb.webp" width="1000" height="1333" loading="lazy" alt="Humayun's Tomb in Delhi, reflected in a still pool" />
+            <figcaption>Humayun's Tomb, Delhi</figcaption>
+          </figure>
+          <figure class="life__tile life__tile--p2">
+            <img src="assets/life/charminar.webp" width="1000" height="1333" loading="lazy" alt="The Charminar in Hyderabad at night, with red balloons at its arch" />
+            <figcaption>Charminar, Hyderabad</figcaption>
+          </figure>
+          <figure class="life__tile life__tile--p3">
+            <img src="assets/life/chennai-auto.webp" width="1000" height="1333" loading="lazy" alt="The view from the back seat of an auto rickshaw in Chennai traffic" />
+            <figcaption>Auto ride, Chennai</figcaption>
+          </figure>
+          <figure class="life__tile life__tile--p4">
+            <img src="assets/life/idukki-fog.webp" width="1000" height="1333" loading="lazy" alt="Friends walking up a misty hill trail in Idukki, Kerala" />
+            <figcaption>Idukki, Kerala</figcaption>
+          </figure>
+          <figure class="life__tile life__tile--travel">
+            <video class="life__video" data-src="assets/life/travel-hill.mp4" poster="assets/life/travel-hill-poster.webp" muted loop playsinline preload="none" aria-label="Albin smiling at the camera on a green hilltop in Kottayam, Kerala"></video>
+            <figcaption>Hilltop, Kottayam</figcaption>
+          </figure>
+          <figure class="life__tile life__tile--p5">
+            <img src="assets/life/red-fort-marble.webp" width="1300" height="1733" loading="lazy" alt="A white marble pavilion at the Red Fort in Delhi, shot from below so its corner and arches line up in perfect symmetry" />
+            <figcaption>Red Fort, Delhi</figcaption>
           </figure>
         </div>
       </div>
@@ -497,6 +524,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=16"></script>
+  <script src="js/main.js?v=19"></script>
 </body>
 </html>

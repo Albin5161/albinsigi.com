@@ -633,33 +633,24 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   margin: 0 auto;
   padding: clamp(72px, 12vh, 130px) var(--pad-x);
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(28px, 5vh, 56px) clamp(32px, 6vw, 80px);
   align-items: start;
 }
 
-.portrait-card {
-  aspect-ratio: 4 / 5;
-  border-radius: 20px;
-  background:
-    repeating-linear-gradient(45deg, transparent 0 10px, rgba(0,0,0,0.03) 10px 11px),
-    var(--paper-soft);
-  border: 1px solid var(--ink);
-  display: grid; place-items: center;
-  font-size: clamp(3rem, 6vw, 5rem);
-  color: var(--ink);
-  position: sticky; top: 96px;
-  overflow: hidden;
-}
-.portrait-card img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
 
 .about h2 { max-width: 18ch; }
 .about__text > p { color: var(--ink-soft); font-size: 1.125rem; max-width: 60ch; margin-bottom: 1em; }
-.about__text > p:last-of-type { margin-bottom: 32px; }
+.about__text > p:last-of-type { margin-bottom: 0; }
+.about__link { color: var(--ink); border-bottom: 1.5px solid var(--line); transition: border-color 0.25s; }
+.about__link:hover { border-color: var(--ink); }
+.about__giggle {
+  font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer;
+  border-bottom: 1.5px dashed var(--ink);
+}
+.about__giggle.is-giggling { animation: giggle 0.5s ease-in-out; display: inline-block; }
+@keyframes giggle { 0%, 100% { transform: none; } 20% { transform: rotate(-4deg); } 45% { transform: rotate(4deg); } 70% { transform: rotate(-2deg); } }
+@media (prefers-reduced-motion: reduce) { .about__giggle.is-giggling { animation: none; } }
 
 .about__points { display: grid; gap: 14px; margin-bottom: 28px; }
 .about__points li {
@@ -722,6 +713,73 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .doodle, .doodle:hover { transform: none; }
+}
+
+/* The real thing behind the doodles: a bento of photos and two looping clips.
+   Desktop is 4 columns; the guitar clip stands tall on the left, the hill clip
+   lies wide along the bottom. */
+.life {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, clamp(150px, 15vw, 205px)) clamp(220px, 23vw, 320px);
+  grid-template-areas:
+    "guitar p1 p2 p3"
+    "guitar p1 p2 p3"
+    "p4 travel travel p5";
+  gap: clamp(10px, 1.4vw, 14px);
+  margin-top: clamp(22px, 3vw, 32px);
+}
+.life__tile--guitar { grid-area: guitar; }
+.life__tile--p1 { grid-area: p1; }
+.life__tile--p2 { grid-area: p2; }
+.life__tile--p3 { grid-area: p3; }
+.life__tile--p4 { grid-area: p4; }
+.life__tile--travel { grid-area: travel; }
+.life__tile--p5 { grid-area: p5; }
+.life__tile {
+  position: relative; margin: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: var(--paper-soft);
+}
+.life__tile img, .life__video {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+.life__tile:hover img, .life__tile:hover .life__video { transform: scale(1.03); }
+.life__tile--travel .life__video { object-position: 70% 50%; }   /* keep the face in frame */
+.life__tile figcaption {
+  position: absolute; left: 10px; bottom: 10px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92); color: var(--ink);
+  font-size: 0.78rem; font-weight: 600; line-height: 1.3;
+  pointer-events: none;
+}
+.life__sound {
+  position: absolute; right: 10px; top: 10px;
+  padding: 6px 12px; border-radius: 999px; border: 0;
+  background: var(--ink); color: var(--paper);
+  font: 600 0.75rem/1.2 var(--font-body);
+  cursor: pointer;
+}
+.life__sound[aria-pressed="true"] { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+@media (max-width: 860px) {
+  .life {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: clamp(160px, 44vw, 300px);
+    grid-template-areas:
+      "guitar p1"
+      "guitar p2"
+      "travel travel"
+      "p3 p4"
+      "p5 p5"
+      "p5 p5";
+  }
+  .life__tile figcaption { left: 8px; bottom: 8px; padding: 4px 9px; font-size: 0.7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .life__tile:hover img, .life__tile:hover .life__video { transform: none; }
 }
 
 /* ============================================================
@@ -1782,9 +1840,6 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .hero__content { grid-template-columns: 1fr; }
   .hero__photo { max-width: 280px; align-items: flex-start; }
   .about { grid-template-columns: 1fr; }
-  .about__portrait { max-width: 300px; }
-  /* relative (not static) so the absolutely positioned photo stays inside the card */
-  .portrait-card { position: relative; top: auto; }
   .work-row { grid-template-columns: auto 1fr; }
   .work-row__arrow { display: none; }
 }
