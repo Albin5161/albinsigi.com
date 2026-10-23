@@ -1941,3 +1941,9 @@ strong, b { font-weight: 600; }
 .case__table--said td:first-child { font-weight: 400; color: var(--ink-soft); width: 44%; }
 .case__table--said td:first-child strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 680px) { .case__table { font-size: 0.85rem; } .case__table th, .case__table td { padding-right: 10px; } }
+
+/* Phones that must line up in a row: every screen gets the same 412 x 917
+   shape, and a taller capture (a long first version) shows its top. */
+.mocks--fit .mock__screen { aspect-ratio: 412 / 917; background: #121212; }
+.mocks--fit .mock__frame img { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: top; background: #121212; }
+.mocks--fit .mock__label { text-align: center; max-width: 268px; }
