@@ -87,16 +87,61 @@ if (cursor && window.matchMedia("(hover: hover)").matches && !reducedMotion) {
   };
   childPhoto.src = assetPrefix + "assets/photo-child.webp";
 
+  /* The kid cursor can be switched off from the homepage footer.
+     The choice is remembered in this browser. */
+  const store = {
+    get: (k) => { try { return localStorage.getItem(k); } catch { return null; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch {} },
+  };
+  let kidOn = store.get("kid-cursor") !== "off";
+  let footerSwitch = null;
+  const setKid = (on) => {
+    kidOn = on;
+    store.set("kid-cursor", on ? "on" : "off");
+    cursor.hidden = !on;
+    if (footerSwitch) {
+      footerSwitch.textContent = `Kid cursor: ${on ? "on" : "off"}`;
+      footerSwitch.setAttribute("aria-pressed", String(on));
+    }
+  };
+  cursor.hidden = !kidOn;
+
+  const footerMeta = document.querySelector(".footer__meta");
+  if (footerMeta) {
+    const dot = document.createElement("span");
+    dot.className = "footer__dot";
+    dot.setAttribute("aria-hidden", "true");
+    dot.textContent = "·";
+    footerSwitch = document.createElement("button");
+    footerSwitch.type = "button";
+    footerSwitch.className = "footer__switch";
+    footerSwitch.id = "kid-switch";
+    footerSwitch.addEventListener("click", () => setKid(!kidOn));
+    footerMeta.append(dot, footerSwitch);
+    setKid(kidOn);
+    // the About line that points here only makes sense once the switch exists
+    const aboutNote = document.querySelector(".about__kid-off");
+    if (aboutNote) aboutNote.hidden = false;
+  }
+
   let cx = -100, cy = -100, tx = -100, ty = -100;
 
   // homepage: the first fold (hero and ticker) keeps the plain system cursor
   const firstFold = document.querySelector(".marquee") || document.querySelector(".hero");
 
+  // when the mouse rests (usually someone reading), the photo steps away; any move brings it back
+  // (some browsers and devices fire mousemove without moving, so only a real change counts)
+  let idleTimer = 0;
   window.addEventListener("mousemove", (e) => {
+    const moved = Math.abs(e.clientX - tx) + Math.abs(e.clientY - ty) > 2;
     tx = e.clientX;
     ty = e.clientY;
     const inFirstFold = firstFold && e.clientY < firstFold.getBoundingClientRect().bottom;
     cursor.classList.toggle("is-active", !inFirstFold);
+    if (!moved) return;
+    cursor.classList.remove("is-idle");
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => cursor.classList.add("is-idle"), 1100);
   });
 
   document.querySelectorAll("a, button").forEach((el) => {
@@ -104,10 +149,14 @@ if (cursor && window.matchMedia("(hover: hover)").matches && !reducedMotion) {
     el.addEventListener("mouseleave", () => cursor.classList.remove("is-hovering"));
   });
 
+  // the photo trails beside the pointer (below right), never on top of what it points at;
+  // the plain dot stays centred on it
   (function follow() {
     cx += (tx - cx) * 0.2;
     cy += (ty - cy) * 0.2;
-    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+    const photo = cursor.classList.contains("cursor-dot--photo");
+    const ox = photo ? 30 : 0, oy = photo ? 34 : 0;
+    cursor.style.transform = `translate(${cx + ox}px, ${cy + oy}px) translate(-50%, -50%)`;
     requestAnimationFrame(follow);
   })();
 }
@@ -216,10 +265,12 @@ if (timeEl) {
     pre.src = r.dataset.preview;
   });
 
-  const W = 300, H = (300 * 9) / 16, OFF = 24;
+  // the previews are cut-out devices of different shapes, so the height comes from the image
+  const W = 320, OFF = 24;
   let tx = 0, ty = 0, cx = 0, cy = 0, raf = null, active = false;
 
   function target(e) {
+    const H = box.offsetHeight || W * 0.75;
     let x = e.clientX + OFF, y = e.clientY + OFF;
     if (x + W > window.innerWidth) x = e.clientX - W - OFF;
     if (y + H > window.innerHeight) y = e.clientY - H - OFF;
@@ -264,7 +315,8 @@ if (timeEl) {
 
 /* Doodle hover sounds: real recordings (a strum from Albin's own guitar
    video, a camera shutter and a child's laugh from Mixkit's free sound
-   library), plus a synthesized whoosh for the plane.
+   library, and for travel the chime before an announcement at a Kerala
+   railway station: "Indian Railway announcement" by egovind on Freesound, CC0).
    Browsers only allow audio after a real user gesture (click/tap/key),
    so the context unlocks on the first interaction and hovers stay
    silent until then. Doodles are hover-only; the "little Albin" giggle
@@ -290,16 +342,9 @@ if (timeEl) {
     window.addEventListener(ev, () => { ensureCtx(); if (ctx) loadSamples(ctx); }, { once: true, passive: true })
   );
 
-  function noiseBuffer(c, seconds) {
-    const buf = c.createBuffer(1, c.sampleRate * seconds, c.sampleRate);
-    const data = buf.getChannelData(0);
-    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
-    return buf;
-  }
-
   /* Recorded sounds: fetched once, the first time sound is allowed,
-     so they cost nothing on page load (about 50 KB together). */
-  const SAMPLES = { guitar: 0.75, camera: 0.5, giggle: 0.8 };   // name: volume
+     so they cost nothing on page load (about 75 KB together). */
+  const SAMPLES = { guitar: 0.75, camera: 0.5, giggle: 0.8, train: 0.7 };   // name: volume
   const buffers = {};
   let loading = null;
   function loadSamples(c) {
@@ -329,22 +374,7 @@ if (timeEl) {
     guitar(c) { sample(c, "guitar"); },
     camera(c) { sample(c, "camera"); },
     giggle(c) { sample(c, "giggle"); },
-    plane(c) {
-      const t = c.currentTime;
-      const src = c.createBufferSource();
-      src.buffer = noiseBuffer(c, 0.5);
-      const bp = c.createBiquadFilter();
-      bp.type = "bandpass";
-      bp.Q.value = 1.2;
-      bp.frequency.setValueAtTime(350, t);
-      bp.frequency.exponentialRampToValueAtTime(1800, t + 0.45);
-      const g = c.createGain();
-      g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.08, t + 0.12);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
-      src.connect(bp).connect(g).connect(c.destination);
-      src.start(t);
-    },
+    train(c) { sample(c, "train"); },
   };
 
   if (finePointer) cards.forEach((card) => {
@@ -492,8 +522,9 @@ if (timeEl) {
 
 /* Corner mascot (homepage only): an autonomous little "kid-me" that
    wanders the bottom-left and does activities (walk, sit, sleep, stretch,
-   code, guitar, photo, design). Silent. Desktop only. Fades out over the
-   dark contact section so a dark-bodied mascot doesn't vanish on black. */
+   code, guitar, photo, design), and copies the About tile under the pointer.
+   Silent. Fades out over the dark contact section so a dark-bodied mascot
+   doesn't vanish on black. */
 (function () {
   const mascot = document.getElementById("mascot");
   if (!mascot) return;                                   // homepage only (runs on mobile too)
@@ -546,8 +577,7 @@ if (timeEl) {
     action = "walk"; f = 0; show("walk"); setFrame("walk", 0);
     stateEnd = now + rand(2800, 6200); animT = moveT = now; apply();
   }
-  function startActivity(now) {
-    const name = ACTIVITIES[(Math.random() * ACTIVITIES.length) | 0];
+  function startActivity(now, name = ACTIVITIES[(Math.random() * ACTIVITIES.length) | 0]) {
     ensureLoaded(name);
     action = name; f = 0; holdT = 0;                      // keep dir so walk resumes the same way; apply() unmirrors activities
     show(name); setFrame(name, 0);
@@ -571,7 +601,7 @@ if (timeEl) {
       apply();
       if (now >= stateEnd) startActivity(now);
     } else if (a.loop) {
-      if (now >= stateEnd) startWalk(now);
+      if (now >= stateEnd && pinned !== action) startWalk(now);
     } else if (holdT && now - holdT >= a.hold) {
       startWalk(now);
     }
@@ -581,10 +611,33 @@ if (timeEl) {
 
   if (reduce) { show("walk"); setFrame("walk", 0); apply(); return; }   // static, no motion
 
+  /* Copycat: hovering the guitar clip in About makes him play along for as
+     long as the pointer stays; hovering a photo or a travel clip makes him
+     snap one. Pointer devices only, and only once he is up and walking. */
+  let booted = false, pinned = null;
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.querySelectorAll(".life__tile").forEach((tile) => {
+      const name = tile.classList.contains("life__tile--guitar") ? "guitar" : "photo";
+      tile.addEventListener("mouseenter", () => {
+        if (!booted) return;
+        const now = performance.now();
+        if (name === "guitar") pinned = "guitar";
+        if (action === name && (A[name].loop || !holdT)) return;   // already at it
+        startActivity(now, name);
+      });
+      tile.addEventListener("mouseleave", () => {
+        if (pinned !== name) return;
+        pinned = null;
+        stateEnd = Math.min(stateEnd, performance.now() + 1200);   // finish the strum, then wander off
+      });
+    });
+  }
+
   // Defer ALL mascot startup to idle so it never competes with first paint / LCP.
   // walk_0 is the only eager frame; load the rest of walk + wave when we actually start.
   function boot() {
     ensureLoaded("walk"); ensureLoaded("wave");
+    booted = true;
     startWalk(performance.now());
     requestAnimationFrame(loop);
     // then preload the activity frames on a later idle tick
@@ -691,8 +744,11 @@ if (timeEl) {
 
 /* ---- About: the guitar and travel clips ----
    They load only when they come near the screen and pause when they leave,
-   so they cost nothing on first load. With reduced motion they stay still
-   until someone presses the sound button. */
+   so they cost nothing on first load, and loop silently (with reduced motion
+   they stay still until clicked). A click (or Enter/Space) on a clip with
+   sound turns its sound on from the start; the next click pauses it, the one
+   after plays on. Clips without sound just pause and play. Only one clip is
+   heard at a time, and a paused clip stays paused when scrolled back. */
 (function () {
   const videos = document.querySelectorAll(".life__video");
   if (!videos.length) return;
@@ -702,7 +758,7 @@ if (timeEl) {
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(({ target: v, isIntersecting }) => {
-        if (isIntersecting) { load(v); if (!still || !v.muted) v.play().catch(() => {}); }
+        if (isIntersecting) { load(v); if (!v.dataset.held && (!still || !v.muted)) v.play().catch(() => {}); }
         else if (v.getAttribute("src")) v.pause();
       });
     }, { rootMargin: "200px 0px" });
@@ -711,14 +767,37 @@ if (timeEl) {
     videos.forEach(load);
   }
 
-  document.querySelectorAll(".life__sound").forEach((btn) => {
-    const v = btn.closest(".life__tile").querySelector("video");
-    btn.addEventListener("click", () => {
+  const setHeld = (v, held) => {
+    if (held) v.dataset.held = "1"; else delete v.dataset.held;
+    v.closest(".life__tile").classList.toggle("is-paused", held);
+  };
+  const setMuted = (v, muted) => {
+    v.muted = muted;
+    v.closest(".life__tile").classList.toggle("is-loud", !muted);
+  };
+  videos.forEach((v) => {
+    v.tabIndex = 0;
+    const toggle = () => {
       load(v);
-      v.muted = !v.muted;
-      if (!v.muted) { v.currentTime = 0; v.play().catch(() => {}); }
-      btn.setAttribute("aria-pressed", String(!v.muted));
-      btn.textContent = v.muted ? "Tap for sound" : "Mute";
+      if (v.paused) {
+        if (v.hasAttribute("data-sound")) {
+          videos.forEach((o) => { if (o !== v && !o.muted) setMuted(o, true); });
+          setMuted(v, false);
+        }
+        setHeld(v, false);
+        v.play().catch(() => {});
+      } else if (v.muted && v.hasAttribute("data-sound")) {
+        videos.forEach((o) => { if (o !== v && !o.muted) setMuted(o, true); });
+        setMuted(v, false);
+        v.currentTime = 0;
+      } else {
+        setHeld(v, true);
+        v.pause();
+      }
+    };
+    v.addEventListener("click", toggle);
+    v.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
   });
 })();

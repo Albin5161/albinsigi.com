@@ -125,9 +125,11 @@ button:focus-visible {
 .cursor-dot.is-active { opacity: 1; }
 .cursor-dot.is-hovering::before { transform: scale(3.714); }  /* 14 → 52px */
 
-/* when assets/photo-child.* exists, the disc becomes the childhood photo */
+/* when assets/photo-child.* exists, the disc becomes the childhood photo.
+   It trails beside the pointer (offset set in js/main.js), shrinks over links
+   rather than growing onto them, and fades away while the mouse rests. */
 .cursor-dot--photo::before {
-  width: 44px; height: 44px;
+  width: 40px; height: 40px;
   background: var(--cursor-photo) center / cover no-repeat;
   /* the childhood photo is very tall; this keeps the face in the circle */
   background-position: 50% 33%;
@@ -135,7 +137,9 @@ button:focus-visible {
   border: 1.5px solid var(--ink);
   box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.35);
 }
-.cursor-dot--photo.is-hovering::before { transform: scale(1.4545); }  /* 44 → 64px */
+.cursor-dot--photo::before { transition: transform 0.25s var(--ease-out), opacity 0.35s var(--ease-out); }
+.cursor-dot--photo.is-hovering::before { transform: scale(0.75); }   /* 40 → 30px */
+.cursor-dot--photo.is-idle::before { opacity: 0; transform: scale(0.6); }
 
 @media (hover: none), (prefers-reduced-motion: reduce) {
   .cursor-dot { display: none; }
@@ -767,17 +771,18 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .doodle, .doodle:hover { transform: none; }
 }
 
-/* The real thing behind the doodles: a bento of photos and two looping clips.
-   Desktop is 4 columns; the guitar clip stands tall on the left, the hill clip
-   lies wide along the bottom. */
+/* The real thing behind the doodles: a bento of photos and three looping clips.
+   Desktop is 4 columns; the guitar clip stands tall top left, the Jaipur clip
+   tall bottom right, and the hill clip sits wide between two photos. */
 .life {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(2, clamp(150px, 15vw, 205px)) clamp(220px, 23vw, 320px);
+  grid-template-rows: repeat(2, clamp(150px, 15vw, 205px)) repeat(2, clamp(130px, 13vw, 180px));
   grid-template-areas:
     "guitar p1 p2 p3"
     "guitar p1 p2 p3"
-    "p4 travel travel p5";
+    "p4 travel travel jaipur"
+    "p5 travel travel jaipur";
   gap: clamp(10px, 1.4vw, 14px);
   margin-top: clamp(22px, 3vw, 32px);
 }
@@ -788,6 +793,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .life__tile--p4 { grid-area: p4; }
 .life__tile--travel { grid-area: travel; }
 .life__tile--p5 { grid-area: p5; }
+.life__tile--jaipur { grid-area: jaipur; }
 .life__tile {
   position: relative; margin: 0; overflow: hidden;
   border: 1px solid var(--line); border-radius: 16px;
@@ -807,14 +813,36 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   font-size: 0.78rem; font-weight: 600; line-height: 1.3;
   pointer-events: none;
 }
-.life__sound {
+/* clips with sound show a small speaker: crossed out while silent, waves once it's on */
+.life__speaker {
   position: absolute; right: 10px; top: 10px;
-  padding: 6px 12px; border-radius: 999px; border: 0;
-  background: var(--ink); color: var(--paper);
-  font: 600 0.75rem/1.2 var(--font-body);
-  cursor: pointer;
+  display: grid; place-items: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(11, 11, 11, 0.6); color: var(--paper);
+  pointer-events: none;
 }
-.life__sound[aria-pressed="true"] { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.life__speaker svg {
+  width: 16px; height: 16px;
+  fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.life__speaker svg path:first-child { fill: currentColor; }
+.life__waves { display: none; }
+.life__tile.is-loud .life__waves { display: inline; }
+.life__tile.is-loud .life__cross { display: none; }
+.life__video { cursor: pointer; }
+.life__video:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+/* a clip paused by a click shows a play mark in the middle */
+.life__tile.is-paused::after {
+  content: "\25B6";
+  position: absolute; left: 50%; top: 50%;
+  width: 52px; height: 52px; margin: -26px 0 0 -26px;
+  display: grid; place-items: center;
+  padding-left: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92); color: var(--ink);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
 @media (max-width: 860px) {
   .life {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -824,7 +852,8 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
       "guitar p1"
       "guitar p2"
       "travel travel"
-      "p3 p4"
+      "p3 jaipur"
+      "p4 jaipur"
       "p5 p5"
       "p5 p5";
   }
@@ -894,6 +923,12 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 .footer a { font-weight: 700; color: var(--paper); }
 .footer__dot { margin: 0 8px; }
+.footer__switch {
+  border: 0; background: none; padding: 0;
+  font: inherit; font-weight: 700; color: var(--paper);
+  cursor: pointer;
+}
+.footer__switch:hover { text-decoration: underline; }
 
 /* ============================================================
    CASE STUDY PAGES
@@ -1953,19 +1988,19 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 
 /* Work-row hover preview (pointer devices only) */
+/* just the devices, cut out: no box, no title (the row already says it).
+   The faint light rim keeps dark phone frames visible over the black hovered row. */
 .work-preview {
   position: fixed; top: 0; left: 0;
-  width: 300px; aspect-ratio: 16 / 9;
-  border-radius: 12px; overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--paper-soft);
+  width: 320px;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.45)) drop-shadow(0 18px 28px rgba(0, 0, 0, 0.22));
   pointer-events: none; z-index: 90;
   opacity: 0; transform: scale(0.9);
   transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
   will-change: left, top, transform, opacity;
 }
 .work-preview.is-visible { opacity: 1; transform: scale(1); }
-.work-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.work-preview img { width: 100%; height: auto; display: block; }
 @media (hover: none), (pointer: coarse) { .work-preview { display: none !important; } }
 @media (prefers-reduced-motion: reduce) {
   .work-preview,
