@@ -389,8 +389,7 @@ if (timeEl) {
     });
   });
 
-  /* "little Albin" giggles: on hover or tap, and once when the line is first
-     read, if the visitor has already clicked something (browser rule). */
+  /* "little Albin" giggles only when someone hovers or taps him. */
   if (kid) {
     let last = 0;
     const giggle = (fromTap) => {
@@ -406,14 +405,6 @@ if (timeEl) {
     };
     if (finePointer) kid.addEventListener("mouseenter", () => giggle());
     kid.addEventListener("click", () => giggle(true));
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(([e]) => {
-        if (!e.isIntersecting) return;
-        io.disconnect();
-        setTimeout(() => giggle(), 500);
-      }, { threshold: 1, rootMargin: "0px 0px -25% 0px" });
-      io.observe(kid);
-    }
   }
 })();
 

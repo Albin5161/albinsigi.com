@@ -771,10 +771,25 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .doodle, .doodle:hover { transform: none; }
 }
 
+/* Desktop: the three "Outside work" cards stand in a column beside the text,
+   next to the paragraph that mentions them; the photo grid runs full width below.
+   Narrower screens keep them as a row under the text. */
+@media (min-width: 861px) {
+  .about { grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); }
+  .about__doodles {
+    grid-column: 2; grid-row: 1;
+    align-self: center;
+    border-top: 0; padding-top: 0;
+  }
+  .about__doodle-row { flex-direction: column; }
+  .doodle { flex: none; }
+}
+
 /* The real thing behind the doodles: a bento of photos and three looping clips.
    Desktop is 4 columns; the guitar clip stands tall top left, the Jaipur clip
    tall bottom right, and the hill clip sits wide between two photos. */
 .life {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(2, clamp(150px, 15vw, 205px)) repeat(2, clamp(130px, 13vw, 180px));
