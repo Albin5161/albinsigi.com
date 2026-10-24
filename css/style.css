@@ -774,6 +774,13 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 /* Desktop: the three "Outside work" cards stand in a column beside the text,
    next to the paragraph that mentions them; the photo grid runs full width below.
    Narrower screens keep them as a row under the text. */
+@media (max-width: 860px) {
+  /* tablet and phone: all three in one compact row, never 2 + 1 or a tall stack */
+  .about__doodle-row { flex-wrap: nowrap; gap: 10px; }
+  .doodle { flex: 1 1 0; min-width: 0; padding: 16px 6px 12px; }
+  .doodle svg { width: 40px; height: 40px; }
+  .doodle figcaption { margin-top: 6px; }
+}
 @media (min-width: 861px) {
   .about { grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); }
   .about__doodles {
