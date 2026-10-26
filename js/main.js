@@ -314,17 +314,15 @@ if (timeEl) {
 })();
 
 /* Doodle hover sounds: real recordings (a strum from Albin's own guitar
-   video, a camera shutter and a child's laugh from Mixkit's free sound
-   library, and for travel the chime before an announcement at a Kerala
-   railway station: "Indian Railway announcement" by egovind on Freesound, CC0).
+   video, a camera shutter from Mixkit's free sound library, and for travel
+   the chime before an announcement at a Kerala railway station: "Indian
+   Railway announcement" by egovind on Freesound, CC0).
    Browsers only allow audio after a real user gesture (click/tap/key),
    so the context unlocks on the first interaction and hovers stay
-   silent until then. Doodles are hover-only; the "little Albin" giggle
-   also plays on tap. All skipped with reduced motion. */
+   silent until then. Hover-only, and skipped with reduced motion. */
 (function () {
   const cards = document.querySelectorAll(".doodle[data-sound]");
-  const kid = document.querySelector(".about__giggle");
-  if (!cards.length && !kid) return;
+  if (!cards.length) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -343,8 +341,8 @@ if (timeEl) {
   );
 
   /* Recorded sounds: fetched once, the first time sound is allowed,
-     so they cost nothing on page load (about 75 KB together). */
-  const SAMPLES = { guitar: 0.75, camera: 0.5, giggle: 0.8, train: 0.7 };   // name: volume
+     so they cost nothing on page load (about 50 KB together). */
+  const SAMPLES = { guitar: 0.75, camera: 0.5, train: 0.7 };   // name: volume
   const buffers = {};
   let loading = null;
   function loadSamples(c) {
@@ -373,7 +371,6 @@ if (timeEl) {
   const play = {
     guitar(c) { sample(c, "guitar"); },
     camera(c) { sample(c, "camera"); },
-    giggle(c) { sample(c, "giggle"); },
     train(c) { sample(c, "train"); },
   };
 
@@ -388,24 +385,6 @@ if (timeEl) {
       if (c && fn) fn(c);
     });
   });
-
-  /* "little Albin" giggles only when someone hovers or taps him. */
-  if (kid) {
-    let last = 0;
-    const giggle = (fromTap) => {
-      const now = performance.now();
-      if (now - last < 900) return;
-      let c = ensureCtx();
-      // a tap is itself the gesture that unlocks sound, so wait for it once
-      if (!c && fromTap === true && ctx) { ctx.resume().then(() => giggle()); return; }
-      if (!c) return;
-      last = now;
-      play.giggle(c);
-      kid.classList.remove("is-giggling"); void kid.offsetWidth; kid.classList.add("is-giggling");
-    };
-    if (finePointer) kid.addEventListener("mouseenter", () => giggle());
-    kid.addEventListener("click", () => giggle(true));
-  }
 })();
 
 /* Back-to-top button on case study pages. Injected here so every case

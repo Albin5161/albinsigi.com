@@ -509,10 +509,12 @@ button:focus-visible {
 
 .ai-grid {
   display: grid;
-  /* minmax(0, 1fr) so long mono names can't stretch the column past the terminal */
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  /* three across on laptops and up, two on small laptops and tablets, one on phones.
+     minmax(0, 1fr) so long mono names can't stretch a column past the terminal */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
+@media (max-width: 1099px) { .ai-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .ai-card {
   display: flex; flex-direction: column;
@@ -560,15 +562,18 @@ button:focus-visible {
   flex: 1; min-height: 0;
   display: block; width: 100%;
   object-fit: cover; object-position: top center;
-  filter: brightness(0.82);
-  transition: filter 0.4s var(--ease-out);
+  transition: transform 0.7s var(--ease-out);
 }
+/* hover: the window lifts and the paper object inside tilts and comes closer,
+   as if someone picked it up */
 .ai-card:hover .ai-card__window,
 .ai-card:focus-visible .ai-card__window { transform: translateY(-4px); }
 .ai-card:hover .ai-card__window img,
-.ai-card:focus-visible .ai-card__window img { filter: none; }
-@media (hover: none) { .ai-card__window img { filter: none; } }
-@media (prefers-reduced-motion: reduce) { .ai-card__window { transition: none; } }
+.ai-card:focus-visible .ai-card__window img { transform: scale(1.07) rotate(-1.5deg) translateY(-3px); }
+@media (prefers-reduced-motion: reduce) {
+  .ai-card__window, .ai-card__window img { transition: none; }
+  .ai-card:hover .ai-card__window img, .ai-card:focus-visible .ai-card__window img { transform: none; }
+}
 
 .ai-card__play {
   position: absolute; left: 12px; bottom: 12px;
@@ -581,33 +586,33 @@ button:focus-visible {
 
 .ai-card__text {
   display: flex; flex-direction: column; flex: 1;
-  padding: 20px 22px 22px;
+  padding: 16px 18px 18px;
 }
 .ai-card__name {
   color: var(--paper);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 .ai-card__status { margin-left: 8px; font-weight: 400; font-size: 0.8rem; color: var(--gray-dim); }
 
 .ai-card__desc {
   color: var(--gray-faint);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin: 10px 0 14px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 8px 0 10px;
 }
-.ai-card__tools { color: var(--gray-dim); font-size: 0.8rem; }
+.ai-card__tools { color: var(--gray-dim); font-size: 0.75rem; }
 .ai-card__link {
   color: var(--paper);
-  font-size: 0.9rem;
-  margin-top: auto; padding-top: 14px;
+  font-size: 0.82rem;
+  margin-top: auto; padding-top: 12px;
   transition: transform 0.3s var(--ease-out);
 }
 a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 
 .term__footnote { color: var(--gray-muted); font-size: 0.9rem; margin-top: 30px; }
 
-@media (max-width: 860px) {
+@media (max-width: 600px) {
   .ai-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 480px) {
@@ -617,8 +622,6 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .term__result { font-size: 0.85rem; margin-bottom: 22px; }
   .ai-grid { gap: 12px; }
   .ai-card__text { padding: 16px; }
-  .ai-card__name { font-size: 0.9rem; }
-  .ai-card__desc, .ai-card__link { font-size: 0.85rem; }
   .term__footnote { font-size: 0.85rem; }
 }
 
@@ -700,13 +703,6 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .about__text > p:last-of-type { margin-bottom: 0; }
 .about__link { color: var(--ink); border-bottom: 1.5px solid var(--line); transition: border-color 0.25s; }
 .about__link:hover { border-color: var(--ink); }
-.about__giggle {
-  font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer;
-  border-bottom: 1.5px dashed var(--ink);
-}
-.about__giggle.is-giggling { animation: giggle 0.5s ease-in-out; display: inline-block; }
-@keyframes giggle { 0%, 100% { transform: none; } 20% { transform: rotate(-4deg); } 45% { transform: rotate(4deg); } 70% { transform: rotate(-2deg); } }
-@media (prefers-reduced-motion: reduce) { .about__giggle.is-giggling { animation: none; } }
 
 .about__points { display: grid; gap: 14px; margin-bottom: 28px; }
 .about__points li {
