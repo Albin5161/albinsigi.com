@@ -212,6 +212,17 @@ if (timeEl) {
     .catch(() => {});
 })();
 
+/* ---- Hidden case studies: switched off in /admin.html, stored by /api/projects ----
+   Without the API (or JS) every case study simply shows. */
+const slugOf = (href) => (href || "").split(/[?#]/)[0].split("/").pop().replace(/\.html$/, "");
+const projectsReady =
+  document.querySelector(".work-list, .case__next")
+    ? fetch("/api/projects")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => (d && Array.isArray(d.hidden) && Array.isArray(d.projects) ? d : null))
+        .catch(() => null)
+    : Promise.resolve(null);
+
 /* ---- Work list: case studies 4 to 7 start folded behind a toggle ---- */
 (function () {
   const more = document.getElementById("work-more");
@@ -219,9 +230,9 @@ if (timeEl) {
   if (!more || !toggle) return;
   const label = toggle.querySelector(".work-toggle__label");
   const icon = toggle.querySelector(".work-toggle__icon");
-  const count = more.querySelectorAll(".work-row").length;
 
   function set(open) {
+    const count = more.querySelectorAll(".work-row").length;
     more.classList.toggle("is-folded", !open);
     more.inert = !open;
     toggle.setAttribute("aria-expanded", String(open));
@@ -240,6 +251,59 @@ if (timeEl) {
     set(false);
     window.scrollBy({ top: toggle.getBoundingClientRect().top - before, behavior: "instant" });
     requestAnimationFrame(() => more.classList.remove("no-anim"));
+  });
+
+  // drop hidden rows, keep three above the fold, renumber, recount
+  projectsReady.then((d) => {
+    if (!d || !d.hidden.length) return;
+    const list = more.parentElement;
+    list.querySelectorAll(".work-row").forEach((row) => {
+      if (d.hidden.includes(slugOf(row.getAttribute("href")))) row.remove();
+    });
+    const moreRows = () => more.querySelectorAll(".work-row");
+    while (list.querySelectorAll(":scope > .work-row").length < 3 && moreRows().length) {
+      list.insertBefore(moreRows()[0], more);
+    }
+    const rows = list.querySelectorAll(".work-row");
+    rows.forEach((row, i) => {
+      const index = row.querySelector(".work-row__index");
+      if (index) index.textContent = String(i + 1).padStart(2, "0");
+    });
+    const intro = document.querySelector("#work .section-head p");
+    const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+    if (intro && rows.length < words.length) {
+      const n = rows.length === 1 ? "One case study" : `${words[rows.length]} case studies`;
+      intro.textContent = intro.textContent.replace(/^\w+ case stud(y|ies)/, n);
+    }
+    if (!moreRows().length) {
+      more.hidden = true;
+      toggle.hidden = true;
+    } else {
+      set(toggle.getAttribute("aria-expanded") === "true");
+    }
+  });
+})();
+
+/* ---- Case study pages: a hidden one sends you home, "Next case study" skips them ---- */
+(function () {
+  const next = document.querySelector(".case__next");
+  if (!next) return;
+  projectsReady.then((d) => {
+    if (!d || !d.hidden.length) return;
+    if (d.hidden.includes(slugOf(location.pathname))) return location.replace("/");
+    const here = d.projects.findIndex((p) => p.slug === slugOf(location.pathname));
+    if (here < 0) return;
+    for (let k = 1; k < d.projects.length; k++) {
+      const p = d.projects[(here + k) % d.projects.length];
+      if (d.hidden.includes(p.slug)) continue;
+      if (p.slug !== slugOf(next.getAttribute("href"))) {
+        next.href = p.slug + ".html";
+        const title = next.querySelector(".case__next-title");
+        if (title) title.textContent = p.title + " →";
+      }
+      return;
+    }
+    next.remove();
   });
 })();
 
