@@ -610,10 +610,29 @@ button:focus-visible {
 }
 a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 
+/* the newest experiment takes a full row, picture beside the text,
+   so the other six keep an even grid under it */
+.ai-card--wide {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+.ai-card--wide .ai-card__shot { border-bottom: 0; border-right: 1px solid #2e2e2e; }
+.ai-card--wide .ai-card__text { justify-content: center; padding: 28px; }
+.ai-card--wide .ai-card__name { font-size: 1.05rem; }
+.ai-card--wide .ai-card__desc { font-size: 0.9rem; }
+.ai-card--wide .ai-card__link { margin-top: 0; }
+@media (max-width: 1099px) { .ai-card--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 .term__footnote { color: var(--gray-muted); font-size: 0.9rem; margin-top: 30px; }
 
 @media (max-width: 600px) {
   .ai-grid { grid-template-columns: minmax(0, 1fr); }
+  .ai-card--wide { display: flex; }
+  .ai-card--wide .ai-card__shot { border-right: 0; border-bottom: 1px solid #2e2e2e; }
+  .ai-card--wide .ai-card__text { padding: 16px 18px 18px; }
+  .ai-card--wide .ai-card__name { font-size: 0.9rem; }
+  .ai-card--wide .ai-card__desc { font-size: 0.82rem; }
+  .ai-card--wide .ai-card__link { margin-top: auto; }
 }
 @media (max-width: 480px) {
   .term__bar { padding: 11px 14px; }
