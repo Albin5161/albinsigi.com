@@ -1397,13 +1397,8 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 }
 .shot > picture { display: block; }
 /* an annotated screenshot: the pins ride along when the picture lifts */
-.shot__pinned { position: relative; width: 100%; container-type: inline-size; transition: transform 0.35s var(--ease-out); }
-.shot__pinned .mock__pin {
-  width: clamp(14px, 3cqw, 18px); height: clamp(14px, 3cqw, 18px);
-  font-size: clamp(8px, 1.6cqw, 10px); line-height: clamp(14px, 3cqw, 18px);
-}
-.shot__pinned:hover { transform: translateY(-3px); }
-.shot .notes { margin: 18px auto 0; }
+.shot__pinned { position: relative; width: 100%; }
+.shot__pinned > img:hover { transform: none; }
 .shot figcaption {
   font-size: var(--text-meta); color: var(--gray);
   text-align: center; margin-top: 14px;
@@ -1592,26 +1587,68 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .mocks, .mocks--2, .mocks--4 { grid-template-columns: 1fr; }
 }
 
-/* Annotations: numbered pins on a screenshot, with matching notes under it.
-   Pins are positioned in % of the screen, measured from the live prototype. */
+/* Callouts: before and after side by side, the notes beside them, and a thin
+   line from a dot on the exact spot to its note (drawn by js/main.js).
+   Dots are positioned in % of the screenshot. Without JS, or on phones, the
+   lines go and each dot shows its number instead. */
 .mock__shot { position: relative; }
-.mock__pin {
-  position: absolute; transform: translate(-50%, -50%);
-  width: 18px; height: 18px; border-radius: 999px;
-  background: var(--ink); color: var(--paper);
-  font: 700 10px/18px var(--font-body); text-align: center;
-  box-shadow: 0 0 0 2px var(--paper), 0 2px 6px rgba(0, 0, 0, 0.28);
-  /* shrink with the phone, so four phones in a row don't get covered */
-  width: clamp(14px, 7cqw, 18px); height: clamp(14px, 7cqw, 18px);
-  font-size: clamp(8px, 3.9cqw, 10px); line-height: clamp(14px, 7cqw, 18px);
-  box-shadow: 0 0 0 1.5px var(--paper), 0 2px 6px rgba(0, 0, 0, 0.28);
+.callout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
+  gap: 24px 44px;
+  align-items: start;
+  margin: 40px 0 12px;
 }
-.notes { display: grid; gap: 7px; width: 100%; max-width: 30em; margin: 2px 0 0; padding: 0; list-style: none; text-align: left; }
-.notes li { display: grid; grid-template-columns: 18px 1fr; gap: 9px; font-size: 0.78rem; line-height: 1.45; color: var(--gray); }
-.notes li span {
-  width: 18px; height: 18px; margin-top: 1px; border-radius: 999px;
+.callout__pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; justify-items: center; }
+.callout .mock__frame:hover { transform: none; }
+.callout__dot {
+  position: absolute; transform: translate(-50%, -50%);
+  width: 9px; height: 9px; border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--paper), 0 1px 4px rgba(0, 0, 0, 0.35);
+  font: 700 9px/16px var(--font-body); color: var(--paper); text-align: center;
+  z-index: 2;
+}
+.callout__dot span { display: none; }
+.callout__notes { position: relative; margin: 0; padding: 0; list-style: none; }
+.callout__notes li {
+  display: grid; grid-template-columns: 20px 1fr; gap: 10px;
+  margin-bottom: 18px;
+  font-size: 0.86rem; line-height: 1.5; color: var(--ink-soft);
+}
+.callout.is-drawn .callout__notes li { position: absolute; left: 0; right: 0; margin: 0; }
+.callout__num {
+  width: 20px; height: 20px; margin-top: 1px; border-radius: 999px;
   background: var(--ink); color: var(--paper);
-  font: 700 10px/18px var(--font-body); text-align: center;
+  font: 700 10px/20px var(--font-body); text-align: center;
+}
+.callout__lines {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  overflow: visible; pointer-events: none; z-index: 1;
+}
+/* a light halo under each line keeps it readable on dark and light screens */
+.callout__lines .halo { fill: none; stroke: var(--paper); stroke-width: 3; stroke-opacity: 0.9; }
+.callout__lines .line { fill: none; stroke: var(--ink); stroke-width: 1; }
+.callout > figcaption {
+  grid-column: 1 / -1;
+  font-size: var(--text-meta); color: var(--gray);
+  text-align: center; line-height: 1.6;
+}
+
+/* wide desktop screenshots: the notes sit underneath in a row and the lines drop down to them */
+.callout--below { grid-template-columns: minmax(0, 1fr); }
+.callout--below .callout__notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px 28px; }
+.callout--below .callout__notes li { margin: 0; }
+.callout--below.is-drawn .callout__notes li { position: static; }
+
+@media (max-width: 720px) {
+  .callout { grid-template-columns: minmax(0, 1fr); }
+  .callout__lines { display: none; }
+  .callout.is-drawn .callout__notes li { position: static; margin-bottom: 14px; }
+  .callout__dot { width: 16px; height: 16px; box-shadow: 0 0 0 1.5px var(--paper), 0 1px 4px rgba(0, 0, 0, 0.35); }
+  .callout__dot span { display: inline; }
+  .callout--below .callout__notes { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* A looping recording can sit in a device frame exactly like a screenshot */
