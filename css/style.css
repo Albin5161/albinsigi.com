@@ -1379,6 +1379,8 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 
 /* Real case-study screenshots */
 .shot { margin: 28px 0 8px; }
+/* a captioned shot gets room after it, so its caption never reads as the next section's */
+.shot:has(> figcaption) { margin-bottom: 72px; }
 .shot > img,
 .shot > picture img,
 .shot__pinned > img,
@@ -1478,7 +1480,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px 22px;
-  margin: 34px 0 8px;
+  margin: 34px 0 88px;   /* a wide gap after, so the caption reads as this figure's */
   justify-items: center;
 }
 .mocks--1 { grid-template-columns: 1fr; }
@@ -1487,7 +1489,7 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
 .mocks > figcaption {
   grid-column: 1 / -1;
   font-size: var(--text-meta); color: var(--gray);
-  text-align: center; margin-top: 6px;
+  text-align: center; margin-top: -16px;  /* 14px under the phones, not floating */
   max-width: 46em; line-height: 1.6;
 }
 .mock { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
@@ -1587,68 +1589,116 @@ a.ai-card:hover .ai-card__link { transform: translateX(6px); }
   .mocks, .mocks--2, .mocks--4 { grid-template-columns: 1fr; }
 }
 
-/* Callouts: before and after side by side, the notes beside them, and a thin
-   line from a dot on the exact spot to its note (drawn by js/main.js).
-   Dots are positioned in % of the screenshot. Without JS, or on phones, the
-   lines go and each dot shows its number instead. */
+/* Callouts: a numbered marker sits on the exact spot in a screenshot, and the
+   notes under the picture carry the same number in the same colour.
+   A marker is either a pin on a point, or (with a width and height) a soft
+   outlined box around the element, with its pin on a corner. Everything is
+   positioned in % of the screenshot, so it holds at any size.
+   The phones use the same two-column grid as .mocks--2, so a before/after pair
+   lines up exactly with the phone rows above and below it. */
 .mock__shot { position: relative; }
 .callout {
+  --c1: #6d5df6;  /* violet    4.6:1 with white */
+  --c2: #d62f6f;  /* raspberry 4.7:1 */
+  --c3: #0b8577;  /* teal      4.5:1 */
+  --c4: #1f6fe0;  /* blue      4.8:1 */
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
-  gap: 24px 44px;
-  align-items: start;
-  margin: 40px 0 12px;
+  margin: 34px 0 88px;
 }
-.callout__pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; justify-items: center; }
+.callout [data-n="1"] { --c: var(--c1); }
+.callout [data-n="2"] { --c: var(--c2); }
+.callout [data-n="3"] { --c: var(--c3); }
+.callout [data-n="4"] { --c: var(--c4); }
+.callout__pair {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 22px; justify-items: center; align-items: start;
+}
 .callout .mock__frame:hover { transform: none; }
+
 .callout__dot {
-  position: absolute; transform: translate(-50%, -50%);
-  width: 9px; height: 9px; border-radius: 999px;
-  background: var(--ink);
-  box-shadow: 0 0 0 2px var(--paper), 0 1px 4px rgba(0, 0, 0, 0.35);
-  font: 700 9px/16px var(--font-body); color: var(--paper); text-align: center;
-  z-index: 2;
+  position: absolute; z-index: 2;
+  width: 0; height: 0;
+  border-radius: 7px;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
 }
-.callout__dot span { display: none; }
-.callout__notes { position: relative; margin: 0; padding: 0; list-style: none; }
+.callout__dot--box {
+  background: color-mix(in srgb, var(--c) 16%, transparent);
+  box-shadow: 0 0 0 2px var(--c), 0 0 0 3.5px rgba(255, 255, 255, 0.55);
+}
+/* the numbered pin: on the point itself, or on the box's top-left corner */
+.callout__dot > span {
+  position: absolute; left: 0; top: 0;
+  transform: translate(-50%, -50%);
+  width: 22px; height: 22px; border-radius: 999px;
+  background: var(--c); color: #fff;
+  font: 700 11px/22px var(--font-body); text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px #fff, 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+.callout__dot[data-pin="tr"] > span { left: 100%; }
+.callout__dot[data-pin="bl"] > span { top: 100%; }
+.callout__dot[data-pin="br"] > span { left: 100%; top: 100%; }
+.callout__dot[data-pin="t"] > span { left: 50%; }
+/* l / r: the pin stands just outside the box, for small targets it would cover */
+.callout__dot[data-pin="l"] > span { left: -15px; top: 50%; }
+.callout__dot[data-pin="r"] > span { left: calc(100% + 15px); top: 50%; }
+/* a soft ring that breathes out of the pin, so the eye finds it */
+.callout__dot > span::after {
+  content: ""; position: absolute; inset: -2px; border-radius: inherit;
+  border: 2px solid var(--c); opacity: 0;
+  animation: callout-ping 2.8s var(--ease-out) infinite;
+}
+.callout__dot[data-n="2"] > span::after { animation-delay: 0.35s; }
+.callout__dot[data-n="3"] > span::after { animation-delay: 0.7s; }
+.callout__dot[data-n="4"] > span::after { animation-delay: 1.05s; }
+@keyframes callout-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  60%, 100% { transform: scale(1.9); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .callout__dot > span::after { animation: none; } }
+
+/* pointing at a note lights up its marker and quiets the rest */
+.callout.is-focus .callout__dot { opacity: 0.3; }
+.callout.is-focus .callout__dot.is-on { opacity: 1; }
+.callout.is-focus .callout__dot--box.is-on { background: color-mix(in srgb, var(--c) 24%, transparent); }
+
+.callout__notes {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px 32px;
+  margin: 30px 0 0; padding: 22px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+/* four notes read better as two rows of two than as three plus one */
+.callout__notes:has(> li:nth-child(4)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .callout__notes li {
-  display: grid; grid-template-columns: 20px 1fr; gap: 10px;
-  margin-bottom: 18px;
-  font-size: 0.86rem; line-height: 1.5; color: var(--ink-soft);
+  display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start;
+  margin: 0; padding: 2px 0;
+  font-size: 0.875rem; line-height: 1.55; color: var(--ink-soft);
+  cursor: default;
+  transition: opacity 0.25s var(--ease-out);
 }
-.callout.is-drawn .callout__notes li { position: absolute; left: 0; right: 0; margin: 0; }
+.callout.is-focus .callout__notes li { opacity: 0.45; }
+.callout.is-focus .callout__notes li.is-on { opacity: 1; }
 .callout__num {
-  width: 20px; height: 20px; margin-top: 1px; border-radius: 999px;
-  background: var(--ink); color: var(--paper);
-  font: 700 10px/20px var(--font-body); text-align: center;
+  width: 22px; height: 22px; border-radius: 999px;
+  background: var(--c); color: #fff;
+  font: 700 11px/22px var(--font-body); text-align: center;
+  font-variant-numeric: tabular-nums;
 }
-.callout__lines {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  overflow: visible; pointer-events: none; z-index: 1;
-}
-/* a light halo under each line keeps it readable on dark and light screens */
-.callout__lines .halo { fill: none; stroke: var(--paper); stroke-width: 3; stroke-opacity: 0.9; }
-.callout__lines .line { fill: none; stroke: var(--ink); stroke-width: 1; }
-.callout > figcaption {
-  grid-column: 1 / -1;
+.callout > figcaption,
+.callout.shot figcaption {
+  margin-top: 12px;
   font-size: var(--text-meta); color: var(--gray);
   text-align: center; line-height: 1.6;
 }
 
-/* wide desktop screenshots: the notes sit underneath in a row and the lines drop down to them */
-.callout--below { grid-template-columns: minmax(0, 1fr); }
-.callout--below .callout__notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px 28px; }
-.callout--below .callout__notes li { margin: 0; }
-.callout--below.is-drawn .callout__notes li { position: static; }
-
-@media (max-width: 720px) {
-  .callout { grid-template-columns: minmax(0, 1fr); }
-  .callout__lines { display: none; }
-  .callout.is-drawn .callout__notes li { position: static; margin-bottom: 14px; }
-  .callout__dot { width: 16px; height: 16px; box-shadow: 0 0 0 1.5px var(--paper), 0 1px 4px rgba(0, 0, 0, 0.35); }
-  .callout__dot span { display: inline; }
-  .callout--below .callout__notes { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 560px) {
+  .callout__pair { grid-template-columns: minmax(0, 1fr); }
+  .callout__notes,
+  .callout__notes:has(> li:nth-child(4)) { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .callout__dot > span { width: 20px; height: 20px; font-size: 10px; line-height: 20px; }
 }
 
 /* A looping recording can sit in a device frame exactly like a screenshot */

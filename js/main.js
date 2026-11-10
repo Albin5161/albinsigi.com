@@ -284,92 +284,26 @@ const projectsReady =
   });
 })();
 
-/* ---- Callouts: a thin line from each dot on a screenshot to its note ----
-   Beside: each note lines up with its dot, and never overlaps the one above.
-   Below (wide screenshots): the line drops to a note in the row underneath.
-   Phones get the numbered dots instead, so the lines are skipped there. */
+/* ---- Callouts: pointing at a note lights up its marker on the screenshot ----
+   The markers and their colours are pure CSS. This only links each note to
+   its marker on hover or focus, and quiets the others while you read. */
 (function () {
-  const figs = document.querySelectorAll(".callout");
-  if (!figs.length) return;
-  const NS = "http://www.w3.org/2000/svg";
-  const wide = window.matchMedia("(min-width: 721px)");
-  const GAP = 18;
-
-  function draw(fig) {
-    const list = fig.querySelector(".callout__notes");
-    const notes = [...fig.querySelectorAll(".callout__notes li[data-n]")];
-    let svg = fig.querySelector(".callout__lines");
-    if (!wide.matches) {
-      fig.classList.remove("is-drawn");
-      list.style.height = "";
-      notes.forEach((li) => (li.style.top = ""));
-      if (svg) svg.innerHTML = "";
-      return;
-    }
-    if (!svg) {
-      svg = document.createElementNS(NS, "svg");
-      svg.setAttribute("class", "callout__lines");
-      svg.setAttribute("aria-hidden", "true");
-      fig.appendChild(svg);
-    }
-    const below = fig.classList.contains("callout--below");
-    fig.classList.add("is-drawn");
-    const box = fig.getBoundingClientRect();
-    const dotAt = (n) => {
-      const d = fig.querySelector(`.callout__dot[data-n="${n}"]`);
-      if (!d) return null;
-      const r = d.getBoundingClientRect();
-      return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top };
-    };
-
-    if (!below) {
-      const listTop = list.getBoundingClientRect().top - box.top;
-      let next = 0;
-      notes.forEach((li) => {
-        const d = dotAt(li.dataset.n);
-        const num = li.querySelector(".callout__num");
-        const want = d ? d.y - listTop - num.offsetTop - num.offsetHeight / 2 : next;
-        const top = Math.max(next, want);
-        li.style.top = top + "px";
-        next = top + li.offsetHeight + GAP;
+  document.querySelectorAll(".callout").forEach((fig) => {
+    const notes = fig.querySelectorAll(".callout__notes li[data-n]");
+    const set = (n) => {
+      fig.classList.toggle("is-focus", n != null);
+      fig.querySelectorAll("[data-n]").forEach((el) => {
+        if (el.matches(".callout__dot, .callout__notes li")) el.classList.toggle("is-on", el.dataset.n === n);
       });
-      list.style.height = Math.max(0, next - GAP) + "px";
-    }
-
-    const shot = fig.querySelector(".shot__pinned");
-    const shotBottom = shot ? shot.getBoundingClientRect().bottom - box.top : 0;
-    // beside: run straight out past the phone's edge, then angle to the note
-    const frame = fig.querySelector(".callout__pair > .mock:last-child .mock__frame");
-    const edge = frame ? frame.getBoundingClientRect().right - box.left + 8 : 0;
-    let paths = "";
+    };
     notes.forEach((li) => {
-      const d = dotAt(li.dataset.n);
-      if (!d) return;
-      const n = li.querySelector(".callout__num").getBoundingClientRect();
-      const nLeft = n.left - box.left, nTop = n.top - box.top;
-      const nMidX = nLeft + n.width / 2, nMidY = nTop + n.height / 2;
-      const p = below
-        ? `M${d.x} ${d.y} V${(shotBottom + nTop) / 2} H${nMidX} V${nTop - 5}`
-        : `M${d.x} ${d.y} H${edge} L${nLeft - 14} ${nMidY} H${nLeft - 5}`;
-      paths += `<path class="halo" d="${p}"/><path class="line" d="${p}"/>`;
+      li.tabIndex = 0;
+      li.addEventListener("mouseenter", () => set(li.dataset.n));
+      li.addEventListener("focus", () => set(li.dataset.n));
+      li.addEventListener("mouseleave", () => set(null));
+      li.addEventListener("blur", () => set(null));
     });
-    svg.innerHTML = paths;
-  }
-
-  let queued = false;
-  const drawAll = () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => {
-      queued = false;
-      figs.forEach(draw);
-    });
-  };
-  drawAll();
-  window.addEventListener("resize", drawAll);
-  window.addEventListener("load", drawAll);
-  if (document.fonts) document.fonts.ready.then(drawAll);
-  figs.forEach((fig) => fig.querySelectorAll("img").forEach((img) => img.addEventListener("load", drawAll)));
+  });
 })();
 
 /* ---- Case study pages: a hidden one sends you home, "Next case study" skips them ---- */
